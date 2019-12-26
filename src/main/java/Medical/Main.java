@@ -17,6 +17,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        Db b= new Db();
         System.out.println("hello world");
         primaryStage.setTitle("Hello World!");
         Image image = new Image("Medical/dr.png");
@@ -34,6 +35,7 @@ public class Main extends Application {
         iv1.setFitWidth(300);
         iv1.setImage(image);
         iv1.setOnMouseClicked(event -> {
+            b.Show();
             a.show();
             primaryStage.close();
         });
