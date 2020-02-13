@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane fx:id="root_1" prefHeight="400.0" prefWidth="522.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Medical.Page_1">
+   <children>
+      <Pane prefHeight="70.0" prefWidth="600.0" styleClass="lin" stylesheets="@../Css/Css.css" />
+      <Pane layoutY="330.0" prefHeight="70.0" prefWidth="600.0" styleClass="lin2" stylesheets="@../Css/Css.css" />
+      <ImageView fitHeight="258.0" fitWidth="434.0" layoutX="83.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Capture.JPG" />
+         </image>
+      </ImageView>
+      <ProgressBar fx:id="ProgressBar" layoutX="12.0" layoutY="320.0" prefHeight="9.0" prefWidth="572.0" progress="0.5" style="-fx-background-position: #ff0000;" />
+   </children>
+</AnchorPane>
