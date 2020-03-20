@@ -10,6 +10,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -18,9 +19,10 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class Page_1 implements Initializable {
+public class StartPage implements Initializable {
     @FXML
     private AnchorPane root_1;
+    AnchorPane root;
 
     @FXML
     private ProgressBar ProgressBar;
@@ -34,7 +36,7 @@ public class Page_1 implements Initializable {
 
                 ProgressBar.setProgress(i / 100.0);
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(10);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -45,15 +47,8 @@ public class Page_1 implements Initializable {
                 public void run() {
 
 
-                    FXMLLoader loader = null;
                     try {
-                        loader = new FXMLLoader(new File("D:\\My Project\\AppDoctor\\src\\main\\resources\\Medical\\sample.fxml").toURI().toURL());
-                    } catch (MalformedURLException e) {
-                        e.printStackTrace();
-                    }
-                    Parent root = null;
-                    try {
-                        root = loader.load();
+                   root = FXMLLoader.load(getClass().getResource("sample.fxml"));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
