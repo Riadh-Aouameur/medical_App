@@ -32,14 +32,14 @@
          <children>
             <TabPane fx:id="tabpane" layoutY="-2.0" prefHeight="400.0" prefWidth="670.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
               <tabs>
-                <Tab fx:id="homeTab" text="Home">
+                <Tab fx:id="homeTab" closable="false" text="Home">
                      <content>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0">
                            <children>
                               <Button layoutX="66.0" layoutY="79.0" mnemonicParsing="false" onAction="#onCreateNewPatient" prefHeight="69.0" prefWidth="89.0" text="New Patient" />
                               <TextField layoutX="66.0" layoutY="30.0" prefHeight="25.0" prefWidth="473.0" promptText="search..." AnchorPane.rightAnchor="130.8" />
-                              <Button layoutX="242.0" layoutY="79.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="122.0" text="Watting Room" />
-                              <Button layoutX="449.0" layoutY="79.0" mnemonicParsing="false" prefHeight="69.0" prefWidth="89.0" text="Appointment" />
+                              <Button layoutX="242.0" layoutY="79.0" mnemonicParsing="false" onAction="#onWattingRoom" prefHeight="69.0" prefWidth="122.0" text="Watting Room" />
+                              <Button layoutX="449.0" layoutY="79.0" mnemonicParsing="false" onAction="#onAppointment" prefHeight="69.0" prefWidth="89.0" text="Appointment" />
                               <Button layoutX="552.0" layoutY="30.0" mnemonicParsing="false" text="Button" />
                               <Button layoutX="66.0" layoutY="200.0" mnemonicParsing="false" onAction="#onMakeConsultation" prefHeight="69.0" prefWidth="89.0" text="Consultation" />
                            </children></AnchorPane>
