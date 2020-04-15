@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Medical.WorkPage">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="641.0" prefWidth="1126.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Medical.WorkPage">
    <children>
-      <AnchorPane prefHeight="400.0" prefWidth="230.0">
+      <AnchorPane prefHeight="641.0" prefWidth="230.0">
          <children>
-            <VBox prefHeight="400.0" prefWidth="230.0">
+            <VBox prefHeight="641.0" prefWidth="230.0">
                <children>
                   <AnchorPane prefHeight="94.0" prefWidth="230.0" />
                   <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="53.0" prefWidth="230.0" text="Home">
@@ -28,20 +28,21 @@
             </VBox>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="232.0" layoutY="1.0" prefHeight="400.0" prefWidth="670.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0">
+      <AnchorPane layoutX="232.0" layoutY="1.0" prefHeight="400.0" prefWidth="670.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="230.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <TabPane fx:id="tabpane" layoutY="-2.0" prefHeight="400.0" prefWidth="670.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <TabPane fx:id="tabpane" layoutX="-9.0" layoutY="81.0" prefHeight="523.0" prefWidth="670.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="81.0">
               <tabs>
                 <Tab fx:id="homeTab" closable="false" text="Home">
                      <content>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                        <AnchorPane prefHeight="524.0" prefWidth="896.0">
                            <children>
                               <Button layoutX="66.0" layoutY="79.0" mnemonicParsing="false" onAction="#onCreateNewPatient" prefHeight="69.0" prefWidth="89.0" text="New Patient" />
-                              <TextField layoutX="66.0" layoutY="30.0" prefHeight="25.0" prefWidth="473.0" promptText="search..." AnchorPane.rightAnchor="130.8" />
+                              <TextField layoutX="66.0" layoutY="32.0" prefHeight="25.0" prefWidth="473.0" promptText="search..." AnchorPane.rightAnchor="356.79999999999995" />
                               <Button layoutX="242.0" layoutY="79.0" mnemonicParsing="false" onAction="#onWattingRoom" prefHeight="69.0" prefWidth="122.0" text="Watting Room" />
                               <Button layoutX="449.0" layoutY="79.0" mnemonicParsing="false" onAction="#onAppointment" prefHeight="69.0" prefWidth="89.0" text="Appointment" />
-                              <Button layoutX="552.0" layoutY="30.0" mnemonicParsing="false" text="Button" />
+                              <Button layoutX="587.0" layoutY="32.0" mnemonicParsing="false" text="Button" />
                               <Button layoutX="66.0" layoutY="200.0" mnemonicParsing="false" onAction="#onMakeConsultation" prefHeight="69.0" prefWidth="89.0" text="Consultation" />
+                              <Button layoutX="241.0" layoutY="200.0" mnemonicParsing="false" onAction="#onOrdonnance" prefHeight="69.0" prefWidth="122.0" text="Ordonnance" />
                            </children></AnchorPane>
                      </content>
                   </Tab>

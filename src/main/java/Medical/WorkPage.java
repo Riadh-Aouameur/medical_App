@@ -1,6 +1,7 @@
 package Medical;
 
-import com.jfoenix.controls.JFXBadge;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -8,18 +9,24 @@ import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
+import javafx.scene.Group;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.Period;
@@ -30,21 +37,22 @@ public class WorkPage  implements Initializable {
     Tab homeTab;
     @FXML
     TabPane tabpane;
+    ObservableList<Patient> list = FXCollections.observableArrayList();
 
-
-    Paitent paitent;
-
-    Tab newPatient = new Tab();
-    Tab consultation = new Tab();
     Tab wattingRoom = new Tab();
     Tab appointment = new Tab();
 
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        newPatient.setText("New Patient");
-        consultation.setText("Consultation");
+
+
         wattingRoom.setText("Watting Room");
         appointment.setText("Appointment");
+        Patients.listPatient.add(new Patient(14,"aouameur","riadh",
+                LocalDate.now(),"male"));
+
+
         tabpane.setTabClosingPolicy(TabPane.TabClosingPolicy.SELECTED_TAB);
 
 
@@ -52,6 +60,8 @@ public class WorkPage  implements Initializable {
 
 
     public void onCreateNewPatient(ActionEvent actionEvent) {
+        Tab newPatient = new Tab();
+        newPatient.setText("New Patient");
 
         VBox vBox = new VBox();
         GridPane gridPane = new GridPane();
@@ -113,14 +123,76 @@ public class WorkPage  implements Initializable {
             @Override
             public void handle(ActionEvent actionEvent) {
 
-                Paitent paitent = new Paitent(4, firstName.getText(), lastName.getText(), brithday.getValue(), gender.getSelectionModel().getSelectedItem().toString());
-                System.out.println(paitent.getFirstName());
 
                 System.out.println("hi");
             }
         });
 
-        vBox.getChildren().setAll(new Label("Create New Patient"), gridPane, hBox, save);
+        Button consultation = new Button("consultation");
+        consultation.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                Tab consultation = new Tab();
+                consultation.setText("Consultation");
+                GridPane gridPane = new GridPane();
+                gridPane.setMinSize(600, 150);
+                gridPane.setPadding(new Insets(10, 10, 0, 10));
+                gridPane.setVgap(4);
+                gridPane.setHgap(4);
+                gridPane.setAlignment(Pos.BASELINE_LEFT);
+
+                TextArea motif = new TextArea();
+                TextArea diagnostic = new TextArea();
+                TextArea traitement = new TextArea();
+                TextArea note = new TextArea();
+
+                motif.setWrapText(true);
+                diagnostic.setWrapText(true);
+                traitement.setWrapText(true);
+                note.setWrapText(true);
+
+                gridPane.add(new Label("motif"), 0, 0);
+                gridPane.add(new Label("diagnostic"), 0, 1);
+                gridPane.add(new Label("Traitement"), 0, 2);
+                gridPane.add(new Label("note"), 0, 3);
+                gridPane.add(motif, 1, 0);
+                gridPane.add(diagnostic, 1, 1);
+                gridPane.add(traitement, 1, 2);
+                gridPane.add(note, 1, 3);
+
+
+                TextField poids = new TextField();
+                TextField taille = new TextField();
+                TextField tomperature = new TextField();
+                TextField pa_syst = new TextField();
+                TextField pa = new TextField();
+                GridPane gridPaneRIGHT = new GridPane();
+                gridPaneRIGHT.setMinSize(600, 150);
+                gridPaneRIGHT.setPadding(new Insets(10, 10, 0, 10));
+                gridPaneRIGHT.setVgap(4);
+                gridPaneRIGHT.setHgap(4);
+                gridPaneRIGHT.setAlignment(Pos.BASELINE_RIGHT);
+                gridPaneRIGHT.add(new Label("Poids"), 0, 0);
+                gridPaneRIGHT.add(new Label("Taille"), 0, 1);
+                gridPaneRIGHT.add(new Label("Tomperature"), 0, 2);
+                gridPaneRIGHT.add(new Label("Pa"), 0, 3);
+                gridPaneRIGHT.add(poids, 1, 0);
+                gridPaneRIGHT.add(taille, 1, 1);
+                gridPaneRIGHT.add(tomperature, 1, 2);
+                gridPaneRIGHT.add(pa, 1, 3);
+                HBox hBox = new HBox();
+                hBox.getChildren().setAll(gridPane, gridPaneRIGHT);
+
+
+                consultation.setContent(hBox);
+
+
+                tabpane.getTabs().add(consultation);
+                tabpane.getSelectionModel().select(consultation);
+            }
+        });
+
+        vBox.getChildren().setAll(new Label("Create New Patient"), gridPane, hBox, save,consultation);
         newPatient.setContent(vBox);
         tabpane.getTabs().add(newPatient);
         tabpane.getSelectionModel().select(newPatient);
@@ -129,6 +201,8 @@ public class WorkPage  implements Initializable {
     }
 
     public void onMakeConsultation(ActionEvent actionEvent) {
+        Tab consultation = new Tab();
+        consultation.setText("Consultation");
         GridPane gridPane = new GridPane();
         gridPane.setMinSize(600, 150);
         gridPane.setPadding(new Insets(10, 10, 0, 10));
@@ -233,6 +307,38 @@ public class WorkPage  implements Initializable {
 
 
     }
+
+
+    public void  onOrdonnance(ActionEvent actionEvent) throws IOException {
+        Tab ordonnance = new Tab();
+        VBox vvBox = new VBox();
+        ordonnance.setText("ordonnance");
+
+
+        ScrollPane sp = new ScrollPane();
+        sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        sp.setFitToHeight(true);
+        sp.setFitToWidth(true);
+        sp.setPrefSize(900,1080);
+        sp.setHmax(1);
+        sp.setVmax(1);
+
+          AnchorPane root = FXMLLoader.load(getClass().getResource("ord.fxml"));
+
+          AnchorPane root_1 = FXMLLoader.load(getClass().getResource("patient.fxml"));
+          AnchorPane root_2 = FXMLLoader.load(getClass().getResource("showordd.fxml"));
+          vvBox.getChildren().addAll(root_1,root,root_2);
+        sp.setContent(vvBox);
+        tabpane.getTabs().add(ordonnance);
+        tabpane.getSelectionModel().select(ordonnance);
+        ordonnance.setContent(sp);
+
+
+
+    }
+
+
 
     public void onAppointment(ActionEvent actionEvent) {
         TextField filterInput = new TextField();
