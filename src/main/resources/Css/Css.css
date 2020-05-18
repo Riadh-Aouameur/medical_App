@@ -1,14 +1,5 @@
-.button
-{
--fx-background-color : #01cafe;
-}
-.lin
-{
--fx-background-color : linear-gradient(to bottom left,#fff,#01cafe);
-
-}
-.lin2
-{
--fx-background-color : linear-gradient(to bottom left,#01cafe,#fff);
+.payload {
+ -fx-background-radius : 30;
+ -fx-border-radius : 30;
 
 }
