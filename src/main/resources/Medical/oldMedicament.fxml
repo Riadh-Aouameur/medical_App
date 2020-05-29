@@ -2,32 +2,26 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="628.0" prefWidth="872.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="medical.selectOldMedicament">
    <children>
-      <TextField layoutX="37.0" layoutY="82.0" prefHeight="46.0" prefWidth="803.0" promptText="search....">
+      <TextField fx:id="search" layoutX="37.0" layoutY="82.0" prefHeight="46.0" prefWidth="803.0" promptText="search....">
          <font>
             <Font name="Arial Rounded MT Bold" size="20.0" />
          </font>
       </TextField>
-      <ScrollPane layoutX="37.0" layoutY="169.0" prefHeight="342.0" prefWidth="803.0">
-         <content>
-            <ListView prefHeight="328.0" prefWidth="800.0" />
-         </content>
-      </ScrollPane>
-      <Button layoutX="731.0" layoutY="541.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="110.0" stylesheets="@../Css/button.css" text="Add" />
-      <Button layoutX="588.0" layoutY="541.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="110.0" stylesheets="@../Css/button.css" text="Cancel" />
+      <Button layoutX="731.0" layoutY="541.0" mnemonicParsing="false" onAction="#onSet" prefHeight="46.0" prefWidth="110.0" stylesheets="@../Css/button.css" text="Add" />
+      <Button layoutX="588.0" layoutY="541.0" mnemonicParsing="false" onAction="#onCancel" prefHeight="46.0" prefWidth="110.0" stylesheets="@../Css/button.css" text="Cancel" />
       <ImageView fitHeight="46.0" fitWidth="56.0" layoutX="795.0" layoutY="82.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@search.png" />
          </image>
       </ImageView>
+      <ListView fx:id="list" layoutX="37.0" layoutY="151.0" prefHeight="332.0" prefWidth="803.0" />
    </children>
 </AnchorPane>

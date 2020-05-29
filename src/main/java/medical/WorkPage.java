@@ -76,20 +76,25 @@ public class WorkPage  implements Initializable {
     public void onCreateNewPatient(ActionEvent actionEvent) throws IOException {
 
         AnchorPane root = FXMLLoader.load(getClass().getResource("createPatient.fxml"));
-        Tab newPatient = new Tab();
-        ScrollPane sp = new ScrollPane();
-        sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-        sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-        sp.setFitToHeight(true);
-        sp.setFitToWidth(true);
-        sp.setPrefSize(900,1080);
-        sp.setHmax(1);
-        sp.setVmax(1);
-        sp.setContent(root);
-        newPatient.setContent(sp);
-        tabpane.getTabs().add(newPatient);
-        tabpane.getSelectionModel().select(newPatient);
-        newPatient.setText("New Patient");
+        Stage primaryStage = new Stage();
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+
+//        Tab newPatient = new Tab();
+//        ScrollPane sp = new ScrollPane();
+//        sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+//        sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+//        sp.setFitToHeight(true);
+//        sp.setFitToWidth(true);
+//        sp.setPrefSize(900,1080);
+//        sp.setHmax(1);
+//        sp.setVmax(1);
+//        sp.setContent(root);
+//        newPatient.setContent(sp);
+//        tabpane.getTabs().add(newPatient);
+//        tabpane.getSelectionModel().select(newPatient);
+//        newPatient.setText("New Patient");
 
 
 
@@ -353,6 +358,11 @@ public class WorkPage  implements Initializable {
     }
 
 
+    public void onMedicalAnalysis(ActionEvent actionEvent) {
+
+
+
+    }
 }
 
 

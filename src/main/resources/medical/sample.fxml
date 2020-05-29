@@ -193,7 +193,7 @@
                                     <ListView fx:id="searchList" prefHeight="207.0" prefWidth="474.0" />
                                  </children>
                               </AnchorPane>
-                              <Button layoutX="323.0" layoutY="295.0" mnemonicParsing="false" onAction="#onCreateNewPatient" prefHeight="88.0" prefWidth="150.0" stylesheets="@../Css/button.css">
+                              <Button layoutX="323.0" layoutY="295.0" mnemonicParsing="false" onAction="#onMedicalAnalysis" prefHeight="88.0" prefWidth="150.0" stylesheets="@../Css/button.css">
                                  <graphic>
                                     <ImageView fitHeight="51.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -230,7 +230,7 @@
                                     <Font name="Arial Rounded MT Bold" size="30.0" />
                                  </font>
                               </Label>
-                              <Label alignment="CENTER" layoutX="260.0" layoutY="396.0" prefHeight="36.0" prefWidth="275.0" text="Medical analysis" textFill="#00a8ef">
+                              <Label alignment="CENTER" layoutX="260.0" layoutY="396.0" prefHeight="36.0" prefWidth="275.0" text="Medical analysit" textFill="#00a8ef">
                                  <font>
                                     <Font name="Arial Rounded MT Bold" size="30.0" />
                                  </font>

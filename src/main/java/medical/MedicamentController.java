@@ -1,9 +1,13 @@
 package medical;
 
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
@@ -19,19 +23,18 @@ public class MedicamentController implements Initializable {
     @FXML
     Label l3;
     @FXML
-
+   Button btn;
  AnchorPane root;
+
  Medicament medicament;
 
  public MedicamentController(Medicament medicament){
 this.medicament = medicament;
 
+
  }
 
-    public void onDelete(ActionEvent actionEvent) {
-        ((VBox) root.getParent()).getChildren().remove(root);
 
-    }
 
 
     @Override
@@ -41,4 +44,7 @@ this.medicament = medicament;
         l2.setText("Dosage : "+medicament.getDosage());
 
     }
+
+
+
 }
