@@ -358,7 +358,12 @@ public class WorkPage  implements Initializable {
     }
 
 
-    public void onMedicalAnalysis(ActionEvent actionEvent) {
+    public void onMedicalAnalysis(ActionEvent actionEvent) throws IOException {
+        AnchorPane root = FXMLLoader.load(getClass().getResource("checkup.fxml"));
+        Scene scene = new Scene(root);
+        Stage stage = new Stage();
+        stage.setScene(scene);
+        stage.show();
 
 
 

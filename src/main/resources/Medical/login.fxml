@@ -36,35 +36,7 @@
                   <CheckBox layoutX="57.0" layoutY="388.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="135.0" text="Remember me" />
                </children>
             </AnchorPane>
-            <AnchorPane fx:id="p3" prefHeight="539.0" prefWidth="418.0" style="-fx-background-color: #fff;">
-               <children>
-                  <Label alignment="CENTER" layoutX="71.0" layoutY="71.0" prefHeight="68.0" prefWidth="220.0" text="Sign up" textFill="#00b7ff">
-                     <font>
-                        <Font name="Arial Rounded MT Bold" size="45.0" />
-                     </font>
-                  </Label>
-                  <VBox layoutX="61.0" layoutY="207.0" prefHeight="208.0" prefWidth="284.0">
-                     <children>
-                        <TextField prefHeight="35.0" prefWidth="180.0" promptText="Specialties">
-                           <VBox.margin>
-                              <Insets bottom="10.0" top="10.0" />
-                           </VBox.margin>
-                        </TextField>
-                        <TextField prefHeight="35.0" prefWidth="180.0" promptText=" Id of approval">
-                           <VBox.margin>
-                              <Insets bottom="10.0" top="10.0" />
-                           </VBox.margin>
-                        </TextField>
-                     </children>
-                  </VBox>
-                  <Button layoutX="61.0" layoutY="448.0" mnemonicParsing="false" onAction="#onNext_3" prefHeight="35.0" prefWidth="284.0" style="-fx-background-color: #00a8ef; -fx-background-radius: 60;" text="Next">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Button>
-               </children>
-            </AnchorPane>
-            <AnchorPane fx:id="p1" prefHeight="539.2" prefWidth="412.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <AnchorPane fx:id="p1" prefHeight="539.2" prefWidth="418.4" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <Label alignment="CENTER" layoutX="71.0" layoutY="71.0" prefHeight="68.0" prefWidth="220.0" text="Sign up" textFill="#00b7ff">
                      <font>
@@ -73,22 +45,22 @@
                   </Label>
                   <VBox layoutX="61.0" layoutY="174.0" prefHeight="249.0" prefWidth="284.0">
                      <children>
-                        <TextField prefHeight="35.0" prefWidth="284.0" promptText="First Name">
+                        <TextField fx:id="lfirstName" prefHeight="35.0" prefWidth="284.0" promptText="First Name">
                            <VBox.margin>
                               <Insets bottom="10.0" top="10.0" />
                            </VBox.margin>
                         </TextField>
-                        <TextField prefHeight="35.0" prefWidth="284.0" promptText="Last Name">
+                        <TextField fx:id="llastName" prefHeight="35.0" prefWidth="284.0" promptText="Last Name">
                            <VBox.margin>
                               <Insets bottom="10.0" top="10.0" />
                            </VBox.margin>
                         </TextField>
-                        <PasswordField prefHeight="35.0" prefWidth="284.0" promptText="Password">
+                        <PasswordField fx:id="lpassword" prefHeight="35.0" prefWidth="284.0" promptText="Password">
                            <VBox.margin>
                               <Insets bottom="10.0" top="10.0" />
                            </VBox.margin>
                         </PasswordField>
-                        <PasswordField prefHeight="35.0" prefWidth="284.0" promptText="Confirm Password">
+                        <PasswordField fx:id="lconfirmoassword" prefHeight="35.0" prefWidth="284.0" promptText="Confirm Password">
                            <VBox.margin>
                               <Insets bottom="10.0" top="10.0" />
                            </VBox.margin>
@@ -101,6 +73,34 @@
                      </children>
                   </VBox>
                   <Button layoutX="61.0" layoutY="444.0" mnemonicParsing="false" onAction="#onNext_1" prefHeight="35.0" prefWidth="284.0" style="-fx-background-color: #00a8ef; -fx-background-radius: 60;" text="Next">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="p3" prefHeight="539.0" prefWidth="418.0" style="-fx-background-color: #fff;">
+               <children>
+                  <Label alignment="CENTER" layoutX="71.0" layoutY="71.0" prefHeight="68.0" prefWidth="220.0" text="Sign up" textFill="#00b7ff">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="45.0" />
+                     </font>
+                  </Label>
+                  <VBox layoutX="61.0" layoutY="207.0" prefHeight="208.0" prefWidth="284.0">
+                     <children>
+                        <TextField fx:id="lspecialties" prefHeight="35.0" prefWidth="180.0" promptText="Specialties">
+                           <VBox.margin>
+                              <Insets bottom="10.0" top="10.0" />
+                           </VBox.margin>
+                        </TextField>
+                        <TextField fx:id="lidOfApproval" prefHeight="35.0" prefWidth="180.0" promptText=" Id of approval">
+                           <VBox.margin>
+                              <Insets bottom="10.0" top="10.0" />
+                           </VBox.margin>
+                        </TextField>
+                     </children>
+                  </VBox>
+                  <Button layoutX="61.0" layoutY="448.0" mnemonicParsing="false" onAction="#onNext_3" prefHeight="35.0" prefWidth="284.0" style="-fx-background-color: #00a8ef; -fx-background-radius: 60;" text="Next">
                      <font>
                         <Font size="24.0" />
                      </font>
@@ -126,38 +126,38 @@
                         </Label>
                         <HBox prefHeight="41.0" prefWidth="268.0">
                            <children>
-                              <TextField prefHeight="35.0" prefWidth="81.0" promptText="day">
+                              <TextField fx:id="lday" prefHeight="35.0" prefWidth="81.0" promptText="day">
                                  <HBox.margin>
                                     <Insets right="5.0" />
                                  </HBox.margin>
                               </TextField>
-                              <TextField prefHeight="35.0" prefWidth="99.0" promptText="month">
+                              <TextField fx:id="lmonth" prefHeight="35.0" prefWidth="99.0" promptText="month">
                                  <HBox.margin>
                                     <Insets right="5.0" />
                                  </HBox.margin>
                               </TextField>
-                              <TextField prefHeight="35.0" prefWidth="97.0" promptText="year" />
+                              <TextField fx:id="lyear" prefHeight="35.0" prefWidth="97.0" promptText="year" />
                            </children>
                            <VBox.margin>
                               <Insets bottom="10.0" />
                            </VBox.margin>
                         </HBox>
-                        <ComboBox prefHeight="37.0" prefWidth="284.0" stylesheets="@../Css/combobox1.css">
+                        <ComboBox fx:id="lgender" prefHeight="37.0" prefWidth="284.0" stylesheets="@../Css/combobox1.css">
                            <VBox.margin>
                               <Insets bottom="10.0" />
                            </VBox.margin>
                         </ComboBox>
-                        <TextField prefHeight="35.0" prefWidth="90.0" promptText="Phone">
+                        <TextField fx:id="lphone" prefHeight="35.0" prefWidth="90.0" promptText="Phone">
                            <VBox.margin>
                               <Insets bottom="10.0" />
                            </VBox.margin>
                         </TextField>
-                        <TextField prefHeight="35.0" prefWidth="90.0" promptText="Email">
+                        <TextField fx:id="lemail" prefHeight="35.0" prefWidth="90.0" promptText="Email">
                            <VBox.margin>
                               <Insets bottom="10.0" />
                            </VBox.margin>
                         </TextField>
-                        <TextField prefHeight="35.0" prefWidth="90.0" promptText="Address">
+                        <TextField fx:id="laddress" prefHeight="35.0" prefWidth="90.0" promptText="Address">
                            <VBox.margin>
                               <Insets bottom="10.0" />
                            </VBox.margin>

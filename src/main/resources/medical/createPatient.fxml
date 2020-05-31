@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onDragDetected="#onSavePatient" prefHeight="524.0" prefWidth="689.0" stylesheets="@../Css/button.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="medical.newPatient">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onDragDetected="#onSavePatient" prefHeight="524.0" prefWidth="689.0" style="-fx-background-color: #fff;" stylesheets="@../Css/button.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="medical.newPatient">
    <children>
       <TextField fx:id="firstName" layoutX="80.0" layoutY="108.0" prefHeight="35.0" prefWidth="249.0" promptText="First Name" />
       <TextField fx:id="placeOfBirth" layoutX="80.0" layoutY="284.0" prefHeight="35.0" prefWidth="249.0" promptText="Place of birth" />
@@ -19,7 +19,6 @@
       <TextField fx:id="job" layoutX="371.0" layoutY="284.0" prefHeight="35.0" prefWidth="249.0" promptText="job" />
       <ComboBox fx:id="gender" layoutX="371.0" layoutY="108.0" prefHeight="31.0" prefWidth="249.0" stylesheets="@../Css/combobox.css" />
       <TextArea fx:id="note" layoutX="76.0" layoutY="337.0" prefHeight="72.0" prefWidth="549.0" promptText="Note..." />
-      <Button layoutX="78.0" layoutY="435.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="133.0" text="Save" />
       <TextField layoutX="80.0" layoutY="232.0" prefHeight="35.0" prefWidth="42.0" promptText="day" />
       <TextField layoutX="247.0" layoutY="232.0" prefHeight="35.0" prefWidth="82.0" promptText="yeas" />
       <TextField layoutX="130.0" layoutY="232.0" prefHeight="35.0" prefWidth="110.0" promptText="month" />
@@ -33,5 +32,7 @@
             <Font name="Arial Rounded MT Bold" size="29.0" />
          </font>
       </Label>
+      <Button layoutX="79.0" layoutY="445.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="133.0" text="Save" />
+      <Button layoutX="221.0" layoutY="445.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="133.0" text="Consulatation" />
    </children>
 </AnchorPane>
