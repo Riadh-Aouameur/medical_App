@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="729.0" prefWidth="280.0" style="-fx-background-color: #00a8ef; -fx-background-radius: 60 0 0 0;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="medical.ControllerRightDrawer">
+   <children>
+      <ImageView fitHeight="99.0" fitWidth="96.0" layoutX="93.0" layoutY="36.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@patient.png" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" layoutY="146.0" prefHeight="22.0" prefWidth="282.0" text="Riadh aouameur" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="17.0" />
+         </font>
+      </Label>
+      <Label layoutY="181.0" prefHeight="22.0" prefWidth="280.0" text="ID : 110283691332" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="17.0" />
+         </font>
+         <padding>
+            <Insets left="5.0" />
+         </padding>
+      </Label>
+      <Label layoutY="203.0" prefHeight="22.0" prefWidth="280.0" text="Number : 12" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="17.0" />
+         </font>
+         <padding>
+            <Insets left="5.0" />
+         </padding>
+      </Label>
+      <Label alignment="CENTER" layoutY="273.0" prefHeight="22.0" prefWidth="282.0" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="17.0" />
+         </font>
+      </Label>
+      <JFXButton layoutX="14.0" layoutY="233.0" prefHeight="27.0" prefWidth="254.0" style="-fx-background-color: #fff;" text="more information" textFill="#00a8ef">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+      </JFXButton>
+      <Label layoutY="316.0" prefHeight="22.0" prefWidth="280.0" text="Pass : 5" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="17.0" />
+         </font>
+         <padding>
+            <Insets left="5.0" />
+         </padding>
+      </Label>
+      <Label layoutY="295.0" prefHeight="22.0" prefWidth="280.0" text="Watting : 5" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="17.0" />
+         </font>
+         <padding>
+            <Insets left="5.0" />
+         </padding>
+      </Label>
+      <JFXButton layoutX="14.0" layoutY="399.0" prefHeight="27.0" prefWidth="96.0" style="-fx-background-color: #fff;" text="Last" textFill="#00a8ef">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="172.0" layoutY="399.0" prefHeight="27.0" prefWidth="96.0" style="-fx-background-color: #fff;" text="Next" textFill="#00a8ef">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+      </JFXButton>
+      <JFXButton layoutX="93.0" layoutY="455.0" prefHeight="27.0" prefWidth="96.0" style="-fx-background-color: #fff;" text="Selecte" textFill="#00a8ef">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+      </JFXButton>
+   </children>
+</AnchorPane>

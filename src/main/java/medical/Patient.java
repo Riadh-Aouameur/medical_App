@@ -11,6 +11,14 @@ public class Patient {
     private SimpleStringProperty firstName;
     private SimpleObjectProperty birthday;
     private  SimpleStringProperty gender;
+    public Patient() {
+        this.id =new SimpleIntegerProperty(-1) ;
+        this.lastName = new SimpleStringProperty("demo") ;
+        this.firstName = new SimpleStringProperty("demo");
+        this.birthday = new SimpleObjectProperty(LocalDate.of(2000,01,01));
+        this.gender = new SimpleStringProperty("demo");
+    }
+
 
     public Patient(int id, String lastName, String firstName, LocalDate birthday, String gender) {
         this.id =new SimpleIntegerProperty(id) ;

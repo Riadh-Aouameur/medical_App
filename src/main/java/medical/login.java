@@ -1,5 +1,7 @@
 package medical;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,10 +11,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -61,7 +65,6 @@ public class login implements Initializable {
     AnchorPane p3;
     DoctorInformationSingle single;
 
-    Boolean aBoolean = false;
 
 
 
@@ -70,16 +73,10 @@ public class login implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        if (aBoolean==false) {
-            p0.toFront();
-            single =new DoctorInformationSingle("demo","Deom","Deom","Deom","Deom","Deom","Deom","Deom","Deom");
+        p1.toFront();
+        lgender.setItems(FXCollections.observableArrayList("Male","Female"));
 
 
-
-        }else {
-            p1.toFront();
-        }
 
 
     }
@@ -96,17 +93,11 @@ public class login implements Initializable {
             Stage primaryStage = new Stage();
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
-            Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-            primaryStage.setX(primaryScreenBounds.getMinX());
-            primaryStage.setY(primaryScreenBounds.getMinY());
 
-            primaryStage.setMaxWidth(primaryScreenBounds.getWidth());
-            primaryStage.setMinWidth(primaryScreenBounds.getWidth());
+        Image icon = new Image(getClass().getResourceAsStream("img/img.png"));
+        primaryStage.getIcons().add(icon);
 
-            primaryStage.setMaxHeight(primaryScreenBounds.getHeight());
-            primaryStage.setMinHeight(primaryScreenBounds.getHeight());
-            primaryStage.initStyle(StageStyle.TRANSPARENT);
-            primaryStage.setTitle("Assistant");
+
             primaryStage.show();
             p.getScene().getWindow().hide();
 
@@ -124,17 +115,11 @@ public class login implements Initializable {
         Stage primaryStage = new Stage();
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
-        Rectangle2D primaryScreenBounds = Screen.getPrimary().getVisualBounds();
-        primaryStage.setX(primaryScreenBounds.getMinX());
-        primaryStage.setY(primaryScreenBounds.getMinY());
 
-        primaryStage.setMaxWidth(primaryScreenBounds.getWidth());
-        primaryStage.setMinWidth(primaryScreenBounds.getWidth());
+        Image icon = new Image(getClass().getResourceAsStream("img/img.png"));
+        primaryStage.getIcons().add(icon);
 
-        primaryStage.setMaxHeight(primaryScreenBounds.getHeight());
-        primaryStage.setMinHeight(primaryScreenBounds.getHeight());
-        primaryStage.initStyle(StageStyle.TRANSPARENT);
-        primaryStage.setTitle("Assistant");
+
         primaryStage.show();
         p.getScene().getWindow().hide();
 
