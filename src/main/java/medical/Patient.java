@@ -7,10 +7,86 @@ import java.time.LocalDate;
 
 public class Patient {
     private SimpleIntegerProperty id;
+    private SimpleIntegerProperty children;
     private SimpleStringProperty lastName;
     private SimpleStringProperty firstName;
     private SimpleObjectProperty birthday;
     private  SimpleStringProperty gender;
+    private  SimpleStringProperty profession ;
+    private  SimpleStringProperty phone ;
+    private  SimpleStringProperty marritalStatus ;
+
+    public int getChildren() {
+        return children.get();
+    }
+
+    public SimpleIntegerProperty childrenProperty() {
+        return children;
+    }
+
+    public void setChildren(int children) {
+        this.children.set(children);
+    }
+
+    public String getProfession() {
+        return profession.get();
+    }
+
+    public SimpleStringProperty professionProperty() {
+        return profession;
+    }
+
+    public void setProfession(String profession) {
+        this.profession.set(profession);
+    }
+
+    public String getPhone() {
+        return phone.get();
+    }
+
+    public SimpleStringProperty phoneProperty() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone.set(phone);
+    }
+
+    public String getMarritalStatus() {
+        return marritalStatus.get();
+    }
+
+    public SimpleStringProperty marritalStatusProperty() {
+        return marritalStatus;
+    }
+
+    public void setMarritalStatus(String marritalStatus) {
+        this.marritalStatus.set(marritalStatus);
+    }
+
+    public Patient(int id, String lastName, String firstName, int children, LocalDate birthday, String gender, String profession, String phone, String marritalStatus) {
+        this.id = new SimpleIntegerProperty(id);
+        this.children = new SimpleIntegerProperty(children);
+        this.lastName = new SimpleStringProperty(lastName);
+        this.firstName = new SimpleStringProperty(firstName);
+        this.birthday = new SimpleObjectProperty(birthday);
+        this.gender = new SimpleStringProperty(gender);
+        this.profession = new SimpleStringProperty( profession);
+        this.phone = new SimpleStringProperty(phone);
+        this.marritalStatus = new SimpleStringProperty(marritalStatus);
+    }
+    public Patient( String lastName, String firstName,int children, LocalDate birthday, String gender, String profession,String phone, String marritalStatus) {
+        this.id = new SimpleIntegerProperty(0);
+        this.children = new SimpleIntegerProperty(children);
+        this.lastName = new SimpleStringProperty(lastName);
+        this.firstName = new SimpleStringProperty(firstName);
+        this.birthday = new SimpleObjectProperty(birthday);
+        this.gender = new SimpleStringProperty(gender);
+        this.profession = new SimpleStringProperty( profession);
+        this.phone = new SimpleStringProperty(phone);
+        this.marritalStatus = new SimpleStringProperty(marritalStatus);
+    }
+
     public Patient() {
         this.id =new SimpleIntegerProperty(-1) ;
         this.lastName = new SimpleStringProperty("demo") ;

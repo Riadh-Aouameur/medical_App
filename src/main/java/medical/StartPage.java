@@ -46,7 +46,7 @@ public class StartPage implements Initializable {
 
 
                     try {
-                   root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+                   root = FXMLLoader.load(getClass().getResource("sample.jifxml"));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

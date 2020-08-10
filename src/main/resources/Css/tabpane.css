@@ -18,7 +18,7 @@
 
 .tab-pane .tab:selected
 {
-    -fx-background-color: #00a8ef;
+    -fx-background-color:  linear-gradient(from 25% 25% to 100% 100%, #1530CC, #5EE6E4);
 }
 
 .tab .tab-label {

@@ -6,7 +6,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
-class MyListCell extends ListCell<String> {
+public class MyListCell extends ListCell<String> {
     @Override
     protected void updateItem(String item, boolean empty) {
         super.updateItem(item, empty);
@@ -19,7 +19,7 @@ class MyListCell extends ListCell<String> {
             imageView.setFitWidth(25);
             Label label =new Label(item);
             label.setStyle("-fx-text-fill: #fff;");
-            setGraphic(new HBox(imageView, label));
+            setGraphic(new HBox(imageView));
         }
 
         setText("");

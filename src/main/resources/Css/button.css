@@ -4,7 +4,7 @@
     -fx-border-width: 2;
     -fx-background-radius: 30
    ;
-    -fx-background-color: #00a8ef;
+    -fx-background-color:  linear-gradient(from 25% 25% to 100% 100%, #1530CC, #5EE6E4);
     -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
     -fx-font-size: 11pt;
     -fx-text-fill: #ffffff;

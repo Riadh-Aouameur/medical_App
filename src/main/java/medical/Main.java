@@ -11,31 +11,21 @@ import javafx.stage.StageStyle;
 
 public class Main extends Application {
 
-    Boolean aBoolean = true;
+
 
 
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        if (aBoolean==false) {
 
-            Parent root = FXMLLoader.load(getClass().getResource("login.fxml"));
-            primaryStage.setTitle("");
+            Parent root = FXMLLoader.load(getClass().getResource("register.fxml"));
             primaryStage.initStyle(StageStyle.UNDECORATED);
             primaryStage.setScene(new Scene(root));
             primaryStage.show();
 
 
 
-        }else {
 
-            Parent root = FXMLLoader.load(getClass().getResource("login_1.fxml"));
-            primaryStage.setTitle("");
-            primaryStage.initStyle(StageStyle.UNDECORATED);
-            primaryStage.setScene(new Scene(root));
-            primaryStage.show();
-
-        }
 
 
     }

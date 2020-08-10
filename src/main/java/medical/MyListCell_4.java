@@ -1,24 +1,17 @@
 package medical;
 
-import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
-import javafx.util.Callback;
+import medical.ItemListSelection;
+import medical.Patient;
 
 import java.io.IOException;
 
-class MyListCell_4 extends ListCell<Patient> {
+ public class MyListCell_4 extends ListCell<Patient> {
     @Override
     protected void updateItem(Patient item, boolean empty) {
         super.updateItem(item, empty);

@@ -2,6 +2,7 @@ package medical;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import medical.Patient;
 
 import java.util.ArrayList;
 

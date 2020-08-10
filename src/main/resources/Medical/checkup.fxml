@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -85,7 +82,7 @@
          <children>
             <ImageView fx:id="imgeGander" fitHeight="92.0" fitWidth="116.0" layoutX="35.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@patient.png" />
+                  <Image url="@img/patient.png" />
                </image>
             </ImageView>
             <TextField fx:id="fName" editable="false" layoutX="257.0" layoutY="66.0" prefHeight="26.0" prefWidth="348.0" />
@@ -144,15 +141,7 @@
             <ListView fx:id="list_2" layoutX="299.0" layoutY="117.0" prefHeight="326.0" prefWidth="482.0" />
             <Button layoutX="37.0" layoutY="455.0" mnemonicParsing="false" onAction="#onAddToList2" prefHeight="40.0" prefWidth="136.0" stylesheets="@../Css/button.css" text="Add" />
             <TextField fx:id="searchField" layoutX="37.0" layoutY="82.0" prefHeight="26.0" prefWidth="235.0" />
-            <TableView fx:id="table_1" layoutX="37.0" layoutY="125.0" prefHeight="317.0" prefWidth="235.0" stylesheets="@../Css/table.css">
-              <columns>
-                <TableColumn fx:id="col1" prefWidth="172.3999900817871" />
-                <TableColumn fx:id="col2" prefWidth="62.80003356933594" />
-              </columns>
-               <cursor>
-                  <Cursor fx:constant="DEFAULT" />
-               </cursor>
-            </TableView>
+            <ListView fx:id="list_1" layoutX="37.0" layoutY="140.0" prefHeight="274.0" prefWidth="235.0" />
          </children>
       </AnchorPane>
    </children>

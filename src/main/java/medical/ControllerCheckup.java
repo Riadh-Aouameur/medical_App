@@ -1,5 +1,6 @@
 package medical;
 
+import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -8,14 +9,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.CheckBoxListCell;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import medical.listCell.MyListCell_5;
-import medical.listCell.MyListCell_6;
-import org.w3c.dom.Document;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -27,10 +22,11 @@ import java.util.ResourceBundle;
 public class ControllerCheckup implements Initializable {
 
 
-    @FXML TableView <CheckupName>table_1;
     @FXML
-     TableColumn <CheckupName,String>col1;
-    @FXML TableColumn<CheckupName,CheckBox> col2;
+    private JFXButton jSave;
+
+
+
     @FXML
     ImageView imgeGander;
     @FXML
@@ -47,6 +43,8 @@ public class ControllerCheckup implements Initializable {
 
     @FXML
     ListView  <Checkup>list_2;
+    @FXML
+    ListView  <CheckupName>list_1;
     @FXML
     TextField searchField;
     ObservableList<CheckupName> observableList_1;
@@ -85,9 +83,9 @@ public class ControllerCheckup implements Initializable {
         fAge.setText(i+"");
         DateTimeFormatter formatter =DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL);
         fDate.setText(formatter.format(LocalDate.now()));
-        col1.setCellValueFactory(new PropertyValueFactory<>("name"));
-        col2.setCellValueFactory(new PropertyValueFactory<>("checked"));
-        table_1.setItems(observableList_1);
+
+        list_1.setItems(observableList_1);
+        list_1.setCellFactory(p->new MyListCell_5());
 
 
 
@@ -112,10 +110,11 @@ public class ControllerCheckup implements Initializable {
                 String filter = newValue.toLowerCase();
                 return checkupName.getName().toLowerCase().contains(filter);
 
+
             });
         });
         SortedList<CheckupName> sortedLis = new SortedList<>(filteredData);
-        table_1.setItems(sortedLis);
+        list_1.setItems(sortedLis);
 
     }
 

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="872.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="medical.ControllerShowPrescription">
+   <children>
+      <Label layoutX="38.0" layoutY="14.0" prefHeight="47.0" prefWidth="230.0" text="Prescription" textFill="#00a8ef">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="30.0" />
+         </font>
+      </Label>
+      <VBox fx:id="vbox" layoutX="35.0" layoutY="201.0" prefWidth="802.0" />
+      <Label layoutX="214.0" layoutY="78.0" prefHeight="17.0" prefWidth="72.0" text="Patient" textFill="#00a8ef">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="fpatient" layoutX="317.0" layoutY="74.0" />
+      <Label layoutX="214.0" layoutY="159.0" prefHeight="17.0" prefWidth="72.0" text="Phone" textFill="#00a8ef">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="fPhone" layoutX="317.0" layoutY="163.0" />
+      <Label layoutX="214.0" layoutY="121.0" prefHeight="17.0" prefWidth="72.0" text="Age" textFill="#00a8ef">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="fAge" layoutX="317.0" layoutY="119.0" />
+      <Label layoutX="502.0" layoutY="80.0" prefHeight="17.0" prefWidth="141.0" text="Prescription id" textFill="#00a8ef">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="fPrescriptionId" layoutX="651.0" layoutY="74.0" />
+      <Label layoutX="502.0" layoutY="123.0" prefHeight="17.0" prefWidth="72.0" text="Date" textFill="#00a8ef">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="fdate" layoutX="651.0" layoutY="119.0" />
+      <ImageView fitHeight="86.0" fitWidth="87.0" layoutX="66.0" layoutY="89.0" pickOnBounds="true" preserveRatio="true" />
+   </children>
+</AnchorPane>
