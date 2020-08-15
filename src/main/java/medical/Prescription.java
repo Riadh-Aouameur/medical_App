@@ -12,7 +12,10 @@ public class Prescription {
     SimpleIntegerProperty id;
     SimpleObjectProperty<LocalDate> date;
 
-
+    public Prescription(Integer id, LocalDate date) {
+        this.id =  new  SimpleIntegerProperty(id);
+        this.date = new SimpleObjectProperty<>(date);
+    }
 
     ObservableList <Medicament> observableList =FXCollections.observableArrayList();
 

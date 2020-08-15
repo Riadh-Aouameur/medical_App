@@ -20,6 +20,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
@@ -30,10 +31,23 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 
 public class WorkPage  implements Initializable {
 
+    public Tab medicalRecordTab;
+    public TextField fAge;
+    public TextField fPhone;
+    public TextField fBirthday;
+    public ImageView imgeGander;
+    public TextField fName;
+    public TextField fDate;
+    public TextField fProfession;
+    public TextField fChildren;
+    public ComboBox <String> fMaritalStatus;
     @FXML
     TableView <Patient>table;
     @FXML
@@ -86,6 +100,7 @@ public class WorkPage  implements Initializable {
 
         tabpane.getTabs().remove(appointementTab);
         tabpane.getTabs().remove(patientsTab);
+        tabpane.getTabs().remove(medicalRecordTab);
         observableList.addAll(db.getPatientData());
         try {
 
@@ -560,20 +575,7 @@ public class WorkPage  implements Initializable {
 
                 }
             }
-        });
-
-
-
-
-
-
-
-
-
-
-
-
-    }
+        }); }
 
     public void onMinButton(ActionEvent actionEvent) {
      Stage stage = (Stage) root.getScene().getWindow();
@@ -772,8 +774,110 @@ public class WorkPage  implements Initializable {
 
 
     }
-
+    Patient patient;
     public void onOpenMedicalRecord(ActionEvent actionEvent) {
+
+        AnchorPane anchorPane = new AnchorPane();
+
+
+        ListView <Patient> litView = new ListView<>();
+        litView.setCellFactory(    param -> new ListCell<Patient>() {
+            @Override
+            protected void updateItem(Patient item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty || item == null || item.getFirstName()+item.getLastName() == null) {
+                    setText(null);
+                } else {
+                    setText(item.getFirstName()+" "+item.getLastName());
+                }
+            }
+        });
+        litView.setItems(listPatient.observableList);
+        litView.setCellFactory(e-> new MyListCell_4());
+        anchorPane.getChildren().add(litView);
+        litView.setPrefSize(500,400);
+        anchorPane.setPrefWidth(500);
+        anchorPane.setPrefHeight(400);
+
+        Scene scene =new Scene(anchorPane,500,400);
+        Stage stage1 = new Stage();
+        stage1.initStyle(StageStyle.UTILITY);
+        stage1.setScene(scene);
+        stage1.show();
+
+        litView.setOnMouseClicked(new EventHandler<MouseEvent>() {
+
+            @Override
+            public void handle(MouseEvent click) {
+
+                if (click.getClickCount() == 2) {
+
+                    patient = litView.getSelectionModel().getSelectedItem();
+
+
+
+                    if(patient.getGender().equals("female")){
+                        Image imProfile = new Image(getClass().getResourceAsStream("img/femalepatient.png"));
+                        imgeGander.setImage(imProfile);
+                    }
+                    fName.setText(patient.getFirstName()+"\t"+patient.getLastName());
+                    fBirthday.setText(patient.getBirthday().toString());
+                    LocalDate b= (LocalDate) patient.getBirthday();
+                    Calendar c =Calendar.getInstance();
+                    int i =c.get(Calendar.YEAR)-b.getYear();
+                    fAge.setText(i+"");
+                    DateTimeFormatter formatter =DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL);
+                    fDate.setText(formatter.format(LocalDate.now()));
+
+
+
+
+
+                    tabpane.getTabs().add(medicalRecordTab);
+                    tabpane.getSelectionModel().select(medicalRecordTab);
+
+
+
+
+                }
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+
+    public void onOpenHistoryOfPrescription(ActionEvent actionEvent) {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("history.fxml"));
+        loader.setControllerFactory(e->{
+
+
+            return new ControllerHistory(patient);
+
+        });
+
+        Stage stage =   new Stage();
+        try {
+            stage.setScene(new Scene(loader.load()));
+
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        stage.show();
+
     }
 }
 

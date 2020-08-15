@@ -5,22 +5,27 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import medical.DataBase.Db;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 
 public class ControllerHistory implements Initializable {
-  @FXML
-  ListView <InformationForHistoryList>list_1;
+    public Label fName;
+    public Label fAge;
     @FXML
-    ListView <Object>list_2;
+  ListView <Prescription>list_1;
     @FXML
-    ObservableList <InformationForHistoryList>observableList1;
-    ObservableList <Object>observableList2;
+    ListView <Prescription>list_2;
+    @FXML
+    ObservableList <Prescription>observableList1;
+    ObservableList <Prescription>observableList2;
 
     @FXML
     ImageView imgeGander;
@@ -29,16 +34,26 @@ public class ControllerHistory implements Initializable {
     { this.patient = patient; }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if(patient.getGender().equals("female")){
+        Db db = new Db();
+        System.out.println(patient.getId());
+
+        if(patient.getGender().equals("Female")){
             Image imProfile = new Image(getClass().getResourceAsStream("img/femalepatient.png"));
             imgeGander.setImage(imProfile);
         }
-        observableList1 = FXCollections.observableArrayList(new InformationForHistoryList(16,"Prescription", LocalDate.of(1999,1,19))
-                ,new InformationForHistoryList(16,"Prescription", LocalDate.of(1999,2,19))
-                ,new InformationForHistoryList(16,"Prescription", LocalDate.of(1999,3,19)));
+
+        fName.setText(patient.getFirstName()+" "+patient.getLastName());
+        LocalDate b= (LocalDate) patient.getBirthday();
+        Calendar c =Calendar.getInstance();
+        int i =c.get(Calendar.YEAR)-b.getYear();
+        fAge.setText(i+"");
 
         observableList2 = FXCollections.observableArrayList();
+        observableList1 = FXCollections.observableArrayList();
+        observableList2.setAll(db.getPatientDaa(patient.getId()));
+        observableList1.setAll(db.getPatientDaa(patient.getId()));
         list_1.setCellFactory(l->new MyListCell_7());
+        list_2.setCellFactory(l->new MyListCell_8());
                 list_1.setItems(observableList1);
                 list_2.setItems(observableList2);
 

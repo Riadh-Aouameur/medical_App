@@ -370,5 +370,45 @@ public class Db {
 
 
     }
+    public ObservableList <Prescription>getPatientDaa(int id){
+
+        ObservableList <Prescription>observableList = FXCollections.observableArrayList();
+        try {
+             ResultSet resultSet ;
+            Statement stt;
+           stt = con.createStatement();
+            System.out.println("records from Db");
+            String query = "select * from  Prescription where patientID ="+id;
+
+            rs = st.executeQuery(query);
+            while(rs.next()){
+                int prescriptionID = rs.getInt("prescriptionID");
+                System.out.println(prescriptionID);
+                String date= rs.getString("dateofprescriptiondate");
+                Prescription prescription = new Prescription(prescriptionID,LocalDate.parse(date));
+
+
+                String query2 = "select * from  Medicament where PrescriptionID  ="+prescription.getId();
+                resultSet = stt.executeQuery(query2);
+                while(resultSet.next()){
+                    String dosage= resultSet.getString("dosage");
+                    int  entityNumber=resultSet.getInt("entityNumber");
+                    String qsp= resultSet.getString("qsp");
+                    String nameMedicament= resultSet.getString("nameMedicament");
+                    prescription.getObservableList().add(new Medicament(nameMedicament,dosage,entityNumber,qsp));
+                }
+                observableList.add(prescription);
+
+            }
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+        System.out.println("records from Db");
+
+        return  observableList ;
+
+
+
+    }
 }
 

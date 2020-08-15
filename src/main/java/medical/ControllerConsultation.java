@@ -108,9 +108,7 @@ public class ControllerConsultation implements Initializable {
         Calendar c =Calendar.getInstance();
         int i =c.get(Calendar.YEAR)-b.getYear();
         fAge.setText(i+"");
-//        observableList = FXCollections.observableArrayList(new Parameters("test","t1"),new Parameters("test","t2"));
-//        list.setCellFactory(p-> new MyListCell_8());
-//        list.setItems(observableList);
+
         DateTimeFormatter formatter =DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL);
         fDate.setText(formatter.format(LocalDate.now()));
         

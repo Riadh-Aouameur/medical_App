@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
@@ -12,73 +11,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="632.0" prefWidth="887.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="medical.ControllerHistory">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="631.0" prefWidth="1058.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="medical.ControllerHistory">
    <children>
-      <HBox prefHeight="36.0" prefWidth="600.0" style="-fx-background-color: #fff;">
-         <children>
-            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="37.0" prefWidth="136.0" style="-fx-background-color: #fff;" text="print" textFill="#00a8ef">
-               <graphic>
-                  <ImageView fitHeight="23.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/print.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <padding>
-                  <Insets left="20.0" />
-               </padding>
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="15.0" />
-               </font>
-            </Button>
-            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="37.0" prefWidth="136.0" style="-fx-background-color: #fff;" text="Save" textFill="#00a8ef">
-               <graphic>
-                  <ImageView fitHeight="23.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/save.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <padding>
-                  <Insets left="20.0" />
-               </padding>
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="15.0" />
-               </font>
-            </Button>
-            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="37.0" prefWidth="136.0" style="-fx-background-color: #fff;" text="Save" textFill="#00a8ef">
-               <graphic>
-                  <ImageView fitHeight="23.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/save.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <padding>
-                  <Insets left="20.0" />
-               </padding>
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="15.0" />
-               </font>
-            </Button>
-            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="37.0" prefWidth="136.0" style="-fx-background-color: #fff;" text="print" textFill="#00a8ef">
-               <graphic>
-                  <ImageView fitHeight="23.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/print.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <padding>
-                  <Insets left="20.0" />
-               </padding>
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="15.0" />
-               </font>
-            </Button>
-         </children>
-      </HBox>
-      <HBox prefHeight="602.0" prefWidth="885.0">
+      <HBox prefHeight="632.0" prefWidth="1009.0">
          <children>
             <AnchorPane prefHeight="598.0" prefWidth="250.0" style="-fx-background-color: #fff;">
                <children>
@@ -87,12 +22,12 @@
                         <Image url="@img/patient.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="69.0" layoutY="22.0" prefHeight="17.0" prefWidth="166.0" text="Riadh Aouameur" textFill="#00a8ef">
+                  <Label fx:id="fName" layoutX="69.0" layoutY="22.0" prefHeight="17.0" prefWidth="166.0" text="Riadh Aouameur" textFill="#00a8ef">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label layoutX="69.0" layoutY="45.0" prefHeight="17.0" prefWidth="166.0" text="Age : 18 year" textFill="#00a8ef">
+                  <Label fx:id="fAge" layoutX="69.0" layoutY="45.0" prefHeight="17.0" prefWidth="166.0" text="Age : 18 year" textFill="#00a8ef">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="12.0" />
                      </font>
@@ -111,9 +46,9 @@
                   </Button>
                </children>
             </AnchorPane>
-            <AnchorPane prefHeight="492.0" prefWidth="667.0" style="-fx-background-color: #363636;">
+            <AnchorPane prefHeight="632.0" prefWidth="820.0" style="-fx-background-color: #363636;">
                <children>
-                  <ListView fx:id="list_2" layoutX="24.0" layoutY="29.0" prefHeight="508.0" prefWidth="600.0" style="-fx-background-color: #363636;" />
+                  <ListView fx:id="list_2" layoutX="51.0" layoutY="31.0" prefHeight="569.0" prefWidth="711.0" style="-fx-background-color: #363636;" />
                </children></AnchorPane>
          </children>
       </HBox>
