@@ -1,30 +1,61 @@
 package medical;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.ObservableList;
+import medical.DataBase.Db;
 
 public class DoctorInformationSingle{
 
+
+ SimpleStringProperty doctorID;
    SimpleStringProperty firstName;
  SimpleStringProperty lastName;
  SimpleStringProperty birthday;
- SimpleStringProperty phone;
+
  SimpleStringProperty address;
-SimpleStringProperty email;
+
+    public String getDoctorID() {
+        return doctorID.get();
+    }
+
+    public SimpleStringProperty doctorIDProperty() {
+        return doctorID;
+    }
+
+    public void setDoctorID(String doctorID) {
+        this.doctorID.set(doctorID);
+    }
+
+
+    SimpleStringProperty emailOrPhone;
 SimpleStringProperty gender;
 SimpleStringProperty specialties;
   SimpleStringProperty  idOfApproval;
 
 
-  DoctorInformationSingle(String firstName, String lastName, String birthday, String phone, String address, String email,String gender, String specialties, String idOfApproval) {
-        this.firstName = new SimpleStringProperty(firstName);
-        this.lastName = new SimpleStringProperty(lastName);
-        this.birthday = new SimpleStringProperty(birthday);
-        this.phone = new SimpleStringProperty(phone);
-        this.address = new SimpleStringProperty(address);
-        this.email =new SimpleStringProperty( email);
-        this.gender =new SimpleStringProperty( gender);
-        this.specialties = new SimpleStringProperty(specialties);
-        this.idOfApproval = new SimpleStringProperty(idOfApproval);
+    private DoctorInformationSingle(int a) {
+        Db db = new Db();
+        ObservableList <String>observableList = db.getDoctorData(a);
+
+
+        this.firstName = new SimpleStringProperty(observableList.get(0));
+        this.lastName = new SimpleStringProperty(observableList.get(1));
+        this.birthday = new SimpleStringProperty(observableList.get(2));
+        this.address = new SimpleStringProperty(observableList.get(7));
+        this.emailOrPhone =new SimpleStringProperty( observableList.get(5));
+        this.gender =new SimpleStringProperty( observableList.get(3));
+        this.specialties = new SimpleStringProperty(observableList.get(6));
+        this.idOfApproval = new SimpleStringProperty(observableList.get(4));
+        this.doctorID = new SimpleStringProperty(String.valueOf(a));
+    }
+    private static DoctorInformationSingle doctor = null;
+
+    public synchronized static DoctorInformationSingle getInstance(int x) {
+
+        if(doctor == null)
+            doctor = new DoctorInformationSingle(x);
+
+        return doctor;
     }
 
     public String getFirstName() {
@@ -63,17 +94,7 @@ SimpleStringProperty specialties;
         this.birthday.set(birthday);
     }
 
-    public String getPhone() {
-        return phone.get();
-    }
 
-    public SimpleStringProperty phoneProperty() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone.set(phone);
-    }
 
     public String getAddress() {
         return address.get();
@@ -85,18 +106,6 @@ SimpleStringProperty specialties;
 
     public void setAddress(String address) {
         this.address.set(address);
-    }
-
-    public String getEmail() {
-        return email.get();
-    }
-
-    public SimpleStringProperty emailProperty() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email.set(email);
     }
 
     public String getGender() {
@@ -133,5 +142,17 @@ SimpleStringProperty specialties;
 
     public void setIdOfApproval(String idOfApproval) {
         this.idOfApproval.set(idOfApproval);
+    }
+    public String getEmailOrPhone() {
+        return emailOrPhone.get();
+    }
+
+    public SimpleStringProperty emailOrPhoneProperty() {
+        return emailOrPhone;
+    }
+
+    public void setEmailOrPhone(String emailOrPhone) {
+        this.emailOrPhone.set(emailOrPhone);
+
     }
 }

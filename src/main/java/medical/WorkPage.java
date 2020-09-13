@@ -12,17 +12,16 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import medical.DataBase.Db;
@@ -30,7 +29,6 @@ import medical.DataBase.Db;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Calendar;
@@ -38,11 +36,15 @@ import java.util.ResourceBundle;
 
 public class WorkPage  implements Initializable {
 
+    public ImageView drg;
+    public Label dr ;
+
     public Tab medicalRecordTab;
     public TextField fAge;
     public TextField fPhone;
     public TextField fBirthday;
     public ImageView imgeGander;
+
     public TextField fName;
     public TextField fDate;
     public TextField fProfession;
@@ -98,7 +100,14 @@ public class WorkPage  implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        tabpane.getTabs().remove(appointementTab);
+        dr.setText("Dr."+DoctorInformationSingle.getInstance(0).getFirstName());
+        if(DoctorInformationSingle.getInstance(0).getGender().equals("Female")) {
+            Image imProfile = new Image(getClass().getResourceAsStream("img/femalepatient.png"));
+            drg.setImage(imProfile);
+        }
+
+
+            tabpane.getTabs().remove(appointementTab);
         tabpane.getTabs().remove(patientsTab);
         tabpane.getTabs().remove(medicalRecordTab);
         observableList.addAll(db.getPatientData());
@@ -275,13 +284,9 @@ public class WorkPage  implements Initializable {
                     return true;
                 }
                 String filter = newValue.toLowerCase();
-                if(patient.getFirstName().toLowerCase().indexOf(filter)!=-1){
+                if(patient.getFirstName().toLowerCase().contains(filter)){
                     return true;
-                } else if(patient.getLastName().toLowerCase().indexOf(filter)!=-1){
-                    return true;
-                }else {
-                    return false;
-                }
+                } else return patient.getLastName().toLowerCase().contains(filter);
 
             });
         });
@@ -363,7 +368,6 @@ public class WorkPage  implements Initializable {
         stage1.show();
 
         litView.setOnMouseClicked(new EventHandler<MouseEvent>() {
-
             @Override
             public void handle(MouseEvent click) {
 
@@ -821,11 +825,12 @@ public class WorkPage  implements Initializable {
                         Image imProfile = new Image(getClass().getResourceAsStream("img/femalepatient.png"));
                         imgeGander.setImage(imProfile);
                     }
-                    fName.setText(patient.getFirstName()+"\t"+patient.getLastName());
+                    fName.setText(patient.getFirstName()+" "+patient.getLastName());
                     fBirthday.setText(patient.getBirthday().toString());
                     LocalDate b= (LocalDate) patient.getBirthday();
                     Calendar c =Calendar.getInstance();
                     int i =c.get(Calendar.YEAR)-b.getYear();
+                    fPhone.setText(patient.getPhone());
                     fAge.setText(i+"");
                     DateTimeFormatter formatter =DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL);
                     fDate.setText(formatter.format(LocalDate.now()));
@@ -878,6 +883,89 @@ public class WorkPage  implements Initializable {
         }
         stage.show();
 
+    }
+
+    public void onOpenCalender(ActionEvent actionEvent) {
+
+        try {
+        String params ;
+        params = "C:\\Program Files (x86)\\Calendrier\\Cld2000.exe";
+
+
+            Runtime.getRuntime().exec(params);
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
+    }
+
+    public void onOpenHistoryOfConsultation(ActionEvent actionEvent) {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("history1.fxml"));
+        loader.setControllerFactory(e->{
+
+
+            return new ControllerHistory1(patient);
+
+        });
+
+        Stage stage =   new Stage();
+        try {
+            stage.setScene(new Scene(loader.load()));
+
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        stage.show();
+
+    }
+
+    public void onOpenHistoryOfDocuments(ActionEvent actionEvent) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("history2.fxml"));
+        loader.setControllerFactory(e->{
+
+
+            return new ControllerHistory2(patient);
+
+        });
+
+        Stage stage =   new Stage();
+        try {
+            stage.setScene(new Scene(loader.load()));
+
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        stage.show();
+    }
+
+    public void onOpenHistoryOfMedicalAnalysis(ActionEvent actionEvent) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("history3.fxml"));
+        loader.setControllerFactory(e->{
+
+
+            return new ControllerHistory3(patient);
+
+        });
+
+        Stage stage =   new Stage();
+        try {
+            stage.setScene(new Scene(loader.load()));
+
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        stage.show();
+    }
+
+    public void onMouseClicked(MouseEvent mouseEvent) {
+        paneSearch.setVisible(false);
     }
 }
 

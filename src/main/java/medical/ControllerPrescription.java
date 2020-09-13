@@ -21,15 +21,23 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import medical.DataBase.Db;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.util.Calendar;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class ControllerPrescription implements Initializable {
 
@@ -112,7 +120,8 @@ public class ControllerPrescription implements Initializable {
         modelPrescription.setMedicaments(FXCollections.observableArrayList(new Medicament("gsgff","bfxcbfv",4,"bfdfbfb"),new Medicament("gsgff","bfxcbfv",4,"bfdfbfb")));
         observableList2 = FXCollections.observableArrayList(modelPrescription);
         listLoad.setItems(observableList2);
-        fName.setText(patient.getFirstName()+"\t"+patient.getLastName());
+        fPhone.setText(patient.getPhone());
+        fName.setText(patient.getFirstName()+" "+patient.getLastName());
         fBirthday.setText(patient.getBirthday().toString());
         LocalDate b= (LocalDate) patient.getBirthday();
         Calendar c =Calendar.getInstance();
@@ -393,7 +402,32 @@ public class ControllerPrescription implements Initializable {
                 if (result.isPresent() && result.get() == ButtonType.OK){
                     System.out.println("save");
                     Db db=new Db();
-                    db.InsertMedicament(prescription,patient.getId());
+                    int doctorID = Integer.parseInt(DoctorInformationSingle.getInstance(0).getDoctorID());
+                    db.InsertMedicament(prescription,patient.getId(),doctorID);
+                    try {
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3305/medical?autoReconnect=true&useSSL=false","root","1234");
+                        String q = "SELECT *\n" +
+                                "FROM  Prescription\n" +
+                                "INNER JOIN Medicament ON Prescription.prescriptionID = Medicament.prescriptionID\n" +
+                                "INNER JOIN patient ON Prescription.patientID = patient.patientID\n" +
+                                "INNER JOIN doctor ON Prescription.doctorID = doctor.doctorID\n" +
+                                "where Prescription.prescriptionID ="+prescription.getId();
+                        JasperDesign jd = JRXmlLoader.load("src/main/resources/medical/jasper/Blank_A4_2.jrxml");
+                        JRDesignQuery jrDesignQuery = new JRDesignQuery();
+                        jrDesignQuery.setText(q);
+                        jd.setQuery(jrDesignQuery);
+
+
+                        JasperReport jr = JasperCompileManager.compileReport(jd);
+                        Map<String, Object> param = new HashMap<String, Object>();
+                        JasperPrint jP = JasperFillManager.fillReport(jr,param,con);
+
+                        JasperViewer.viewReport(jP,false);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
                 }
                 System.out.println("NOT save");
 

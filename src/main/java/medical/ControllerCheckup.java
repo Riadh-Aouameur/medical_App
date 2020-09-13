@@ -1,6 +1,5 @@
 package medical;
 
-import com.jfoenix.controls.JFXButton;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -11,22 +10,30 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
+import medical.DataBase.Db;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
-import java.util.Calendar;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class ControllerCheckup implements Initializable {
 
 
-    @FXML
-    private JFXButton jSave;
-
-
-
+    public AnchorPane textAge;
+    public TextArea text;
     @FXML
     ImageView imgeGander;
     @FXML
@@ -41,14 +48,13 @@ public class ControllerCheckup implements Initializable {
     TextField fName;
 
 
-    @FXML
-    ListView  <Checkup>list_2;
+
     @FXML
     ListView  <CheckupName>list_1;
     @FXML
     TextField searchField;
     ObservableList<CheckupName> observableList_1;
-    ObservableList<Checkup> observableList_2 ;
+    Db db= new Db();
 
 
     Patient patient;
@@ -56,18 +62,7 @@ public class ControllerCheckup implements Initializable {
     public ControllerCheckup(Patient patient) {
         this.patient = patient;
     }
-    public ControllerCheckup(PatientForAllPatients patient)
-    {
-        this.patient = new Patient();
 
-        this.patient.setId(patient.getId());
-        this.patient.setFirstName(patient.getFirstName());
-        this.patient.setLastName(patient.getLastName());
-        this.patient.setGender(patient.getGender());
-        this.patient.setBirthday(patient.getBirthday());
-
-
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -75,12 +70,13 @@ public class ControllerCheckup implements Initializable {
             Image imProfile = new Image(getClass().getResourceAsStream("img/femalepatient.png"));
             imgeGander.setImage(imProfile);
         }
-        fName.setText(patient.getFirstName()+"\t"+patient.getLastName());
+        fName.setText(patient.getFirstName()+" "+patient.getLastName());
         fBirthday.setText(patient.getBirthday().toString());
         LocalDate b= (LocalDate) patient.getBirthday();
         Calendar c =Calendar.getInstance();
         int i =c.get(Calendar.YEAR)-b.getYear();
         fAge.setText(i+"");
+        fPhone.setText(patient.getPhone());
         DateTimeFormatter formatter =DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL);
         fDate.setText(formatter.format(LocalDate.now()));
 
@@ -90,12 +86,9 @@ public class ControllerCheckup implements Initializable {
 
 
          observableList_1 =FXCollections.observableArrayList(new CheckupName("fns"),new CheckupName("uree"),new CheckupName("Creatinine"),new CheckupName("asat"),new CheckupName("Alat"),new CheckupName("crp"),new CheckupName("Vs"),new CheckupName("cholesterol"),new CheckupName("Triglyceride"));
-         observableList_2 =FXCollections.observableArrayList();
-
-        list_2.setItems(observableList_2);
 
 
-        list_2.setCellFactory(pr->new MyListCell_6());
+
 
 
         // search field
@@ -119,58 +112,78 @@ public class ControllerCheckup implements Initializable {
     }
 
     public void onAddToList2(ActionEvent actionEvent) {
-
-
-        ObservableList  <Checkup> observableList =FXCollections.observableArrayList();
-        for (CheckupName checkupName : observableList_1) {
-            Checkup checkup = new Checkup(checkupName);
-            if(checkupName.getChecked().isSelected()){
-                observableList.add(checkup);
+       String txt="";
+        for(int i=0;i<observableList_1.size();i++){
+            if(observableList_1.get(i).getChecked().isSelected()){
+                String s =observableList_1.get(i).getName();
+                txt = txt+(i+1)+"- The Analysis "+s+"\n";
+                text.setText(txt);
             }
 
 
-
-
-
         }
-
-        Boolean  b= false;
-        for (Checkup checkup : observableList) {
-            for (Checkup value : observableList_2) {
-
-                if (checkup.getName().equals(value.getName())) {
-                     b = true;
-                }
-
-            }
-        }
-
-        if (b){
-
-            Alert alert = new Alert(Alert.AlertType.WARNING,"deble",ButtonType.APPLY);
-            alert.show();
-
-            return;
-
-        }else {
-            observableList_2.addAll(observableList);
-
-        }
-
-
-
-
-
-
-
-
-
-
     }
 
-    public void onCheckup(ActionEvent actionEvent) {
-    }
+
 
     public void onPrint(ActionEvent actionEvent) {
+
+        if (!text.getText().isEmpty()){
+
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("");
+            alert.setTitle("");
+            alert.setHeaderText("");
+
+            ButtonType buttonCancel=  new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+            alert.getDialogPane().getButtonTypes().add(buttonCancel);
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK){
+                String content= text.getText();
+                LocalDate date =LocalDate.now();
+
+                Integer doctorID=Integer.parseInt(DoctorInformationSingle.getInstance(0).getDoctorID());
+                Integer patientID = patient.getId();
+
+                Checkup checkup =new Checkup( content,  date, doctorID, patientID);
+                checkup.setId(db.InsertCheckup(checkup));
+
+                try {
+                    Class.forName("com.mysql.jdbc.Driver");
+                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3305/medical?autoReconnect=true&useSSL=false","root","1234");
+                    String q = "SELECT checkup.content,checkup.checkupID,checkup.dateofcheckup,doctor.firstname,doctor.lastname,doctor.specialty,doctor.address,doctor.emailorphone,patient.firstname,patient.lastname,patient.birthday,patient.patientID\n" +
+                            "FROM checkup\n" +
+                            "INNER JOIN patient ON checkup.patientID = patient.patientID\n" +
+                            "INNER JOIN doctor ON checkup.doctorID = doctor.doctorID\n" +
+                            "where checkupID ="+checkup.getId();
+                    JasperDesign jd = JRXmlLoader.load("src/main/resources/medical/jasper/Blank_A4_1.jrxml");
+                    JRDesignQuery jrDesignQuery = new JRDesignQuery();
+                    jrDesignQuery.setText(q);
+                    jd.setQuery(jrDesignQuery);
+
+
+                    JasperReport jr = JasperCompileManager.compileReport(jd);
+                    Map<String, Object> param = new HashMap<String, Object>();
+                    JasperPrint jP = JasperFillManager.fillReport(jr,param,con);
+
+                    JasperViewer.viewReport(jP,false);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+                System.out.println("work....");
+            }else {
+
+                Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+                alert2.setContentText("");
+                alert2.setTitle("");
+                alert2.setHeaderText("");
+                alert2.showAndWait();
+            }
+
+
+
+        }
     }
 }

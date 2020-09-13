@@ -30,6 +30,18 @@ public class DoctorInformation {
         this.idOfApproval = new SimpleStringProperty(idOfApproval);
         this.gender = new SimpleStringProperty(gender);
     }
+    public DoctorInformation(String firstName, String lastName, LocalDate birthday, String specialty, String address, String emailOrPhone, int id,String gender,String idOfApproval) {
+        this.id = new SimpleIntegerProperty(id);
+        this.firstName =new SimpleStringProperty( firstName);
+        LastName =new SimpleStringProperty( lastName);
+        this.birthday =new SimpleObjectProperty( birthday);
+        this.specialty = new SimpleStringProperty(specialty);
+        this.address = new SimpleStringProperty(address);
+        this.emailOrPhone = new SimpleStringProperty(emailOrPhone);
+        this.pass = new SimpleStringProperty();
+        this.idOfApproval = new SimpleStringProperty(idOfApproval);
+        this.gender = new SimpleStringProperty(gender);
+    }
 
     public String getGender() {
         return gender.get();

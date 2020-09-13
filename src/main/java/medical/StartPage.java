@@ -7,7 +7,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -22,8 +21,7 @@ public class StartPage implements Initializable {
     private AnchorPane root_1;
     AnchorPane root;
 
-    @FXML
-    private ProgressBar ProgressBar;
+
 
     public class Pg_Thread extends Thread{
 
@@ -32,7 +30,7 @@ public class StartPage implements Initializable {
         public void run() {
             for( int i = 1;i<=100;i++) {
 
-                ProgressBar.setProgress(i / 100.0);
+
                 try {
                     Thread.sleep(10);
                 } catch (InterruptedException e) {
@@ -43,7 +41,6 @@ public class StartPage implements Initializable {
             Platform.runLater(new Runnable() {
                 @Override
                 public void run() {
-
 
                     try {
                    root = FXMLLoader.load(getClass().getResource("sample.jifxml"));
@@ -81,7 +78,7 @@ public class StartPage implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ProgressBar.setProgress(0.0);
+        //ProgressBar.setProgress(0.0);
         Pg_Thread pg_thread =new Pg_Thread();
         pg_thread.start();
     }

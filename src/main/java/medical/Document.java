@@ -9,20 +9,49 @@ import java.time.LocalDate;
 public class Document {
     SimpleIntegerProperty id;
      SimpleStringProperty content;
+    SimpleIntegerProperty doctorID;
+    SimpleIntegerProperty patientID;
      SimpleStringProperty type;
      SimpleObjectProperty <LocalDate>date;
 
-    public Document( String content, String type, LocalDate date) {
+    public Document( String content, String type, LocalDate date,Integer doctorID,Integer patientID) {
         this.id = new SimpleIntegerProperty();
         this.content =  new SimpleStringProperty(content);
         this.type = new SimpleStringProperty( type);
+        this.doctorID = new SimpleIntegerProperty(doctorID);
+        this.patientID = new SimpleIntegerProperty(patientID);
         this.date = new SimpleObjectProperty<>(date);
     }
-    public Document(int id , String content, String type, LocalDate date) {
+    public Document(int id , String content, String type, LocalDate date,Integer doctorID) {
         this.id = new SimpleIntegerProperty(id);
         this.content =  new SimpleStringProperty(content);
         this.type = new SimpleStringProperty( type);
         this.date = new SimpleObjectProperty<>(date);
+        this.doctorID = new SimpleIntegerProperty(doctorID);
+    }
+
+    public int getPatientID() {
+        return patientID.get();
+    }
+
+    public SimpleIntegerProperty patientIDProperty() {
+        return patientID;
+    }
+
+    public void setPatientID(int patientID) {
+        this.patientID.set(patientID);
+    }
+
+    public int getDoctorID() {
+        return doctorID.get();
+    }
+
+    public SimpleIntegerProperty doctorIDProperty() {
+        return doctorID;
+    }
+
+    public void setDoctorID(int doctorID) {
+        this.doctorID.set(doctorID);
     }
 
     public int getId() {

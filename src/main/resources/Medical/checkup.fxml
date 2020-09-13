@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -12,56 +13,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="739.0" prefWidth="860.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="medical.ControllerCheckup">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="719.0" prefWidth="860.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="medical.ControllerCheckup">
    <children>
-      <HBox prefHeight="40.0" prefWidth="860.0" style="-fx-background-color: #fff;">
+      <HBox prefHeight="46.0" prefWidth="860.0" style="-fx-background-color: #fff;">
          <children>
-            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="37.0" prefWidth="136.0" style="-fx-background-color: #fff;" text="print" textFill="#00a8ef">
-               <graphic>
-                  <ImageView fitHeight="23.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/print.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <padding>
-                  <Insets left="20.0" />
-               </padding>
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="15.0" />
-               </font>
-            </Button>
-            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="37.0" prefWidth="136.0" style="-fx-background-color: #fff;" text="Save" textFill="#00a8ef">
-               <graphic>
-                  <ImageView fitHeight="23.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/save.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <padding>
-                  <Insets left="20.0" />
-               </padding>
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="15.0" />
-               </font>
-            </Button>
-            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="37.0" prefWidth="136.0" style="-fx-background-color: #fff;" text="Save" textFill="#00a8ef">
-               <graphic>
-                  <ImageView fitHeight="23.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/save.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <padding>
-                  <Insets left="20.0" />
-               </padding>
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="15.0" />
-               </font>
-            </Button>
-            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="37.0" prefWidth="136.0" style="-fx-background-color: #fff;" text="print" textFill="#00a8ef">
+            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#onPrint" prefHeight="37.0" prefWidth="145.0" style="-fx-background-color: #fff;" text="print" textFill="#1632cc">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -78,7 +34,7 @@
             </Button>
          </children>
       </HBox>
-      <AnchorPane fx:id="textAge" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="186.0" prefWidth="862.0" style="-fx-background-color: #fff;">
+      <AnchorPane fx:id="textAge" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="186.0" prefWidth="852.0" style="-fx-background-color: #fff;">
          <children>
             <ImageView fx:id="imgeGander" fitHeight="92.0" fitWidth="116.0" layoutX="35.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -86,30 +42,30 @@
                </image>
             </ImageView>
             <TextField fx:id="fName" editable="false" layoutX="257.0" layoutY="66.0" prefHeight="26.0" prefWidth="348.0" />
-            <Label layoutX="163.0" layoutY="67.0" prefHeight="22.0" prefWidth="85.0" text="Patient" textFill="#00b7ff">
+            <Label layoutX="163.0" layoutY="67.0" prefHeight="22.0" prefWidth="85.0" text="Patient" textFill="#1632cc">
                <font>
                   <Font name="Arial" size="17.0" />
                </font>
             </Label>
-            <Label layoutX="163.0" layoutY="110.0" prefHeight="22.0" prefWidth="85.0" text="Birthday" textFill="#00b7ff">
+            <Label layoutX="163.0" layoutY="110.0" prefHeight="22.0" prefWidth="85.0" text="Birthday" textFill="#1632cc">
                <font>
                   <Font name="Arial" size="17.0" />
                </font>
             </Label>
-            <Label layoutX="163.0" layoutY="154.0" prefHeight="22.0" prefWidth="85.0" text="Phone" textFill="#00b7ff">
+            <Label layoutX="163.0" layoutY="154.0" prefHeight="22.0" prefWidth="85.0" text="Phone" textFill="#1632cc">
                <font>
                   <Font name="Arial" size="17.0" />
                </font>
             </Label>
             <TextField fx:id="fBirthday" editable="false" layoutX="257.0" layoutY="108.0" prefHeight="26.0" prefWidth="182.0" />
             <TextField fx:id="fPhone" editable="false" layoutX="257.0" layoutY="152.0" prefHeight="26.0" prefWidth="182.0" />
-            <Label layoutX="497.0" layoutY="110.0" prefHeight="22.0" prefWidth="85.0" text="Age" textFill="#00b7ff">
+            <Label layoutX="497.0" layoutY="110.0" prefHeight="22.0" prefWidth="85.0" text="Age" textFill="#1632cc">
                <font>
                   <Font name="Arial" size="17.0" />
                </font>
             </Label>
             <TextField fx:id="fAge" editable="false" layoutX="603.0" layoutY="108.0" prefHeight="26.0" prefWidth="182.0" />
-            <Label layoutX="497.0" layoutY="154.0" prefHeight="22.0" prefWidth="85.0" text="Date" textFill="#00b7ff">
+            <Label layoutX="497.0" layoutY="154.0" prefHeight="22.0" prefWidth="85.0" text="Date" textFill="#1632cc">
                <font>
                   <Font name="Arial" size="17.0" />
                </font>
@@ -124,24 +80,24 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Label layoutX="35.0" layoutY="14.0" prefHeight="22.0" prefWidth="444.0" text="Patient information" textFill="#00b7ff">
+            <Label layoutX="35.0" layoutY="14.0" prefHeight="22.0" prefWidth="444.0" text="Patient information" textFill="#1632cc">
                <font>
                   <Font name="Arial Rounded MT Bold" size="31.0" />
                </font>
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="517.0" prefWidth="859.0" style="-fx-background-color: #fff;">
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="859.0" style="-fx-background-color: #fff;">
          <children>
-            <Label layoutX="37.0" layoutY="8.0" prefHeight="58.0" prefWidth="266.0" text="Medical analysit" textFill="#00b7ff">
+            <Label layoutX="37.0" layoutY="8.0" prefHeight="58.0" prefWidth="266.0" text="Medical analysit" textFill="#1632cc">
                <font>
                   <Font name="Arial Rounded MT Bold" size="30.0" />
                </font>
             </Label>
-            <ListView fx:id="list_2" layoutX="299.0" layoutY="117.0" prefHeight="326.0" prefWidth="482.0" />
-            <Button layoutX="37.0" layoutY="455.0" mnemonicParsing="false" onAction="#onAddToList2" prefHeight="40.0" prefWidth="136.0" stylesheets="@../Css/button.css" text="Add" />
+            <Button layoutX="34.0" layoutY="429.0" mnemonicParsing="false" onAction="#onAddToList2" prefHeight="40.0" prefWidth="136.0" stylesheets="@../Css/button.css" text="Add" />
             <TextField fx:id="searchField" layoutX="37.0" layoutY="82.0" prefHeight="26.0" prefWidth="235.0" />
-            <ListView fx:id="list_1" layoutX="37.0" layoutY="140.0" prefHeight="274.0" prefWidth="235.0" />
+            <ListView fx:id="list_1" layoutX="37.0" layoutY="132.0" prefHeight="282.0" prefWidth="235.0" />
+            <TextArea fx:id="text" layoutX="330.0" layoutY="132.0" prefHeight="282.0" prefWidth="473.0" />
          </children>
       </AnchorPane>
    </children>

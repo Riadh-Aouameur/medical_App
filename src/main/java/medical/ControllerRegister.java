@@ -22,8 +22,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import medical.DataBase.Db;
-import medical.DoctorInformation;
-import medical.MemberLogin;
 
 import java.io.IOException;
 import java.net.URL;
@@ -85,8 +83,7 @@ public class ControllerRegister  implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-       // i4.setImage(new Image("resources/medical/img/ror.png"));
-        i3.setImage(new Image(getClass().getResourceAsStream("img/f.png")));
+
 
         final IntegerProperty i = new SimpleIntegerProperty(0);
         Timeline timeline = new Timeline();
@@ -244,7 +241,7 @@ public class ControllerRegister  implements Initializable {
                      iConfirmPassword.setText(iConfirmPassword.getText()+character);
                 iConfirmPassword.positionCaret((iConfirmPassword.getText()+character).length());
                      if(iConfirmPassword.getText().equals(iPassword.getText())&&!iPassword.getText().isEmpty()){
-                         i4.setImage(new Image(getClass().getResourceAsStream("img/eror.png")));
+                         i4.setImage(new Image(getClass().getResourceAsStream("img/f.png")));
                          i3.setImage(new Image(getClass().getResourceAsStream("img/f.png")));
                      }else if (!iConfirmPassword.getText().isEmpty()){
                          i4.setImage(new Image(getClass().getResourceAsStream("img/eror.png")));
@@ -400,7 +397,13 @@ if (firstName != null && lastName != null
       {
             memberLogin=new MemberLogin(tFirsstName.getText().toLowerCase(),tLastName.getText().toLowerCase(),password.getText());
           Db db = new Db();
+
           if (db.memberLogin(memberLogin)){
+              System.out.println("iddddddd "+memberLogin.getDoctorID());
+
+
+              DoctorInformationSingle.getInstance(memberLogin.getDoctorID());
+              System.out.println("this doctor Name "+DoctorInformationSingle.getInstance(0).getFirstName());
               try {
                   root = FXMLLoader.load(getClass().getResource("sample.fxml"));
               } catch (IOException e) {
@@ -412,7 +415,7 @@ if (firstName != null && lastName != null
               primaryStage.initStyle(StageStyle.UNDECORATED);
               primaryStage.setMaximized(true);
 
-              Image icon = new Image(getClass().getResourceAsStream("img/eror.png"));
+              Image icon = new Image(getClass().getResourceAsStream("img/care.png"));
               primaryStage.getIcons().add(icon);
 
               primaryStage.show();

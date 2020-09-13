@@ -1,11 +1,8 @@
 package medical;
 
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.layout.HBox;
-import medical.Checkup;
-import medical.CheckupName;
 
 public class MyListCell_6 extends ListCell<Checkup> {
     @Override
@@ -14,7 +11,7 @@ public class MyListCell_6 extends ListCell<Checkup> {
         if (empty || item == null ) {
             setGraphic(null);
         } else {
-            Label label =new Label(item.getName()+" ");
+            Label label =new Label(item+" ");
             label.setStyle("-fx-text-fill: #000;");
             label.setPrefSize(180,60);
 

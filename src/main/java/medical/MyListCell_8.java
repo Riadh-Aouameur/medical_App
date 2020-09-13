@@ -17,6 +17,12 @@ public class MyListCell_8 extends ListCell<Prescription> {
             setGraphic(null);
         } else{
             FXMLLoader loader = new FXMLLoader(getClass().getResource("h1.fxml"));
+
+
+            loader.setControllerFactory(e->{
+
+                return new ControllerH1(item);
+            });
             try {
                 setGraphic(loader.load());
             } catch (IOException e) {

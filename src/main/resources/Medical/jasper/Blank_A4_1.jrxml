@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.13.0.final using JasperReports Library version 6.13.0-46ada4d1be8f3c5985fd0b6146f3ed44caed6f05  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4_1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="444f9944-a592-4575-8138-28fe764d0dc8">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter (3)"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT checkup.content,checkup.checkupID,checkup.dateofcheckup,doctor.firstname,doctor.lastname,doctor.specialty,doctor.address,doctor.emailorphone,patient.firstname,patient.lastname,patient.birthday,patient.patientID
+FROM checkup
+INNER JOIN patient ON checkup.patientID = patient.patientID
+INNER JOIN doctor ON checkup.doctorID = doctor.doctorID
+where checkupID = 3;]]>
+	</queryString>
+	<field name="content" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="content"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="checkup"/>
+	</field>
+	<field name="checkupID" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="checkupID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="checkup"/>
+	</field>
+	<field name="dateofcheckup" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="dateofcheckup"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="checkup"/>
+	</field>
+	<field name="firstname" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="firstname"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="doctor"/>
+	</field>
+	<field name="lastname" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="lastname"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="doctor"/>
+	</field>
+	<field name="specialty" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="specialty"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="doctor"/>
+	</field>
+	<field name="address" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="address"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="doctor"/>
+	</field>
+	<field name="emailorphone" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="emailorphone"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="doctor"/>
+	</field>
+	<field name="COLUMN_9" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="firstname"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="patient"/>
+	</field>
+	<field name="COLUMN_10" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="lastname"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="patient"/>
+	</field>
+	<field name="birthday" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="birthday"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="patient"/>
+	</field>
+	<field name="patientID" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="patientID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="patient"/>
+	</field>
+	<group name="content">
+		<groupExpression><![CDATA[$F{content}]]></groupExpression>
+	</group>
+	<group name="checkupID">
+		<groupExpression><![CDATA[$F{checkupID}]]></groupExpression>
+	</group>
+	<group name="dateofcheckup">
+		<groupExpression><![CDATA[$F{dateofcheckup}]]></groupExpression>
+	</group>
+	<group name="firstname">
+		<groupExpression><![CDATA[$F{firstname}]]></groupExpression>
+	</group>
+	<group name="lastname">
+		<groupExpression><![CDATA[$F{lastname}]]></groupExpression>
+	</group>
+	<group name="specialty">
+		<groupExpression><![CDATA[$F{specialty}]]></groupExpression>
+	</group>
+	<group name="address">
+		<groupExpression><![CDATA[$F{address}]]></groupExpression>
+	</group>
+	<group name="emailorphone">
+		<groupExpression><![CDATA[$F{emailorphone}]]></groupExpression>
+	</group>
+	<group name="COLUMN_9">
+		<groupExpression><![CDATA[$F{COLUMN_9}]]></groupExpression>
+	</group>
+	<group name="COLUMN_10">
+		<groupExpression><![CDATA[$F{COLUMN_10}]]></groupExpression>
+	</group>
+	<group name="birthday">
+		<groupExpression><![CDATA[$F{birthday}]]></groupExpression>
+	</group>
+	<group name="patientID">
+		<groupExpression><![CDATA[$F{patientID}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="101" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="20" width="200" height="20" uuid="2845d277-a2be-49a2-8d38-bb390434e9ca">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="Arial Rounded MT Bold" size="17"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Dr."+$F{firstname}.substring(0,1).toUpperCase()+"."+$F{lastname}.toUpperCase()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="41" width="200" height="20" uuid="6bd1b423-6760-49ba-962b-1f37807cfade">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="Arial Rounded MT Bold" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["MEDECINE "+$F{specialty}.toUpperCase()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="62" width="200" height="20" uuid="da443859-3287-444e-a256-70a3c38c85c9">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="Arial Rounded MT Bold" size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{address}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="81" width="200" height="20" uuid="82c2a7cf-1a7d-46c8-a7cf-60991442c2ad">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="Arial Rounded MT Bold" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Phone : "+$F{emailorphone}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="340" y="20" width="200" height="20" uuid="ada89052-b21a-4704-ba1e-2957b630d96a">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" markup="none">
+					<font fontName="Arial Rounded MT Bold" size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dateofcheckup}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="340" y="41" width="200" height="20" uuid="208a0fd9-1956-4d67-af39-4246db90b3a6">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" markup="none">
+					<font fontName="Arial Rounded MT Bold" size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Patient ID : "+$F{patientID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="340" y="62" width="200" height="20" uuid="7854aea9-3fc9-45cc-a85f-2a57d17488aa">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" markup="none">
+					<font fontName="Arial Rounded MT Bold" size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Patient : "+$F{firstname}+" "+$F{lastname}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="340" y="81" width="200" height="20" uuid="177393a1-ecb8-4527-9e5d-585612e61d0b">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" markup="none">
+					<font fontName="Arial Rounded MT Bold" size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Age : "+($F{dateofcheckup}.getYear()-$F{birthday}.getYear())]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="53" splitType="Stretch">
+			<textField>
+				<reportElement x="113" y="8" width="330" height="40" uuid="987ee814-830a-4cd4-93dd-4752227cb7b8">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="Arial Rounded MT Bold" size="26"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Medical tests"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="58" splitType="Prevent">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField textAdjust="StretchHeight">
+				<reportElement positionType="Float" x="4" y="10" width="556" height="18" uuid="e1560fc3-c3e5-451b-91ca-22c46e4473e7">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7e68c113-e1f4-49a2-8925-ce15529fad55"/>
+				</reportElement>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{content}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="26" splitType="Stretch">
+			<line>
+				<reportElement x="-22" y="2" width="600" height="1" uuid="b944bdaa-b0b8-47d6-b131-e3159906d12c"/>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="450" y="10" width="120" height="10" uuid="00954d7b-a654-4519-8d46-f18b8245b5e2">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Right" markup="none">
+					<font fontName="Arial Rounded MT Bold" size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Document ID : "+$F{checkupID}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

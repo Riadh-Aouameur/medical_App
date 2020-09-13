@@ -21,13 +21,15 @@ public class Consultation {
     SimpleStringProperty surgicalHistory;
     SimpleStringProperty medicalHistory;
     SimpleStringProperty allergies;
+    SimpleIntegerProperty doctorID;
+    SimpleIntegerProperty patientID;
 
     SimpleObjectProperty <LocalDate> date;
 
     public Consultation(String historyOfTheIllness, String physicalActivity, String addictions, String diagnosis, String treatment,String reasons, String clinicalExamination, String resultsOfTest, String diet, LocalDate date , String familyHistory,
             String surgicalHistory,
              String medicalHistory,
-             String allergies) {
+             String allergies,Integer doctorID,Integer patientID) {
 
 
         this.id = new SimpleIntegerProperty();
@@ -41,12 +43,61 @@ public class Consultation {
         this.resultsOfTest = new SimpleStringProperty(resultsOfTest);
         this.diet = new SimpleStringProperty(diet);
         this.date = new SimpleObjectProperty<LocalDate>(date);
-
         this.familyHistory = new SimpleStringProperty(familyHistory);
         this.surgicalHistory = new SimpleStringProperty(surgicalHistory);
         this.medicalHistory = new SimpleStringProperty(medicalHistory);
         this. allergies = new SimpleStringProperty(allergies);
+        this.doctorID= new SimpleIntegerProperty(doctorID);
+        this.patientID= new SimpleIntegerProperty(patientID);
 
+    }
+    public Consultation(String historyOfTheIllness, String physicalActivity, String addictions, String diagnosis, String treatment,String reasons, String clinicalExamination, String resultsOfTest, String diet, LocalDate date , String familyHistory,
+                        String surgicalHistory,
+                        String medicalHistory,
+                        String allergies,Integer doctorID,Integer patientID,Integer consultationID) {
+
+
+        this.id = new SimpleIntegerProperty(consultationID);
+        this.historyOfTheIllness = new SimpleStringProperty(historyOfTheIllness);
+        this.physicalActivity = new SimpleStringProperty(physicalActivity);
+        this.addictions = new SimpleStringProperty(addictions);
+        this.diagnosis = new SimpleStringProperty( diagnosis);
+        this.treatment = new SimpleStringProperty(treatment);
+        this.reasons = new SimpleStringProperty(reasons);
+        this.clinicalExamination = new SimpleStringProperty(clinicalExamination);
+        this.resultsOfTest = new SimpleStringProperty(resultsOfTest);
+        this.diet = new SimpleStringProperty(diet);
+        this.date = new SimpleObjectProperty<LocalDate>(date);
+        this.familyHistory = new SimpleStringProperty(familyHistory);
+        this.surgicalHistory = new SimpleStringProperty(surgicalHistory);
+        this.medicalHistory = new SimpleStringProperty(medicalHistory);
+        this. allergies = new SimpleStringProperty(allergies);
+        this.doctorID= new SimpleIntegerProperty(doctorID);
+        this.patientID= new SimpleIntegerProperty(patientID);
+
+    }
+    public int getDoctorID() {
+        return doctorID.get();
+    }
+
+    public SimpleIntegerProperty doctorIDProperty() {
+        return doctorID;
+    }
+
+    public void setDoctorID(int doctorID) {
+        this.doctorID.set(doctorID);
+    }
+
+    public int getPatientID() {
+        return patientID.get();
+    }
+
+    public SimpleIntegerProperty patientIDProperty() {
+        return patientID;
+    }
+
+    public void setPatientID(int patientID) {
+        this.patientID.set(patientID);
     }
 
     public String getFamilyHistory() {

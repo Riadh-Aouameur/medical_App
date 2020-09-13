@@ -11,7 +11,6 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import medical.DataBase.Db;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 
@@ -80,35 +79,23 @@ public class ControllerConsultation implements Initializable {
 
 
     }
-    public ControllerConsultation(PatientForAllPatients patient, Boolean test)
-    {
-        this.patient = new Patient();
-        this.patient.setId(patient.getId());
-        this.patient.setFirstName(patient.getFirstName());
-        this.patient.setLastName(patient.getLastName());
-        this.patient.setGender(patient.getGender());
-        this.patient.setBirthday(patient.getBirthday());
 
-
-
-
-    }
 
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if(patient.getGender().equals("female")){
+        if(patient.getGender().equals("Female")){
             Image imProfile = new Image(getClass().getResourceAsStream("img/femalepatient.png"));
             imgeGander.setImage(imProfile);
         }
-        fName.setText(patient.getFirstName()+"\t"+patient.getLastName());
+        fName.setText(patient.getFirstName()+" "+patient.getLastName());
         fBirthday.setText(patient.getBirthday().toString());
         LocalDate b= (LocalDate) patient.getBirthday();
         Calendar c =Calendar.getInstance();
         int i =c.get(Calendar.YEAR)-b.getYear();
         fAge.setText(i+"");
-
+        fPhone.setText(patient.getPhone());
         DateTimeFormatter formatter =DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL);
         fDate.setText(formatter.format(LocalDate.now()));
         
@@ -160,8 +147,8 @@ public class ControllerConsultation implements Initializable {
         if (!(tMedicalHistory.getText().isEmpty())){
             medicalHistory= tMedicalHistory.getText();
         }
-
-        Consultation consultation = new Consultation(historyOfTheIllness,physicalActivity,addictions,diagnosis,treatment,reasons,clinicalExamination,resultsOfTest,diet,LocalDate.now(),familyHistory,surgicalHistory,medicalHistory,allergies);
+        int doctorID = Integer.parseInt(DoctorInformationSingle.getInstance(0).getDoctorID());
+        Consultation consultation = new Consultation(historyOfTheIllness,physicalActivity,addictions,diagnosis,treatment,reasons,clinicalExamination,resultsOfTest,diet,LocalDate.now(),familyHistory,surgicalHistory,medicalHistory,allergies,patient.getId(),doctorID);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText("");
         alert.setTitle("");
@@ -172,7 +159,8 @@ public class ControllerConsultation implements Initializable {
         Optional <ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == ButtonType.OK){
             Db db = new Db();
-            db.InsertConsultation(consultation,patient.getId());
+
+            db.InsertConsultation(consultation);
             System.out.println("save");
 
             //TODO database
@@ -183,7 +171,32 @@ public class ControllerConsultation implements Initializable {
 
     public void onHistoryOfIllness(ActionEvent actionEvent) throws IOException {
         Stage  primaryStage = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("historyoftheillness.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("historyoftheillness.fxml"));
+        loader.setControllerFactory(e->{
+
+
+            return new ControllerHiOfTheIll(patient);
+
+        });
+
+        Parent root = loader.load();
+
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show();
+    }
+
+    public void onClinicalExamination(ActionEvent actionEvent) throws IOException {
+        Stage  primaryStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("clinicalExamination.fxml"));
+        loader.setControllerFactory(e->{
+
+
+            return new ControllerClinicalExamination(patient);
+
+        });
+
+        Parent root = loader.load();
+
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }

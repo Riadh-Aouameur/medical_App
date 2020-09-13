@@ -6,14 +6,23 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class Prescription {
     SimpleIntegerProperty id;
+    SimpleIntegerProperty doctorID;
+    SimpleIntegerProperty patientID;
     SimpleObjectProperty<LocalDate> date;
 
     public Prescription(Integer id, LocalDate date) {
         this.id =  new  SimpleIntegerProperty(id);
+        this.date = new SimpleObjectProperty<>(date);
+        this.doctorID =  new  SimpleIntegerProperty();
+        this.patientID =  new  SimpleIntegerProperty();
+    }
+    public Prescription(Integer id, LocalDate date,Integer doctorID,Integer patientID) {
+        this.id =  new  SimpleIntegerProperty(id);
+        this.doctorID =  new  SimpleIntegerProperty(doctorID);
+        this.patientID =  new  SimpleIntegerProperty(patientID);
         this.date = new SimpleObjectProperty<>(date);
     }
 
@@ -57,5 +66,28 @@ public class Prescription {
 
     public void setDate(LocalDate date) {
         this.date.set(date);
+    }
+    public int getDoctorID() {
+        return doctorID.get();
+    }
+
+    public SimpleIntegerProperty doctorIDProperty() {
+        return doctorID;
+    }
+
+    public void setDoctorID(int doctorID) {
+        this.doctorID.set(doctorID);
+    }
+
+    public int getPatientID() {
+        return patientID.get();
+    }
+
+    public SimpleIntegerProperty patientIDProperty() {
+        return patientID;
+    }
+
+    public void setPatientID(int patientID) {
+        this.patientID.set(patientID);
     }
 }

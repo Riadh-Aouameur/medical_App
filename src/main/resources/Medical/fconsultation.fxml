@@ -19,26 +19,11 @@
    <children>
       <HBox prefHeight="36.0" prefWidth="1253.0">
          <children>
-            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#onSave" prefHeight="37.0" prefWidth="136.0" style="-fx-background-color: #fff;" text="Save" textFill="#00a8ef">
+            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#onSave" prefHeight="37.0" prefWidth="136.0" style="-fx-background-color: #fff;" text="Save" textFill="#1632cc">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@img/save.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <padding>
-                  <Insets left="20.0" />
-               </padding>
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="15.0" />
-               </font>
-            </Button>
-            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="37.0" prefWidth="136.0" style="-fx-background-color: #fff;" text="print" textFill="#00a8ef">
-               <graphic>
-                  <ImageView fitHeight="23.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/print.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -59,30 +44,30 @@
                </image>
             </ImageView>
             <TextField fx:id="fName" layoutX="257.0" layoutY="53.0" prefHeight="26.0" prefWidth="348.0" stylesheets="@../Css/textArea.css" />
-            <Label layoutX="163.0" layoutY="55.0" prefHeight="22.0" prefWidth="85.0" text="Patient" textFill="#00b7ff">
+            <Label layoutX="163.0" layoutY="55.0" prefHeight="22.0" prefWidth="85.0" text="Patient" textFill="#1632cc">
                <font>
                   <Font name="Arial" size="17.0" />
                </font>
             </Label>
-            <Label layoutX="163.0" layoutY="99.0" prefHeight="22.0" prefWidth="85.0" text="Birthday" textFill="#00b7ff">
+            <Label layoutX="163.0" layoutY="99.0" prefHeight="22.0" prefWidth="85.0" text="Birthday" textFill="#1632cc">
                <font>
                   <Font name="Arial" size="17.0" />
                </font>
             </Label>
-            <Label layoutX="163.0" layoutY="141.0" prefHeight="22.0" prefWidth="85.0" text="Phone" textFill="#00b7ff">
+            <Label layoutX="163.0" layoutY="141.0" prefHeight="22.0" prefWidth="85.0" text="Phone" textFill="#1632cc">
                <font>
                   <Font name="Arial" size="17.0" />
                </font>
             </Label>
             <TextField fx:id="fBirthday" layoutX="257.0" layoutY="95.0" prefHeight="26.0" prefWidth="182.0" stylesheets="@../Css/textArea.css" />
             <TextField fx:id="fPhone" layoutX="257.0" layoutY="139.0" prefHeight="26.0" prefWidth="182.0" stylesheets="@../Css/textArea.css" />
-            <Label layoutX="497.0" layoutY="97.0" prefHeight="22.0" prefWidth="85.0" text="Age" textFill="#00b7ff">
+            <Label layoutX="497.0" layoutY="97.0" prefHeight="22.0" prefWidth="85.0" text="Age" textFill="#1632cc">
                <font>
                   <Font name="Arial" size="17.0" />
                </font>
             </Label>
             <TextField fx:id="fAge" layoutX="603.0" layoutY="97.0" prefHeight="26.0" prefWidth="182.0" />
-            <Label layoutX="497.0" layoutY="141.0" prefHeight="22.0" prefWidth="85.0" text="Date" textFill="#00b7ff">
+            <Label layoutX="497.0" layoutY="141.0" prefHeight="22.0" prefWidth="85.0" text="Date" textFill="#1632cc">
                <font>
                   <Font name="Arial" size="17.0" />
                </font>
@@ -97,29 +82,29 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Label layoutX="35.0" prefHeight="22.0" prefWidth="444.0" text="Patient information" textFill="#00b7ff">
+            <Label layoutX="35.0" prefHeight="22.0" prefWidth="444.0" text="Patient information" textFill="#1632cc">
                <font>
                   <Font name="Arial Rounded MT Bold" size="31.0" />
                </font>
             </Label>
-            <Label layoutX="825.0" layoutY="55.0" prefHeight="22.0" prefWidth="123.0" text="Marital status " textFill="#00b7ff">
+            <Label layoutX="825.0" layoutY="55.0" prefHeight="22.0" prefWidth="123.0" text="Marital status " textFill="#1632cc">
                <font>
                   <Font name="Arial" size="17.0" />
                </font>
             </Label>
-            <Label layoutX="825.0" layoutY="141.0" prefHeight="22.0" prefWidth="102.0" text="Profession" textFill="#00b7ff">
+            <Label layoutX="825.0" layoutY="141.0" prefHeight="22.0" prefWidth="102.0" text="Profession" textFill="#1632cc">
                <font>
                   <Font name="Arial" size="17.0" />
                </font>
             </Label>
             <TextField fx:id="fProfession" layoutX="970.0" layoutY="139.0" prefHeight="26.0" prefWidth="182.0" />
-            <Label layoutX="826.0" layoutY="97.0" prefHeight="22.0" prefWidth="85.0" text="Children" textFill="#00b7ff">
+            <Label layoutX="826.0" layoutY="97.0" prefHeight="22.0" prefWidth="85.0" text="Children" textFill="#1632cc">
                <font>
                   <Font name="Arial" size="17.0" />
                </font>
             </Label>
             <TextField fx:id="fChildren" layoutX="970.0" layoutY="95.0" prefHeight="26.0" prefWidth="182.0" />
-            <ComboBox fx:id="fMaritalStatus" layoutX="970.0" layoutY="54.0" prefHeight="25.0" prefWidth="182.0" style="-fx-background-color: #00b7ff; -fx-background-radius: 30;" />
+            <ComboBox fx:id="fMaritalStatus" layoutX="970.0" layoutY="54.0" prefHeight="25.0" prefWidth="182.0" style="-fx-background-color: #1632cc; -fx-background-radius: 30;" />
             <ImageView fitHeight="22.0" fitWidth="30.0" layoutX="1121.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@img/patients.png" />
@@ -145,7 +130,7 @@
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Label layoutX="25.0" layoutY="15.0" prefHeight="22.0" prefWidth="182.0" text="History of the illness" textFill="#00b7ff">
+                              <Label layoutX="25.0" layoutY="15.0" prefHeight="22.0" prefWidth="182.0" text="History of the illness" textFill="#1632cc">
                                  <font>
                                     <Font name="Arial" size="17.0" />
                                  </font>
@@ -161,17 +146,17 @@
                               <TextArea fx:id="tPhysicalActivity" layoutX="25.0" layoutY="169.0" prefHeight="92.0" prefWidth="1163.0" promptText="Write here ..." />
                               <TextArea fx:id="tAddictions" layoutX="25.0" layoutY="304.0" prefHeight="92.0" prefWidth="1163.0" promptText="Write here ..." />
                               <TextArea fx:id="tDiet" layoutX="25.0" layoutY="36.0" prefHeight="92.0" prefWidth="1163.0" promptText="Write here ..." />
-                              <Label layoutX="25.0" layoutY="15.0" prefHeight="22.0" prefWidth="180.0" text="Diet" textFill="#00b7ff">
+                              <Label layoutX="25.0" layoutY="15.0" prefHeight="22.0" prefWidth="180.0" text="Diet" textFill="#1632cc">
                                  <font>
                                     <Font name="Arial" size="17.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="24.0" layoutY="281.0" prefHeight="22.0" prefWidth="182.0" text="Addictions" textFill="#00b7ff">
+                              <Label layoutX="24.0" layoutY="281.0" prefHeight="22.0" prefWidth="182.0" text="Addictions" textFill="#1632cc">
                                  <font>
                                     <Font name="Arial" size="17.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="24.0" layoutY="145.0" prefHeight="22.0" prefWidth="182.0" text="Physical activity" textFill="#00b7ff">
+                              <Label layoutX="24.0" layoutY="145.0" prefHeight="22.0" prefWidth="182.0" text="Physical activity" textFill="#1632cc">
                                  <font>
                                     <Font name="Arial" size="17.0" />
                                  </font>
@@ -194,18 +179,18 @@
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
                               <TextArea fx:id="tReasons" layoutX="25.0" layoutY="43.0" prefHeight="80.0" prefWidth="1163.0" promptText="Write here ..." />
-                              <Label layoutX="25.0" layoutY="14.0" prefHeight="22.0" prefWidth="180.0" text="Reasons" textFill="#00b7ff">
+                              <Label layoutX="25.0" layoutY="14.0" prefHeight="22.0" prefWidth="180.0" text="Reasons" textFill="#1632cc">
                                  <font>
                                     <Font name="Arial" size="17.0" />
                                  </font>
                               </Label>
                               <TextArea fx:id="tClinicalExamination" layoutX="25.0" layoutY="165.0" prefHeight="188.0" prefWidth="1163.0" promptText="Write here ..." />
-                              <Label layoutX="25.0" layoutY="135.0" prefHeight="22.0" prefWidth="180.0" text="Clinical Examination" textFill="#00b7ff">
+                              <Label layoutX="25.0" layoutY="135.0" prefHeight="22.0" prefWidth="180.0" text="Clinical Examination" textFill="#1632cc">
                                  <font>
                                     <Font name="Arial" size="17.0" />
                                  </font>
                               </Label>
-                              <Button layoutX="1045.0" layoutY="405.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="143.0" stylesheets="@../Css/button.css">
+                              <Button layoutX="1045.0" layoutY="405.0" mnemonicParsing="false" onAction="#onClinicalExamination" prefHeight="30.0" prefWidth="143.0" stylesheets="@../Css/button.css">
                                  <graphic>
                                     <ImageView fitHeight="23.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
@@ -222,13 +207,13 @@
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
                               <TextArea fx:id="tDiagnosis" layoutX="25.0" layoutY="43.0" prefHeight="125.0" prefWidth="1165.0" promptText="Write here ..." />
-                              <Label layoutX="25.0" layoutY="14.0" prefHeight="22.0" prefWidth="180.0" text="Diagnosis" textFill="#00b7ff">
+                              <Label layoutX="25.0" layoutY="14.0" prefHeight="22.0" prefWidth="180.0" text="Diagnosis" textFill="#1632cc">
                                  <font>
                                     <Font name="Arial" size="17.0" />
                                  </font>
                               </Label>
                               <TextArea fx:id="tTreatment" layoutX="25.0" layoutY="227.0" prefHeight="125.0" prefWidth="1165.0" promptText="Write here ..." />
-                              <Label layoutX="25.0" layoutY="198.0" prefHeight="22.0" prefWidth="180.0" text="Treatment" textFill="#00b7ff">
+                              <Label layoutX="25.0" layoutY="198.0" prefHeight="22.0" prefWidth="180.0" text="Treatment" textFill="#1632cc">
                                  <font>
                                     <Font name="Arial" size="17.0" />
                                  </font>
@@ -260,7 +245,7 @@
                                     </ImageView>
                                  </graphic>
                               </Button>
-                              <Label layoutX="25.0" layoutY="15.0" prefHeight="22.0" prefWidth="182.0" text="Results of Test" textFill="#00b7ff">
+                              <Label layoutX="25.0" layoutY="15.0" prefHeight="22.0" prefWidth="182.0" text="Results of Test" textFill="#1632cc">
                                  <font>
                                     <Font name="Arial" size="17.0" />
                                  </font>
@@ -273,13 +258,13 @@
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
                               <TextArea fx:id="tAllergies" layoutX="25.0" layoutY="30.0" prefHeight="70.0" prefWidth="1165.0" promptText="Write here ..." />
-                              <Label layoutX="25.0" layoutY="7.0" prefHeight="22.0" prefWidth="180.0" text="Allergies" textFill="#00b7ff">
+                              <Label layoutX="25.0" layoutY="7.0" prefHeight="22.0" prefWidth="180.0" text="Allergies" textFill="#1632cc">
                                  <font>
                                     <Font name="Arial" size="17.0" />
                                  </font>
                               </Label>
                               <TextArea fx:id="tMedicalHistory" layoutX="25.0" layoutY="132.0" prefHeight="70.0" prefWidth="1165.0" promptText="Write here ..." />
-                              <Label layoutX="25.0" layoutY="109.0" prefHeight="22.0" prefWidth="180.0" text="Medical history" textFill="#00b7ff">
+                              <Label layoutX="25.0" layoutY="109.0" prefHeight="22.0" prefWidth="180.0" text="Medical history" textFill="#1632cc">
                                  <font>
                                     <Font name="Arial" size="17.0" />
                                  </font>
@@ -294,13 +279,13 @@
                                  </graphic>
                               </Button>
                               <TextArea fx:id="tSurgicalHistory" layoutX="25.0" layoutY="230.0" prefHeight="70.0" prefWidth="1165.0" promptText="Write here ..." />
-                              <Label layoutX="25.0" layoutY="209.0" prefHeight="22.0" prefWidth="180.0" text="Surgical history" textFill="#00b7ff">
+                              <Label layoutX="25.0" layoutY="209.0" prefHeight="22.0" prefWidth="180.0" text="Surgical history" textFill="#1632cc">
                                  <font>
                                     <Font name="Arial" size="17.0" />
                                  </font>
                               </Label>
                               <TextArea fx:id="tFamilyHistory" layoutX="25.0" layoutY="328.0" prefHeight="70.0" prefWidth="1165.0" promptText="Write here ..." />
-                              <Label layoutX="25.0" layoutY="306.0" prefHeight="22.0" prefWidth="180.0" text="Familly history" textFill="#00b7ff">
+                              <Label layoutX="25.0" layoutY="306.0" prefHeight="22.0" prefWidth="180.0" text="Familly history" textFill="#1632cc">
                                  <font>
                                     <Font name="Arial" size="17.0" />
                                  </font>
