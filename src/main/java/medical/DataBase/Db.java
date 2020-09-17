@@ -87,7 +87,8 @@ public class Db {
                String profession= rs.getString("Profession") ;
                String phone = rs.getString("phone");
                String marritalStatus = rs.getString("MarritalStatus");
-               Patient patient = new Patient(id,lastName,firstName,children,LocalDate.parse(birthday),gender,profession,phone,marritalStatus);
+               String status = rs.getString("pstatus");
+               Patient patient = new Patient(id,lastName,firstName,children,LocalDate.parse(birthday),gender,profession,phone,marritalStatus,status);
                observableList.add(patient);
             }
         }catch(Exception ex){
@@ -183,7 +184,7 @@ public class Db {
 
     public int InsertPatientData(Patient patient)  {
         PreparedStatement pstmt;
-        String query = "insert into patient(firstname,lastname,children,MarritalStatus,profession,birthday,phone,gender)values (?,?,?,?,?,?,?,?)";
+        String query = "insert into patient(firstname,lastname,children,MarritalStatus,profession,birthday,phone,gender,pstatus)values (?,?,?,?,?,?,?,?,?)";
         try {
             pstmt = (PreparedStatement) con.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, patient.getFirstName());
@@ -194,6 +195,7 @@ public class Db {
             pstmt.setObject(6, patient.getBirthday());
             pstmt.setString(7, patient.getPhone());
             pstmt.setString(8, patient.getGender());
+            pstmt.setString(9, "Active");
 
 
 
@@ -301,7 +303,7 @@ public class Db {
 
             int i = 0;
             while (i<prescription.getObservableList().size()) {
-                System.out.println("hhhhhhhhhhhhhhh");
+
 
                 pstmt1.setString(1, prescription.getObservableList().get(i).getDosage());
                 pstmt1.setInt(2, prescription.getObservableList().get(i).getEntityNumber());
@@ -525,7 +527,7 @@ public class Db {
         }catch(Exception ex){
             System.out.println(ex);
         }
-        System.out.println("records from Db");
+
 
         return  observableList ;
 
@@ -533,7 +535,32 @@ public class Db {
 
     }
 
+    public ObservableList <String>getTestAndResults(int id){
 
+        ObservableList <String>observableList = FXCollections.observableArrayList();
+        try {
+
+
+            System.out.println("records from Db");
+            String query = "SELECT resultsOfTest FROM  consultation  where patientID ="+id;
+
+            rs = st.executeQuery(query);
+            while(rs.next()){
+                String theIllness= rs.getString("resultsOfTest");
+                observableList.add(theIllness);
+            }
+
+
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+
+
+        return  observableList ;
+
+
+
+    }
     public ObservableList <String>getHistoryOfThell(int id){
 
         ObservableList <String>observableList = FXCollections.observableArrayList();
@@ -586,6 +613,84 @@ public class Db {
 
 
     }
+    public ObservableList <String>getSurgicalHistory(int id){
+
+        ObservableList <String>observableList = FXCollections.observableArrayList();
+        try {
+
+
+            System.out.println("records from Db");
+            String query = "SELECT surgicalHistory FROM  consultation  where patientID ="+id;
+
+            rs = st.executeQuery(query);
+            while(rs.next()){
+                String theIllness= rs.getString("surgicalHistory");
+                observableList.add(theIllness);
+            }
+
+
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+        System.out.println("records from Db");
+
+        return  observableList ;
+
+
+
+    }
+    public ObservableList <String>getMedicalHistory(int id){
+
+        ObservableList <String>observableList = FXCollections.observableArrayList();
+        try {
+
+
+            System.out.println("records from Db");
+            String query = "SELECT medicalHistory FROM  consultation  where patientID ="+id;
+
+            rs = st.executeQuery(query);
+            while(rs.next()){
+                String theIllness= rs.getString("medicalHistory");
+                observableList.add(theIllness);
+            }
+
+
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+        System.out.println("records from Db");
+
+        return  observableList ;
+
+
+
+    }
+    public ObservableList <String>getTreatment(int id){
+
+        ObservableList <String>observableList = FXCollections.observableArrayList();
+        try {
+
+
+            System.out.println("records from Db");
+            String query = "SELECT treatment FROM  consultation  where patientID ="+id;
+
+            rs = st.executeQuery(query);
+            while(rs.next()){
+                String theIllness= rs.getString("treatment");
+                observableList.add(theIllness);
+            }
+
+
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+        System.out.println("records from Db");
+
+        return  observableList ;
+
+
+
+    }
     public ObservableList <String>getHistoryOfReasons(int id){
 
         ObservableList <String>observableList = FXCollections.observableArrayList();
@@ -599,6 +704,158 @@ public class Db {
             while(rs.next()){
                 String theIllness= rs.getString("reasons");
                 observableList.add(theIllness);
+            }
+
+
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+        System.out.println("records from Db");
+
+        return  observableList ;
+
+
+
+    }
+    public ObservableList <String>getFamilyHistory(int id){
+
+        ObservableList <String>observableList = FXCollections.observableArrayList();
+        try {
+
+
+            System.out.println("records from Db");
+            String query = "SELECT familyHistory FROM  consultation  where patientID ="+id;
+
+            rs = st.executeQuery(query);
+            while(rs.next()){
+                String theIllness= rs.getString("familyHistory");
+                observableList.add(theIllness);
+            }
+
+
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+        System.out.println("records from Db");
+
+        return  observableList ;
+
+
+
+    }
+    public ObservableList <String>getAllergies(int id){
+
+        ObservableList <String>observableList = FXCollections.observableArrayList();
+        try {
+
+
+            System.out.println("records from Db");
+            String query = "SELECT allergies FROM  consultation  where patientID ="+id;
+
+            rs = st.executeQuery(query);
+            while(rs.next()){
+                String theIllness= rs.getString("allergies");
+                observableList.add(theIllness);
+            }
+
+
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+        System.out.println("records from Db");
+
+        return  observableList ;
+
+
+
+    }
+    public ObservableList <String>getAddictions(int id){
+
+        ObservableList <String>observableList = FXCollections.observableArrayList();
+        try {
+
+
+            String query = "SELECT addictions FROM  consultation  where patientID ="+id;
+
+            rs = st.executeQuery(query);
+            while(rs.next()){
+                String theIllness= rs.getString("addictions");
+                observableList.add(theIllness);
+            }
+
+
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+        System.out.println("records from Db");
+
+        return  observableList ;
+
+
+
+    }
+    public ObservableList <String>getPhysicalActivity(int id){
+
+        ObservableList <String>observableList = FXCollections.observableArrayList();
+        try {
+
+
+            String query = "SELECT physicalActivity FROM  consultation  where patientID ="+id;
+
+            rs = st.executeQuery(query);
+            while(rs.next()){
+                String theIllness= rs.getString("physicalActivity");
+                observableList.add(theIllness);
+            }
+
+
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+        System.out.println("records from Db");
+
+        return  observableList ;
+
+
+
+    }    public ObservableList <String>getDiet(int id){
+
+        ObservableList <String>observableList = FXCollections.observableArrayList();
+        try {
+
+
+            String query = "SELECT diet FROM  consultation  where patientID ="+id;
+
+            rs = st.executeQuery(query);
+            while(rs.next()){
+                String theIllness= rs.getString("diet");
+                observableList.add(theIllness);
+            }
+
+
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+        System.out.println("records from Db");
+
+        return  observableList ;
+
+
+
+    }
+    public ObservableList <String>getHistoryOfDiagnosis(int id){
+
+        ObservableList <String>observableList = FXCollections.observableArrayList();
+        try {
+
+
+            System.out.println("records from Db");
+            String query = "SELECT diagnosis FROM  consultation  where patientID ="+id;
+
+            rs = st.executeQuery(query);
+            while(rs.next()){
+                String diagnosis= rs.getString("diagnosis");
+                observableList.add(diagnosis);
             }
 
 
@@ -673,6 +930,136 @@ public class Db {
         System.out.println("records from Db");
 
         return  doctorInformation ;
+
+
+
+    }
+    public void deletePatient(int id){
+        System.out.println("test");
+        String sql = "DELETE FROM patient WHERE patientID="+id;
+        try {
+
+            st.executeUpdate(sql);
+        }catch(SQLException e) {
+            System.out.println("Error");
+
+        }
+
+
+
+    }
+    public void deleteMedi(int id){
+        System.out.println("test");
+        String sql = "DELETE FROM patient WHERE patientID="+id;
+        try {
+
+            st.executeUpdate(sql);
+        }catch(SQLException e) {
+            System.out.println("Error");
+
+        }
+
+
+
+    }    public void deleteCheckup(int id){
+        System.out.println("test");
+        String sql = "DELETE FROM checkupName WHERE checkupNameID="+id;
+        try {
+
+            st.executeUpdate(sql);
+        }catch(SQLException e) {
+            System.out.println("Error");
+
+        }
+
+
+
+    }
+    public int InsertMedi(MedicamentName medicamentName)  {
+        PreparedStatement pstmt;
+        int id = 0;
+        String query = "insert into MedicamentName(mediName,dosage)values(?,?)";
+        try {
+            pstmt = (PreparedStatement) con.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
+            pstmt.setString(1, medicamentName.getName());
+            pstmt.setString(2,medicamentName.getDosage());
+            pstmt.executeUpdate();
+            rs = pstmt.getGeneratedKeys();
+            if(rs != null && rs.next()){
+                id= rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+        return id;
+
+    }
+    public int InsertCheckup(CheckupName checkupName)  {
+        PreparedStatement pstmt;
+        int id = 0;
+        String query = "insert into checkupName(checkupName)values(?)";
+        try {
+            pstmt = (PreparedStatement) con.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
+            pstmt.setString(1, checkupName.getName());
+            pstmt.executeUpdate();
+            rs = pstmt.getGeneratedKeys();
+            if(rs != null && rs.next()){
+                id= rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return id;
+
+    }
+    public ObservableList <MedicamentName>getMedi(){
+
+        ObservableList <MedicamentName>observableList = FXCollections.observableArrayList();
+        try {
+            System.out.println("records from Db");
+            String query = "SELECT * FROM MedicamentName";
+            rs = st.executeQuery(query);
+            while(rs.next()){
+                int id = rs.getInt("MedicamentNameID");
+
+                String dosage= rs.getString("dosage");
+                String name = rs.getString("mediName") ;
+                observableList.add(new MedicamentName(id,name,dosage));
+            }
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+
+
+        return  observableList ;
+
+
+
+    }
+    public ObservableList <CheckupName>getCheckupName(){
+
+        ObservableList <CheckupName>observableList = FXCollections.observableArrayList();
+        try {
+            System.out.println("records from Db");
+            String query = "SELECT * FROM MedicamentName";
+            rs = st.executeQuery(query);
+            while(rs.next()){
+                int id = rs.getInt("checkupNameID");
+                String name = rs.getString("checkupName") ;
+                observableList.add(new CheckupName(name,id));
+            }
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+
+
+        return  observableList ;
 
 
 

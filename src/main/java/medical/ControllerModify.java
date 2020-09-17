@@ -3,6 +3,7 @@ package medical;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,11 +15,7 @@ import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 
-
-
-
-
-public class newPatient implements Initializable {
+public class ControllerModify implements Initializable {
 
     public TextField phone;
     public ToggleGroup group;
@@ -40,45 +37,51 @@ public class newPatient implements Initializable {
     String iLastName = null;
     LocalDate iBirthday = null;
     String iPhone =" ";
-    String iChildren="0" ;
+    String iChildren="-1" ;
     String iMarritalStatus ="";
     String iProfession ="";
-    Patient patient;
-APatientForWaitingRoom aPatientForWaitingRoom;
 
-    public newPatient(APatientForWaitingRoom aPatientForWaitingRoom) {
-        this.aPatientForWaitingRoom = aPatientForWaitingRoom;
-    }
-    public newPatient() {
-        this.aPatientForWaitingRoom = null;
+    ObservableList<Patient> observableList = FXCollections.observableArrayList();
+    Patient selectPatient;
+
+    public ControllerModify(ObservableList<Patient> observableList, Patient selectPatient) {
+        this.observableList = observableList;
+        this.selectPatient = selectPatient;
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        marritalStatus.setItems(FXCollections.observableArrayList("Single","Married","Divorced","Widowed"));
+        marritalStatus.setItems(FXCollections.observableArrayList("single","Married","Divorced","Widowed"));
         marritalStatus.setCellFactory(param -> new MyListCell());
         marritalStatus.setButtonCell(new MyListCell());
-
         children.setItems(FXCollections.observableArrayList("0","1","2","3","4","5","More"));
         children.setCellFactory(param -> new MyListCell());
         children.setButtonCell(new MyListCell());
-        if(!(aPatientForWaitingRoom==null)){
-            firstName.setText(aPatientForWaitingRoom.getFirstName());
-            lastName.setText(aPatientForWaitingRoom.getLastName());
-            phone.setText(aPatientForWaitingRoom.getPhone());
-            if(aPatientForWaitingRoom.getGender().equals("Female")){
+        firstName.setText(selectPatient.getFirstName());
+        lastName.setText(selectPatient.getLastName());
+        //Todo
+        marritalStatus.setValue("Single");
+        children.setValue("1");
+        phone.setText(selectPatient.getPhone());
 
-                ife.fire();
-            }else {
-                ima.fire();
-            }
-        }else{
-
-
+        profession.setText(selectPatient.getProfession());
+        birthday.setValue(LocalDate.parse(selectPatient.getBirthday().toString()));
+        if(selectPatient.getGender().equals("Female")){
+            ife.fire();
+            gender="Female";
+        }else {
             ima.fire();
-
-
+            gender="Male";
         }
+
+
+
+
+
+
+
+
+
         group = new ToggleGroup();
         ife.setToggleGroup(group);
         ima.setToggleGroup(group);
@@ -123,9 +126,14 @@ APatientForWaitingRoom aPatientForWaitingRoom;
         }
 
         if (iFirstName != null && iLastName != null&& iBirthday != null){
-            patient = new Patient(iLastName,iFirstName,Integer.parseInt(iChildren),iBirthday,gender,iProfession,iPhone,iMarritalStatus,"Active");
+
             Db db = new Db();
-            db.InsertPatientData(patient);
+           // db.InsertPatientData(patient);
+
+
+
+
+
 
              iFirstName = null;
             iLastName = null;
@@ -147,7 +155,7 @@ APatientForWaitingRoom aPatientForWaitingRoom;
 
 
 
-            System.out.println(iFirstName+" "+iLastName+" "+iBirthday+" "+iChildren+" "+gender);
+
         }else {
             System.out.println("error");
             massage.setText("error");

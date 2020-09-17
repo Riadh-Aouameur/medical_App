@@ -10,7 +10,6 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
@@ -59,7 +58,7 @@ public class StartPage implements Initializable {
 
                     primaryStage.setMaxHeight(primaryScreenBounds.getHeight());
                     primaryStage.setMinHeight(primaryScreenBounds.getHeight());
-                    primaryStage.initStyle(StageStyle.TRANSPARENT);
+                    //primaryStage.initStyle(StageStyle.DECORATED);
                     primaryStage.setTitle("Assistant");
                     primaryStage.show();
 

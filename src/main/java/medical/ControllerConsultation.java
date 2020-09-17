@@ -23,7 +23,7 @@ import java.util.*;
 
 public class ControllerConsultation implements Initializable {
     public TextField fChildren;
-    public ComboBox <String> fMaritalStatus;
+    public TextField fMaritalStatus;
     public TextField fProfession;
     public TextArea tHistoryOfTheIllness;
     public TextArea tPhysicalActivity;
@@ -96,6 +96,9 @@ public class ControllerConsultation implements Initializable {
         int i =c.get(Calendar.YEAR)-b.getYear();
         fAge.setText(i+"");
         fPhone.setText(patient.getPhone());
+        fMaritalStatus.setText(patient.getMarritalStatus());
+        fProfession.setText(patient.getProfession());
+        fChildren.setText(String.valueOf(patient.getChildren()));
         DateTimeFormatter formatter =DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL);
         fDate.setText(formatter.format(LocalDate.now()));
         
@@ -199,5 +202,70 @@ public class ControllerConsultation implements Initializable {
 
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
+    }
+
+    public void onMedicalRecord(ActionEvent actionEvent) throws IOException {
+        Stage  primaryStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("medicalRecord.fxml"));
+        loader.setControllerFactory(e->{
+
+
+            return new ControllerMedicalRecord(patient);
+
+        });
+
+        Parent root = loader.load();
+
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show();
+    }
+
+    public void onTestResults(ActionEvent actionEvent) throws IOException {
+        Stage  primaryStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("testAndResults.fxml"));
+        loader.setControllerFactory(e->{
+
+
+            return new ControllerTestResults(patient);
+
+        });
+
+        Parent root = loader.load();
+
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show();
+    }
+
+    public void onDiagnosisAndTreatment(ActionEvent actionEvent) throws IOException {
+        Stage  primaryStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("diagnosisAndTreatment.fxml"));
+        loader.setControllerFactory(e->{
+
+
+            return new ControllerDiagnosisAndTreatment(patient);
+
+        });
+
+        Parent root = loader.load();
+
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show();
+    }
+
+    public void onLifeStyle(ActionEvent actionEvent) throws IOException {
+        Stage  primaryStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("lifeStyle.fxml"));
+        loader.setControllerFactory(e->{
+
+
+            return new ControllerLifeStyle(patient);
+
+        });
+
+        Parent root = loader.load();
+
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show();
+
     }
 }

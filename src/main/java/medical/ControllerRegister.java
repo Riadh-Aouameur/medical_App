@@ -42,9 +42,10 @@ public class ControllerRegister  implements Initializable {
     public TextField iEmailOrPhone;
     public DatePicker iBirthday;
     public PasswordField iConfirmPassword;
-    public CheckBox rememberMe;
+
     public AnchorPane anchorPaneRoot;
     public AnchorPane anchor_2;
+    public AnchorPane anchor_3;
     public AnchorPane anchor_1;
     public ImageView i1;
     public ImageView i2;
@@ -67,7 +68,7 @@ public class ControllerRegister  implements Initializable {
     BorderPane root;
 
 
-    Integer id ;
+
   String firstName;
     String lastName;
     LocalDate birthday ;
@@ -82,7 +83,47 @@ public class ControllerRegister  implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        iEmailOrPhone.lengthProperty().addListener(new ChangeListener<Number>() {
 
+            @Override
+            public void changed(ObservableValue<? extends Number> observable,
+                                Number oldValue, Number newValue) {
+                if (newValue.intValue() > oldValue.intValue()) {
+                    // Check if the new character is greater than LIMIT
+                    if (iEmailOrPhone.getText().length() >= 10) {
+
+                        // if it's 11th character then just setText to previous
+                        // one
+                        iEmailOrPhone.setText(iEmailOrPhone.getText().substring(0, 10));
+                    }
+                }
+            }
+        });
+
+        iEmailOrPhone.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    iEmailOrPhone.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+        iFirstName.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\sa-zA-Z*")) {
+                iFirstName.setText(newValue.replaceAll("[^\\sa-zA-Z]", ""));
+            }
+        });
+        iLastName.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\sa-zA-Z*")) {
+               iLastName.setText(newValue.replaceAll("[^\\sa-zA-Z]", ""));
+            }
+        });
+        iSpecialties.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\sa-zA-Z*")) {
+                iSpecialties.setText(newValue.replaceAll("[^\\sa-zA-Z]", ""));
+            }
+        });
 
 
         final IntegerProperty i = new SimpleIntegerProperty(0);
@@ -106,6 +147,9 @@ public class ControllerRegister  implements Initializable {
          ima.fire();
      ife.setToggleGroup(group);
      ima.setToggleGroup(group);
+
+
+
 
         group.selectedToggleProperty().addListener(new ChangeListener<Toggle>(){
             public void changed(ObservableValue<? extends Toggle> ov,
@@ -350,15 +394,7 @@ public class ControllerRegister  implements Initializable {
             emailOrPhone=iEmailOrPhone.getText();
         }
 
-        System.out.println(firstName);
-        System.out.println(lastName);
-        System.out.println(birthday);
-        System.out.println(specialty);
-        System.out.println(address);
-        System.out.println(emailOrPhone);
-        System.out.println(pass);
-        System.out.println(gender);
-        System.out.println(idOfApproval);
+
 if (firstName != null && lastName != null
         && birthday != null && specialty != null
         && address != null && emailOrPhone != null
@@ -368,6 +404,28 @@ if (firstName != null && lastName != null
     DoctorInformation doctorInformation = new DoctorInformation(firstName,lastName,birthday,specialty,address,emailOrPhone,pass,gender,idOfApproval);
     Db db= new Db();
     db.InsertData(doctorInformation);
+    firstName=null;
+    lastName=null;
+    birthday=null;
+    specialty=null;address=null;
+    emailOrPhone=null;
+    pass=null;
+
+    idOfApproval=null;
+    password.clear();
+
+   iIdOfApproval.clear();
+   iSpecialties.clear();
+
+iPassword.clear();
+iAddress.clear();
+iLastName.clear();
+  iFirstName.clear();
+
+iEmailOrPhone.clear();
+   iBirthday.setValue(null);
+iConfirmPassword.clear();
+anchor_3.toFront();
 }else
 {
 

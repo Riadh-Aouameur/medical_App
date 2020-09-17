@@ -120,6 +120,8 @@ public class ControllerDocument implements Initializable {
                   JasperReport jr = JasperCompileManager.compileReport(jd);
                   Map<String, Object> param = new HashMap<String, Object>();
                   JasperPrint jP = JasperFillManager.fillReport(jr,param,con);
+                 content = null;
+                    documentContent.clear();
 
                   JasperViewer.viewReport(jP,false);
               } catch (Exception e) {

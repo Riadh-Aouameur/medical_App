@@ -5,14 +5,19 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import medical.DataBase.Db1;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -34,6 +39,24 @@ public class ControllerRightDrawer implements Initializable {
 
     public void onSetPanePatient(ActionEvent actionEvent) {
         r1.toFront();
+    }
+
+    public void onOpenNewPatient(ActionEvent actionEvent) throws IOException {
+
+        Stage primaryStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("createPatient.fxml"));
+       APatientForWaitingRoom patient= listView.getSelectionModel().getSelectedItem();
+        loader.setControllerFactory(e->{
+
+
+            return new newPatient(patient);
+
+        });
+
+        Parent root = loader.load();
+
+        primaryStage.setScene(new Scene(root));
+        primaryStage.show();
     }
 
 

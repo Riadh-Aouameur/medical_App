@@ -8,37 +8,10 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="730.0" prefWidth="280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="medical.ControllerRightDrawer">
    <children>
-      <AnchorPane fx:id="r1" prefHeight="782.0" prefWidth="280.0" style="-fx-background-radius: 60 0 0 0; -fx-background-color: #fff;">
-         <children>
-            <ListView fx:id="listView" layoutY="83.0" prefHeight="652.0" prefWidth="280.0" style="-fx-background-radius: 5; -fx-background-color: #fff;" stylesheets="@../Css/listView.css" />
-            <Label fx:id="firstLastName1" alignment="BASELINE_LEFT" layoutY="27.0" prefHeight="35.0" prefWidth="179.0" text="Patients" textFill="#1530cc">
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="21.0" />
-               </font>
-            </Label>
-            <Button layoutX="225.0" layoutY="25.0" mnemonicParsing="false" onAction="#onSetPaneList" prefHeight="22.0" prefWidth="33.0" style="-fx-background-color: #fff;">
-               <graphic>
-                  <ImageView fitHeight="35.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@img/h2.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-            </Button>
-            <Line endX="127.5999755859375" layoutX="126.0" layoutY="735.0" startX="-100.0" stroke="#1530cc" />
-            <Line endX="127.5999755859375" layoutX="125.0" layoutY="758.0" startX="-100.0" stroke="#1530cc" />
-            <Label layoutX="26.0" layoutY="736.0" prefHeight="22.0" prefWidth="229.0" text="Developer team  M &amp;&amp; R" textFill="#1530cc">
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="13.0" />
-               </font>
-            </Label>
-         </children>
-      </AnchorPane>
       <AnchorPane fx:id="r2" prefHeight="782.0" prefWidth="280.0" style="-fx-background-color: #fff;">
          <children>
             <ImageView fx:id="imageGender" fitHeight="99.0" fitWidth="96.0" layoutX="88.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true">
@@ -59,10 +32,17 @@
                   <Insets left="5.0" />
                </padding>
             </Label>
-            <JFXButton layoutX="13.0" layoutY="351.0" prefHeight="27.0" prefWidth="254.0" style="-fx-background-color: #1530CC;" text="Select Patient" textFill="WHITE">
+            <JFXButton layoutX="13.0" layoutY="351.0" onAction="#onOpenNewPatient" prefHeight="27.0" prefWidth="254.0" style="-fx-background-color: #1530CC;" text="New Patient" textFill="WHITE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="15.0" />
                </font>
+               <graphic>
+                  <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/adduser.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
             </JFXButton>
             <Label layoutX="9.0" layoutY="270.0" prefHeight="22.0" prefWidth="223.0" text="Pass       : 5" textFill="#1530cc">
                <font>
@@ -104,6 +84,37 @@
                   </ImageView>
                </graphic>
             </Button>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="r1" prefHeight="782.0" prefWidth="280.0" style="-fx-background-radius: 60 0 0 0; -fx-background-color: #fff;">
+         <children>
+            <ListView fx:id="listView" layoutY="100.0" prefHeight="652.0" prefWidth="280.0" style="-fx-background-radius: 5; -fx-background-color: #fff;" stylesheets="@../Css/listView.css" />
+            <Label fx:id="firstLastName1" alignment="BASELINE_LEFT" layoutY="27.0" prefHeight="35.0" prefWidth="179.0" text="Patients" textFill="#1530cc">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="21.0" />
+               </font>
+            </Label>
+            <Button layoutX="225.0" layoutY="25.0" mnemonicParsing="false" onAction="#onSetPaneList" prefHeight="22.0" prefWidth="33.0" style="-fx-background-color: #fff;">
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/h2.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <JFXButton layoutX="13.0" layoutY="742.0" onAction="#onOpenNewPatient" prefHeight="27.0" prefWidth="254.0" style="-fx-background-color: #1530CC;" text="New Patient" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="15.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/adduser.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
          </children>
       </AnchorPane>
    </children>

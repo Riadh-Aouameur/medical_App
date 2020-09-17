@@ -42,7 +42,9 @@ import java.util.*;
 public class ControllerPrescription implements Initializable {
 
 
-   @FXML ListView <ModelPrescription> listLoad;
+    public Button m;
+    public Button a;
+    @FXML ListView <ModelPrescription> listLoad;
     @FXML
     VBox paneLaodamodel;
     @FXML
@@ -87,6 +89,7 @@ public class ControllerPrescription implements Initializable {
 
     Patient patient;
     private  int index;
+    Db db=new Db();
 
     public ControllerPrescription(Patient patient)
     {
@@ -95,18 +98,7 @@ public class ControllerPrescription implements Initializable {
 
 
     }
-    public ControllerPrescription(PatientForAllPatients patient, Boolean test)
-    {
-        this.patient = new Patient();
 
-       this.patient.setId(patient.getId());
-       this.patient.setFirstName(patient.getFirstName());
-       this.patient.setLastName(patient.getLastName());
-       this.patient.setGender(patient.getGender());
-       this.patient.setBirthday(patient.getBirthday());
-
-
-    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -147,6 +139,9 @@ public class ControllerPrescription implements Initializable {
                     textDosage.setText(medicament.getDosage());
                     textQsp.setText(medicament.getQsp());
                     textEntityNumber.setText(String.valueOf(medicament.getEntityNumber()));
+                    m.setDisable(false);
+                    a.setDisable(true);
+
 
 
 
@@ -235,6 +230,8 @@ public class ControllerPrescription implements Initializable {
         textDosage.setText("");
         textQsp.setText("");
         textEntityNumber.setText("");
+        a.setDisable(false);
+        m.setDisable(true);
     }
 
     public void onSave(ActionEvent actionEvent) {
@@ -336,14 +333,7 @@ public class ControllerPrescription implements Initializable {
 
     }
 
-    public void onSelectOld(ActionEvent actionEvent) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("oldMedicament.fxml"));
-        AnchorPane anchorPane = loader.load();
-        Stage primaryStage = new Stage();
-        Scene scene = new Scene(anchorPane);
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
+
 
     public void onMouseClickedAnchorPane(MouseEvent mouseEvent) {
         if(paneLIstOFMedicament.isVisible())
@@ -401,9 +391,10 @@ public class ControllerPrescription implements Initializable {
                 Optional <ButtonType> result = alert.showAndWait();
                 if (result.isPresent() && result.get() == ButtonType.OK){
                     System.out.println("save");
-                    Db db=new Db();
+
                     int doctorID = Integer.parseInt(DoctorInformationSingle.getInstance(0).getDoctorID());
                     db.InsertMedicament(prescription,patient.getId(),doctorID);
+                    listOfMedication.getItems().clear();
                     try {
                         Class.forName("com.mysql.jdbc.Driver");
                         Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3305/medical?autoReconnect=true&useSSL=false","root","1234");
@@ -429,10 +420,27 @@ public class ControllerPrescription implements Initializable {
                     }
 
                 }
-                System.out.println("NOT save");
+
 
             }
 
 
+    }
+
+    public void onOpenMedi(ActionEvent actionEvent) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("addMedicament.fxml"));
+
+
+        Stage stage =   new Stage();
+        try {
+            stage.setScene(new Scene(loader.load()));
+
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        stage.setTitle("About");
+        stage.show();
     }
 }

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.13.0.final using JasperReports Library version 6.13.0-46ada4d1be8f3c5985fd0b6146f3ed44caed6f05  -->
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4_2" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0e701a2f-9073-4555-b24b-fb3d183dac22">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4_5" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="afef9725-b608-4924-840f-4445942395c1">
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="New Data Adapter (3)"/>
 	<queryString language="SQL">
-		<![CDATA[SELECT *
-FROM  Prescription
-INNER JOIN Medicament ON Prescription.prescriptionID = Medicament.prescriptionID
-INNER JOIN patient ON Prescription.patientID = patient.patientID
-INNER JOIN doctor ON Prescription.doctorID = doctor.doctorID
-where Prescription.prescriptionID = 1]]>
+		<![CDATA[SELECT Prescription.prescriptionID,Prescription.dateofprescriptiondate,Medicament.qsp,Medicament.dosage,Medicament.entityNumber,Medicament.nameMedicament,doctor.doctorID,doctor.firstname,doctor.lastname,doctor.specialty,doctor.address,doctor.emailorphone,patient.firstname,patient.lastname,patient.birthday,patient.patientID
+                                FROM  Prescription
+								INNER JOIN Medicament ON Prescription.prescriptionID = Medicament.prescriptionID
+							    INNER JOIN patient ON Prescription.patientID = patient.patientID
+                                INNER JOIN doctor ON Prescription.doctorID = doctor.doctorID
+                                where Prescription.prescriptionID =1]]>
 	</queryString>
 	<field name="prescriptionID" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.label" value="prescriptionID"/>
@@ -19,13 +19,9 @@ where Prescription.prescriptionID = 1]]>
 		<property name="com.jaspersoft.studio.field.label" value="dateofprescriptiondate"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="prescription"/>
 	</field>
-	<field name="doctorID" class="java.lang.Integer">
-		<property name="com.jaspersoft.studio.field.label" value="doctorID"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="prescription"/>
-	</field>
-	<field name="patientID" class="java.lang.Integer">
-		<property name="com.jaspersoft.studio.field.label" value="patientID"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="prescription"/>
+	<field name="qsp" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="qsp"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="medicament"/>
 	</field>
 	<field name="dosage" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="dosage"/>
@@ -35,68 +31,20 @@ where Prescription.prescriptionID = 1]]>
 		<property name="com.jaspersoft.studio.field.label" value="entityNumber"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="medicament"/>
 	</field>
-	<field name="qsp" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="qsp"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="medicament"/>
-	</field>
 	<field name="nameMedicament" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="nameMedicament"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="medicament"/>
 	</field>
-	<field name="COLUMN_9" class="java.lang.Integer">
-		<property name="com.jaspersoft.studio.field.label" value="prescriptionID"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="medicament"/>
-	</field>
-	<field name="COLUMN_10" class="java.lang.Integer">
-		<property name="com.jaspersoft.studio.field.label" value="patientID"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="patient"/>
-	</field>
-	<field name="firstname" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="firstname"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="patient"/>
-	</field>
-	<field name="lastname" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="lastname"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="patient"/>
-	</field>
-	<field name="birthday" class="java.sql.Date">
-		<property name="com.jaspersoft.studio.field.label" value="birthday"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="patient"/>
-	</field>
-	<field name="profession" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="profession"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="patient"/>
-	</field>
-	<field name="phone" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="phone"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="patient"/>
-	</field>
-	<field name="gender" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="gender"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="patient"/>
-	</field>
-	<field name="children" class="java.lang.Integer">
-		<property name="com.jaspersoft.studio.field.label" value="children"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="patient"/>
-	</field>
-	<field name="marritalStatus" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="marritalStatus"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="patient"/>
-	</field>
-	<field name="COLUMN_19" class="java.lang.Integer">
+	<field name="doctorID" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.label" value="doctorID"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="doctor"/>
 	</field>
-	<field name="COLUMN_20" class="java.lang.String">
+	<field name="firstname" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="firstname"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="doctor"/>
 	</field>
-	<field name="COLUMN_21" class="java.lang.String">
+	<field name="lastname" class="java.lang.String">
 		<property name="com.jaspersoft.studio.field.label" value="lastname"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="doctor"/>
-	</field>
-	<field name="COLUMN_22" class="java.sql.Date">
-		<property name="com.jaspersoft.studio.field.label" value="birthday"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="doctor"/>
 	</field>
 	<field name="specialty" class="java.lang.String">
@@ -111,17 +59,21 @@ where Prescription.prescriptionID = 1]]>
 		<property name="com.jaspersoft.studio.field.label" value="emailorphone"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="doctor"/>
 	</field>
-	<field name="COLUMN_26" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="gender"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="doctor"/>
+	<field name="COLUMN_13" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="firstname"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="patient"/>
 	</field>
-	<field name="idofapproval" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="idofapproval"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="doctor"/>
+	<field name="COLUMN_14" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="lastname"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="patient"/>
 	</field>
-	<field name="pass" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="pass"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="doctor"/>
+	<field name="birthday" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="birthday"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="patient"/>
+	</field>
+	<field name="patientID" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="patientID"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="patient"/>
 	</field>
 	<group name="prescriptionID">
 		<groupExpression><![CDATA[$F{prescriptionID}]]></groupExpression>
@@ -129,11 +81,8 @@ where Prescription.prescriptionID = 1]]>
 	<group name="dateofprescriptiondate">
 		<groupExpression><![CDATA[$F{dateofprescriptiondate}]]></groupExpression>
 	</group>
-	<group name="doctorID">
-		<groupExpression><![CDATA[$F{doctorID}]]></groupExpression>
-	</group>
-	<group name="patientID">
-		<groupExpression><![CDATA[$F{patientID}]]></groupExpression>
+	<group name="qsp">
+		<groupExpression><![CDATA[$F{qsp}]]></groupExpression>
 	</group>
 	<group name="dosage">
 		<groupExpression><![CDATA[$F{dosage}]]></groupExpression>
@@ -141,53 +90,17 @@ where Prescription.prescriptionID = 1]]>
 	<group name="entityNumber">
 		<groupExpression><![CDATA[$F{entityNumber}]]></groupExpression>
 	</group>
-	<group name="qsp">
-		<groupExpression><![CDATA[$F{qsp}]]></groupExpression>
-	</group>
 	<group name="nameMedicament">
 		<groupExpression><![CDATA[$F{nameMedicament}]]></groupExpression>
 	</group>
-	<group name="COLUMN_9">
-		<groupExpression><![CDATA[$F{COLUMN_9}]]></groupExpression>
-	</group>
-	<group name="COLUMN_10">
-		<groupExpression><![CDATA[$F{COLUMN_10}]]></groupExpression>
+	<group name="doctorID">
+		<groupExpression><![CDATA[$F{doctorID}]]></groupExpression>
 	</group>
 	<group name="firstname">
 		<groupExpression><![CDATA[$F{firstname}]]></groupExpression>
 	</group>
 	<group name="lastname">
 		<groupExpression><![CDATA[$F{lastname}]]></groupExpression>
-	</group>
-	<group name="birthday">
-		<groupExpression><![CDATA[$F{birthday}]]></groupExpression>
-	</group>
-	<group name="profession">
-		<groupExpression><![CDATA[$F{profession}]]></groupExpression>
-	</group>
-	<group name="phone">
-		<groupExpression><![CDATA[$F{phone}]]></groupExpression>
-	</group>
-	<group name="gender">
-		<groupExpression><![CDATA[$F{gender}]]></groupExpression>
-	</group>
-	<group name="children">
-		<groupExpression><![CDATA[$F{children}]]></groupExpression>
-	</group>
-	<group name="marritalStatus">
-		<groupExpression><![CDATA[$F{marritalStatus}]]></groupExpression>
-	</group>
-	<group name="COLUMN_19">
-		<groupExpression><![CDATA[$F{COLUMN_19}]]></groupExpression>
-	</group>
-	<group name="COLUMN_20">
-		<groupExpression><![CDATA[$F{COLUMN_20}]]></groupExpression>
-	</group>
-	<group name="COLUMN_21">
-		<groupExpression><![CDATA[$F{COLUMN_21}]]></groupExpression>
-	</group>
-	<group name="COLUMN_22">
-		<groupExpression><![CDATA[$F{COLUMN_22}]]></groupExpression>
 	</group>
 	<group name="specialty">
 		<groupExpression><![CDATA[$F{specialty}]]></groupExpression>
@@ -198,22 +111,25 @@ where Prescription.prescriptionID = 1]]>
 	<group name="emailorphone">
 		<groupExpression><![CDATA[$F{emailorphone}]]></groupExpression>
 	</group>
-	<group name="COLUMN_26">
-		<groupExpression><![CDATA[$F{COLUMN_26}]]></groupExpression>
+	<group name="COLUMN_13">
+		<groupExpression><![CDATA[$F{COLUMN_13}]]></groupExpression>
 	</group>
-	<group name="idofapproval">
-		<groupExpression><![CDATA[$F{idofapproval}]]></groupExpression>
+	<group name="COLUMN_14">
+		<groupExpression><![CDATA[$F{COLUMN_14}]]></groupExpression>
 	</group>
-	<group name="pass">
-		<groupExpression><![CDATA[$F{pass}]]></groupExpression>
+	<group name="birthday">
+		<groupExpression><![CDATA[$F{birthday}]]></groupExpression>
+	</group>
+	<group name="patientID">
+		<groupExpression><![CDATA[$F{patientID}]]></groupExpression>
 	</group>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="101" splitType="Stretch">
+		<band height="90" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="9" width="200" height="20" uuid="750ee0e5-b33f-4dab-8735-769e8c822f5d">
+				<reportElement x="0" y="9" width="200" height="20" uuid="7267f763-d572-4209-8d8a-4d2364834908">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -223,57 +139,17 @@ where Prescription.prescriptionID = 1]]>
 				<textFieldExpression><![CDATA["Dr."+$F{firstname}.substring(0,1).toUpperCase()+"."+$F{lastname}.toUpperCase()]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="345" y="51" width="200" height="20" uuid="5fa2f25e-e334-4698-aee6-34917acd98b0">
-					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Left" markup="none">
-					<font fontName="Arial Rounded MT Bold" size="13"/>
-				</textElement>
-				<textFieldExpression><![CDATA["Patient : "+$F{firstname}+" "+$F{lastname}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="345" y="30" width="200" height="20" uuid="f088f1cf-83e1-4ba6-88ec-018e1f48ea6d">
-					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Left" markup="none">
-					<font fontName="Arial Rounded MT Bold" size="13"/>
-				</textElement>
-				<textFieldExpression><![CDATA["Patient ID : "+$F{patientID}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="345" y="9" width="200" height="20" uuid="6b4ece08-886d-4825-9ed5-55f6a8bf55ce">
-					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Left" markup="none">
-					<font fontName="Arial Rounded MT Bold" size="13"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{dateofprescriptiondate}]]></textFieldExpression>
-			</textField>
-			<textField isBlankWhenNull="true">
-				<reportElement x="345" y="70" width="200" height="20" uuid="5a5d2708-02cd-460a-ba70-05b613d915e5">
-					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Left" markup="none">
-					<font fontName="Arial Rounded MT Bold" size="13"/>
-				</textElement>
-				<textFieldExpression><![CDATA["Age : "+($F{dateofprescriptiondate}.getYear()-$F{birthday}.getYear())]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="0" y="70" width="200" height="20" uuid="644433c6-7e3a-41bd-8504-6d32b0471ef3">
+				<reportElement x="0" y="30" width="200" height="20" uuid="915bc20e-aa0f-445e-8e89-3130a2c1609a">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" markup="none">
-					<font fontName="Arial Rounded MT Bold" size="12"/>
+					<font fontName="Arial Rounded MT Bold" size="14"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Phone : "+$F{emailorphone}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["MEDECINE "+$F{specialty}.toUpperCase()]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="51" width="200" height="20" uuid="e12b87d3-0919-4866-a5f4-9eb11b5f1459">
+				<reportElement x="0" y="51" width="200" height="20" uuid="b37948b1-a3d0-4014-b6a3-4301b0be8d72">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -283,21 +159,61 @@ where Prescription.prescriptionID = 1]]>
 				<textFieldExpression><![CDATA[$F{address}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="30" width="200" height="20" uuid="078acc87-2dcf-4d95-ae02-aec1bbab0cfb">
+				<reportElement x="0" y="70" width="200" height="20" uuid="d3bec5f0-b104-4280-9f08-da3afa350424">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" markup="none">
-					<font fontName="Arial Rounded MT Bold" size="14"/>
+					<font fontName="Arial Rounded MT Bold" size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA["MEDECINE "+$F{specialty}.toUpperCase()]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Phone : "+$F{emailorphone}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="345" y="30" width="200" height="20" uuid="8a4c757b-0581-42d3-b60d-2074202dd08f">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" markup="none">
+					<font fontName="Arial Rounded MT Bold" size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Patient ID : "+$F{patientID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="345" y="9" width="200" height="20" uuid="41cb2830-e6d1-4509-8458-ddd6346e6d5c">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" markup="none">
+					<font fontName="Arial Rounded MT Bold" size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{dateofprescriptiondate}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="345" y="51" width="200" height="20" uuid="6867ffce-5705-407f-b056-573b64a9e528">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" markup="none">
+					<font fontName="Arial Rounded MT Bold" size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Patient : "+$F{firstname}+" "+$F{lastname}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="345" y="70" width="200" height="20" uuid="794fca0c-4c75-45e8-9b65-2e5505cd7d9c">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Left" markup="none">
+					<font fontName="Arial Rounded MT Bold" size="13"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Age : "+($F{dateofprescriptiondate}.getYear()-$F{birthday}.getYear())]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="71" splitType="Stretch">
+		<band height="60" splitType="Stretch">
 			<textField>
-				<reportElement x="112" y="9" width="330" height="52" uuid="fd6f18cb-bf5a-4f94-a8c7-c84c62fb6e29">
+				<reportElement x="112" y="0" width="330" height="52" uuid="a26f21c6-e9bf-4c36-9ecf-d12950a7c914">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -309,9 +225,9 @@ where Prescription.prescriptionID = 1]]>
 		</band>
 	</pageHeader>
 	<detail>
-		<band height="62" splitType="Stretch">
+		<band height="125" splitType="Stretch">
 			<textField textAdjust="StretchHeight">
-				<reportElement positionType="Float" x="0" y="0" width="320" height="28" uuid="a64311f1-1db2-421f-947d-40f9d8b94201">
+				<reportElement positionType="Float" x="0" y="0" width="320" height="28" uuid="a61838d4-f402-4052-8f65-00b807c44db6">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7e68c113-e1f4-49a2-8925-ce15529fad55"/>
 				</reportElement>
 				<textElement>
@@ -320,16 +236,7 @@ where Prescription.prescriptionID = 1]]>
 				<textFieldExpression><![CDATA[$V{REPORT_COUNT}+"- "+$F{nameMedicament}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight">
-				<reportElement positionType="Float" x="334" y="3" width="210" height="23" uuid="c5f7fc25-abe4-4d54-bb25-62f558977766">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7e68c113-e1f4-49a2-8925-ce15529fad55"/>
-				</reportElement>
-				<textElement>
-					<font size="16"/>
-				</textElement>
-				<textFieldExpression><![CDATA["QSP : "+ $F{qsp}]]></textFieldExpression>
-			</textField>
-			<textField textAdjust="StretchHeight">
-				<reportElement positionType="Float" x="70" y="30" width="250" height="18" uuid="5f90ca38-1e92-4545-941f-b840b0919ebb">
+				<reportElement positionType="Float" x="60" y="30" width="250" height="18" uuid="23bd966a-fb12-4770-8942-3d192cb3d1b3">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7e68c113-e1f4-49a2-8925-ce15529fad55"/>
 				</reportElement>
 				<textElement>
@@ -338,7 +245,16 @@ where Prescription.prescriptionID = 1]]>
 				<textFieldExpression><![CDATA["Dosage : "+$V{REPORT_COUNT}]]></textFieldExpression>
 			</textField>
 			<textField textAdjust="StretchHeight">
-				<reportElement positionType="Float" x="332" y="30" width="210" height="18" uuid="2483bec8-8c3a-4b4e-b7be-86b8b416bcf8">
+				<reportElement positionType="Float" x="334" y="3" width="210" height="23" uuid="45c2b807-d72b-449c-8989-34aedfb66529">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7e68c113-e1f4-49a2-8925-ce15529fad55"/>
+				</reportElement>
+				<textElement>
+					<font size="16"/>
+				</textElement>
+				<textFieldExpression><![CDATA["QSP : "+ $F{qsp}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement positionType="Float" x="332" y="30" width="210" height="18" uuid="127e5787-544f-45ca-92a5-84c2bfa3d0b7">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7e68c113-e1f4-49a2-8925-ce15529fad55"/>
 				</reportElement>
 				<textElement>
@@ -351,10 +267,10 @@ where Prescription.prescriptionID = 1]]>
 	<summary>
 		<band height="42" splitType="Stretch">
 			<line>
-				<reportElement x="-22" y="2" width="600" height="1" uuid="0a5fbb8b-dfb3-43b6-842b-e8df44131211"/>
+				<reportElement x="-22" y="2" width="600" height="1" uuid="d3df6087-5e18-43ed-8479-d6fe40016da1"/>
 			</line>
 			<textField isBlankWhenNull="true">
-				<reportElement x="450" y="10" width="120" height="10" uuid="0645be3b-c1a5-4589-a9c4-e21af63342fc">
+				<reportElement x="450" y="10" width="120" height="10" uuid="c24e7ebe-c59b-4a8f-9aad-09f549ee51a8">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
@@ -366,3 +282,4 @@ where Prescription.prescriptionID = 1]]>
 		</band>
 	</summary>
 </jasperReport>
+

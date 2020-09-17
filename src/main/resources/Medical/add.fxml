@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onDragDetected="#onSavePatient" prefHeight="349.0" prefWidth="659.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="medical.ControllerAdd">
+   <children>
+      <TextField fx:id="firstName" layoutX="43.0" layoutY="90.0" prefHeight="35.0" prefWidth="249.0" promptText="First Name" />
+      <TextField fx:id="lastName" layoutX="43.0" layoutY="141.0" prefHeight="35.0" prefWidth="249.0" promptText="Last Name" />
+      <ComboBox fx:id="marritalStatus" layoutX="371.0" layoutY="141.0" prefHeight="31.0" prefWidth="249.0" stylesheets="@../Css/combobox2.css" />
+      <TextField fx:id="profession" layoutX="371.0" layoutY="245.0" prefHeight="35.0" prefWidth="249.0" promptText="Profession" />
+      <Button layoutX="486.0" layoutY="292.0" mnemonicParsing="false" onAction="#onSavePatient" prefHeight="46.0" prefWidth="133.0" style="-fx-background-color: #00bcd4; -fx-background-radius: 30;" text="Save" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="20.0" />
+         </font></Button>
+      <ComboBox fx:id="children" layoutX="371.0" layoutY="193.0" prefHeight="31.0" prefWidth="249.0" stylesheets="@../Css/combobox2.css" />
+      <RadioButton fx:id="ima" layoutX="99.0" layoutY="255.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="59.0" text="Male" textFill="#00bed4">
+         <toggleGroup>
+            <ToggleGroup fx:id="group" />
+         </toggleGroup>
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font>
+      </RadioButton>
+      <RadioButton fx:id="ife" layoutX="204.0" layoutY="255.0" mnemonicParsing="false" text="Female" textFill="#00bcd4">
+         <toggleGroup>
+            <ToggleGroup fx:id="group" />
+         </toggleGroup>
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font>
+      </RadioButton>
+      <TextField fx:id="phone" layoutX="371.0" layoutY="90.0" prefHeight="35.0" prefWidth="249.0" promptText="Phone" />
+      <DatePicker fx:id="birthday" layoutX="43.0" layoutY="193.0" prefHeight="35.0" prefWidth="249.0" promptText="birthday" />
+      <Label fx:id="massage" layoutX="43.0" layoutY="300.0" prefHeight="29.0" prefWidth="249.0" text="Label" textFill="#03dd39">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="19.0" />
+         </font>
+      </Label>
+      <AnchorPane prefHeight="66.0" prefWidth="659.0" style="-fx-background-color: #00bcd4;">
+         <children>
+            <ImageView fitHeight="54.0" fitWidth="52.0" layoutX="42.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@img/adduser.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="136.0" layoutY="18.0" prefHeight="29.0" prefWidth="177.0" text="New Patient" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="23.0" />
+               </font>
+            </Label>
+            <Button layoutX="566.0" layoutY="20.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="52.0" style="-fx-background-color: #00bcd4;" textFill="WHITE" />
+            <ImageView fitHeight="28.0" fitWidth="27.0" layoutX="583.0" layoutY="23.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../Application/appAssistant/src/main/resources/medical/img/eror.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

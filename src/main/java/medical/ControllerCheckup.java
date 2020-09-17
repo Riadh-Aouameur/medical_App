@@ -171,7 +171,7 @@ public class ControllerCheckup implements Initializable {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
+                    text.clear();
                 System.out.println("work....");
             }else {
 
@@ -184,6 +184,12 @@ public class ControllerCheckup implements Initializable {
 
 
 
+        }else {
+            Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
+            alert2.setContentText("Document is Empty");
+            alert2.setTitle("");
+            alert2.setHeaderText("");
+            alert2.showAndWait();
         }
     }
 }

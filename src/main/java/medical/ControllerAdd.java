@@ -3,6 +3,7 @@ package medical;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -14,11 +15,7 @@ import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 
-
-
-
-
-public class newPatient implements Initializable {
+public class ControllerAdd implements Initializable {
 
     public TextField phone;
     public ToggleGroup group;
@@ -40,17 +37,14 @@ public class newPatient implements Initializable {
     String iLastName = null;
     LocalDate iBirthday = null;
     String iPhone =" ";
-    String iChildren="0" ;
+    String iChildren="-1" ;
     String iMarritalStatus ="";
     String iProfession ="";
     Patient patient;
-APatientForWaitingRoom aPatientForWaitingRoom;
+    ObservableList<Patient> observableList = FXCollections.observableArrayList();
 
-    public newPatient(APatientForWaitingRoom aPatientForWaitingRoom) {
-        this.aPatientForWaitingRoom = aPatientForWaitingRoom;
-    }
-    public newPatient() {
-        this.aPatientForWaitingRoom = null;
+    public ControllerAdd(ObservableList<Patient> observableList) {
+        this.observableList = observableList;
     }
 
     @Override
@@ -58,27 +52,10 @@ APatientForWaitingRoom aPatientForWaitingRoom;
         marritalStatus.setItems(FXCollections.observableArrayList("Single","Married","Divorced","Widowed"));
         marritalStatus.setCellFactory(param -> new MyListCell());
         marritalStatus.setButtonCell(new MyListCell());
-
         children.setItems(FXCollections.observableArrayList("0","1","2","3","4","5","More"));
         children.setCellFactory(param -> new MyListCell());
         children.setButtonCell(new MyListCell());
-        if(!(aPatientForWaitingRoom==null)){
-            firstName.setText(aPatientForWaitingRoom.getFirstName());
-            lastName.setText(aPatientForWaitingRoom.getLastName());
-            phone.setText(aPatientForWaitingRoom.getPhone());
-            if(aPatientForWaitingRoom.getGender().equals("Female")){
-
-                ife.fire();
-            }else {
-                ima.fire();
-            }
-        }else{
-
-
-            ima.fire();
-
-
-        }
+        ima.fire();
         group = new ToggleGroup();
         ife.setToggleGroup(group);
         ima.setToggleGroup(group);
@@ -126,6 +103,7 @@ APatientForWaitingRoom aPatientForWaitingRoom;
             patient = new Patient(iLastName,iFirstName,Integer.parseInt(iChildren),iBirthday,gender,iProfession,iPhone,iMarritalStatus,"Active");
             Db db = new Db();
             db.InsertPatientData(patient);
+            observableList.add(patient);
 
              iFirstName = null;
             iLastName = null;

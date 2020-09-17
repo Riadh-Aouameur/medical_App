@@ -12,9 +12,9 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -154,8 +154,6 @@ public class WorkPage  implements Initializable {
 
         wattingRoom.setText("Watting Room");
         appointment.setText("Appointment");
-        Patients.listPatient.add(new Patient(14,"aouameur","riadh",
-                LocalDate.now(),"male"));
 
 
         tabpane.setTabClosingPolicy(TabPane.TabClosingPolicy.SELECTED_TAB);
@@ -170,14 +168,6 @@ public class WorkPage  implements Initializable {
     }
 
 
-    public void onCreateNewPatient(ActionEvent actionEvent) throws IOException {
-
-        AnchorPane root = FXMLLoader.load(getClass().getResource("createPatient.fxml"));
-        Stage primaryStage = new Stage();
-        Scene scene = new Scene(root);
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
 
 
 
@@ -189,62 +179,7 @@ public class WorkPage  implements Initializable {
 
         tabpane.getTabs().add(appointementTab);
         tabpane.getSelectionModel().select(appointementTab);
-        //TODO
 
-
-
-//        TextField filterInput = new TextField();
-//        VBox vBox = new VBox();
-//        TableView tableView = new TableView();
-//        ObservableList<PatientForAppointement> observableList = FXCollections.observableArrayList(
-//                new PatientForAppointement(5,"riadh","aouameur",LocalDate.now(),LocalDate.now()),
-//                new PatientForAppointement(6,"samir","benhami",LocalDate.now(),LocalDate.now()),
-//                new PatientForAppointement(7,"mohamed","aouameur",LocalDate.now(),LocalDate.now())
-//
-//        );
-//
-//
-//        TableColumn<PatientForAppointement, String> col_1firstName = new TableColumn<>("First Name");
-//        TableColumn<PatientForAppointement, String> col_1lastName = new TableColumn<>("Last Name");
-//        TableColumn<PatientForAppointement, String> col_1date = new TableColumn<>("Appointment Date");
-//        TableColumn<PatientForAppointement, String> col_1Id = new TableColumn<>("ID");
-//        TableColumn<PatientForAppointement, String> col_1today = new TableColumn<>("Today Date");
-//        col_1firstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
-//        col_1lastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
-//        col_1date.setCellValueFactory(new PropertyValueFactory<>("appointmentdate"));
-//        col_1Id.setCellValueFactory(new PropertyValueFactory<>("id"));
-//        col_1today.setCellValueFactory(new PropertyValueFactory<>("todaydate"));
-//
-//        tableView.getColumns().setAll(col_1Id, col_1firstName, col_1lastName, col_1today, col_1date);
-//        tableView.setItems(observableList);
-//        vBox.getChildren().setAll(filterInput, tableView);
-//        appointment.setContent(vBox);
-//        tabpane.getTabs().add(appointment);
-//        tabpane.getSelectionModel().select(appointment);
-//
-//
-//        FilteredList<PatientForAppointement> filteredData = new FilteredList<>(observableList, s -> true);
-//
-//
-//        filterInput.textProperty().addListener((obs, oldValue, newValue) -> {
-//            filteredData.setPredicate(patientForAppointement -> {
-//                if (newValue == null || newValue.isEmpty()) {
-//                    return true;
-//                }
-//                String filter = newValue.toLowerCase();
-//                if (patientForAppointement.getFirstName().toLowerCase().indexOf(filter) != -1) {
-//                    return true;
-//                } else if (patientForAppointement.getLastName().toLowerCase().indexOf(filter) != -1) {
-//                    return true;
-//                } else {
-//                    return false;
-//                }
-//
-//            });
-//        });
-//        SortedList<PatientForAppointement> sortedLis = new SortedList<>(filteredData);
-//        sortedLis.comparatorProperty().bind(tableView.comparatorProperty());
-//        tableView.setItems(sortedLis);
     }
 
 
@@ -267,13 +202,12 @@ public class WorkPage  implements Initializable {
 
             @Override
             public void handle(MouseEvent event) {
-                System.out.println("clicked on " + searchList.getSelectionModel().getSelectedItem());
-
-                 listPatient.observableList.add(searchList.getSelectionModel().getSelectedItem());
-                 paneSearch.setVisible(false);
-
-                search.setText(searchList.getSelectionModel().getSelectedItem().getFirstName()+" "+searchList.getSelectionModel().getSelectedItem().getLastName());
-
+                Patient patient =searchList.getSelectionModel().getSelectedItem();
+                if(patient!=null){
+                    listPatient.observableList.add(patient);
+                    paneSearch.setVisible(false);
+                    search.setText(searchList.getSelectionModel().getSelectedItem().getFirstName()+" "+searchList.getSelectionModel().getSelectedItem().getLastName());
+                }
             }
         });
         paneSearch.setVisible(true);
@@ -308,7 +242,7 @@ public class WorkPage  implements Initializable {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("history.fxml"));
         loader.setControllerFactory(e->{
-            return new ControllerHistory(new Patient(1,"Riadh","Aouameur",LocalDate.now(),"female"));
+            return new ControllerHistory(new Patient());
         });
 
         Stage stage =   new Stage();
@@ -388,6 +322,8 @@ public class WorkPage  implements Initializable {
 
                         stage.setScene(new Scene( loader.load()));
                         stage.setTitle("Medical Analysis");
+                        stage.initStyle(StageStyle.UTILITY);
+
                         Image icon = new Image(getClass().getResourceAsStream("img/health.png"));
                         stage.getIcons().add(icon);
 
@@ -421,18 +357,12 @@ public class WorkPage  implements Initializable {
     }
 
     public void OnOpenListOfAllPatients(ActionEvent actionEvent) throws IOException {
+        Stage  primaryStage = new Stage();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Patients.fxml"));
+        Parent root = loader.load();
+        primaryStage.setScene(new Scene(root));
 
-        tabpane.getTabs().add(patientsTab);
-        tabpane.getSelectionModel().select(patientsTab);
-        ObservableList<Patient> observableList =  FXCollections.observableArrayList();
-
-        observableList.addAll(db.getPatientData());
-        columnId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        columnFirstName.setCellValueFactory(new PropertyValueFactory<>("firstName"));
-        columnLastName.setCellValueFactory(new PropertyValueFactory<>("lastName"));
-        columnGander.setCellValueFactory(new PropertyValueFactory<>("gender"));
-        columnBirthday.setCellValueFactory(new PropertyValueFactory<>("birthday"));
-        table.setItems(observableList);
+        primaryStage.show();
 
 
 
@@ -490,7 +420,8 @@ public class WorkPage  implements Initializable {
             Stage stage =   new Stage();
                     try {
                         stage.setScene(new Scene(loader.load()));
-                        stage.setTitle("ControllerPrescription");
+                        stage.setTitle("Prescription");
+                        stage.initStyle(StageStyle.UTILITY);
                         Image icon = new Image(getClass().getResourceAsStream("img/prescription.png"));
                         stage.getIcons().add(icon);
                     } catch (IOException e) {
@@ -565,8 +496,8 @@ public class WorkPage  implements Initializable {
                     try {
                         VBox vBox = loader1.load();
                         stage.setScene(new Scene(vBox));
-                        stage.setMaximized(true);
-                        stage.setTitle("ControllerConsultation");
+                        stage.setTitle("Consultation");
+                        stage.initStyle(StageStyle.UTILITY);
                         Image icon = new Image(getClass().getResourceAsStream("img/consultation.png"));
                         stage.getIcons().add(icon);
                     } catch (IOException e) {
@@ -663,7 +594,7 @@ public class WorkPage  implements Initializable {
                     try {
                         VBox vBox = loader1.load();
                         stage.setScene(new Scene(vBox));
-                        stage.setMaximized(true);
+                        stage.initStyle(StageStyle.UTILITY);
                         stage.setTitle("ControllerConsultation");
                         Image icon = new Image(getClass().getResourceAsStream("img/consultation.png"));
                         stage.getIcons().add(icon);
@@ -708,10 +639,12 @@ public class WorkPage  implements Initializable {
 
         Stage stage =   new Stage();
         try {
+            ;
             stage.setScene(new Scene(loader.load()));
             stage.setTitle("ControllerPrescription");
             Image icon = new Image(getClass().getResourceAsStream("img/prescription.png"));
             stage.getIcons().add(icon);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -769,6 +702,7 @@ public class WorkPage  implements Initializable {
             stage.setTitle("Medical Analysis");
             Image icon = new Image(getClass().getResourceAsStream("img/health.png"));
             stage.getIcons().add(icon);
+            stage.initStyle(StageStyle.TRANSPARENT);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -966,6 +900,25 @@ public class WorkPage  implements Initializable {
 
     public void onMouseClicked(MouseEvent mouseEvent) {
         paneSearch.setVisible(false);
+    }
+
+
+    public void onOpenAbout(ActionEvent actionEvent) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("about.fxml"));
+
+
+        Stage stage =   new Stage();
+        try {
+            stage.setScene(new Scene(loader.load()));
+
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        stage.setTitle("About");
+        stage.show();
+
     }
 }
 
