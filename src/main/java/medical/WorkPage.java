@@ -49,7 +49,7 @@ public class WorkPage  implements Initializable {
     public TextField fDate;
     public TextField fProfession;
     public TextField fChildren;
-    public ComboBox <String> fMaritalStatus;
+    public TextField fMaritalStatus;
 
 
     public Tab appointementTab;
@@ -262,6 +262,7 @@ public class WorkPage  implements Initializable {
 
 
         ListView <Patient> litView = new ListView<>();
+        litView.getStylesheets().add("Css/listView.css");
         litView.setCellFactory(    param -> new ListCell<Patient>() {
             @Override
             protected void updateItem(Patient item, boolean empty) {
@@ -327,19 +328,6 @@ public class WorkPage  implements Initializable {
             }
         });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     }
 
     public void OnOpenListOfAllPatients(ActionEvent actionEvent) throws IOException {
@@ -368,6 +356,7 @@ public class WorkPage  implements Initializable {
 
     
         ListView <Patient> litView = new ListView<>();
+        litView.getStylesheets().add("Css/listView.css");
          litView.setCellFactory(    param -> new ListCell<Patient>() {
              @Override
              protected void updateItem(Patient item, boolean empty) {
@@ -448,6 +437,7 @@ public class WorkPage  implements Initializable {
 
 
         ListView <Patient> litView = new ListView<>();
+        litView.getStylesheets().add("Css/listView.css");
         litView.setCellFactory(    param -> new ListCell<Patient>() {
             @Override
             protected void updateItem(Patient item, boolean empty) {
@@ -572,6 +562,7 @@ public class WorkPage  implements Initializable {
 
 
         ListView <Patient> litView = new ListView<>();
+        litView.getStylesheets().add("Css/listView.css");
         litView.setCellFactory(    param -> new ListCell<Patient>() {
             @Override
             protected void updateItem(Patient item, boolean empty) {
@@ -654,6 +645,7 @@ public class WorkPage  implements Initializable {
 
 
         ListView <Patient> litView = new ListView<>();
+        litView.getStylesheets().add("Css/listView.css");
         litView.setCellFactory(    param -> new ListCell<Patient>() {
             @Override
             protected void updateItem(Patient item, boolean empty) {
@@ -703,6 +695,11 @@ public class WorkPage  implements Initializable {
                     fAge.setText(i+"");
                     DateTimeFormatter formatter =DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL);
                     fDate.setText(formatter.format(LocalDate.now()));
+                    fPhone.setText(patient.getPhone());
+                    fMaritalStatus.setText(patient.getMarritalStatus());
+                    fProfession.setText(patient.getProfession());
+                    fChildren.setText(String.valueOf(patient.getChildren()));
+
 
 
 
