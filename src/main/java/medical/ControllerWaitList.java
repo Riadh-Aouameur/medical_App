@@ -32,6 +32,12 @@ public class ControllerWaitList implements Initializable {
         if (patientForWaitingRoom.getStatus().equals("Waiting")){
             Image imProfile = new Image(getClass().getResourceAsStream("img/dot2.png"));
             iStatus.setImage(imProfile);
+        }else if (patientForWaitingRoom.getStatus().equals("Consult")){
+            Image imProfile = new Image(getClass().getResourceAsStream("img/dot3.png"));
+            iStatus.setImage(imProfile);
+        }else {
+            Image imProfile = new Image(getClass().getResourceAsStream("img/dot.png"));
+            iStatus.setImage(imProfile);
         }
 
 

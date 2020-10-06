@@ -6,6 +6,8 @@ import javafx.scene.control.TextArea;
 import medical.DataBase.Db;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 
 public class ControllerH2 implements Initializable {
@@ -34,7 +36,21 @@ public class ControllerH2 implements Initializable {
 
         Db db = new Db() ;
         DoctorInformation doctorInformation = db.getDoctor(document.getDoctorID());
-        t1.setText(doctorInformation.getFirstName());
+        t1.setText("Dr."+doctorInformation.getFirstName()+" "+doctorInformation.getLastName());
+        t2.setText(doctorInformation.getSpecialty().toUpperCase());
+        t3.setText("Address : "+doctorInformation.getAddress());
+        t4.setText("Phone : "+doctorInformation.getEmailOrPhone());
+        Patient patient = db.getPatient(document.getPatientID());
+        i1.setText("Date : "+document.getDate().toString());
+        i2.setText("ID : "+patient.getId());
+        i3.setText("Patient : "+patient.getFirstName()+" "+patient.getLastName());
+        LocalDate b= (LocalDate) patient.getBirthday();
+        Calendar c =Calendar.getInstance();
+        int i =c.get(Calendar.YEAR)-b.getYear();
+        i4.setText("Age : "+i);
+        type.setText(document.getType().toUpperCase());
+        content.setText(document.getContent());
+
 
 
 

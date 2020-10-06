@@ -8,6 +8,8 @@ import javafx.scene.control.ListView;
 import medical.DataBase.Db;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.util.Calendar;
 import java.util.ResourceBundle;
 
 public class ControllerH1 implements Initializable {
@@ -35,7 +37,22 @@ public class ControllerH1 implements Initializable {
         list.setCellFactory(p->new MyListCell_10());
         Db db = new Db() ;
         DoctorInformation doctorInformation = db.getDoctor(prescription.getDoctorID());
-        t1.setText(doctorInformation.getFirstName());
+        t1.setText("Dr."+doctorInformation.getFirstName()+" "+doctorInformation.getLastName());
+        t2.setText(doctorInformation.getSpecialty().toUpperCase());
+        t3.setText("Address : "+doctorInformation.getAddress());
+        t4.setText("Phone : "+doctorInformation.getEmailOrPhone());
+        Patient patient = db.getPatient(prescription.getPatientID());
+        i1.setText("Date : "+prescription.getDate().toString());
+        i2.setText("ID : "+patient.getId());
+        i3.setText("Patient : "+patient.getFirstName()+" "+patient.getLastName());
+
+        LocalDate b= (LocalDate) patient.getBirthday();
+        Calendar c =Calendar.getInstance();
+        int i =c.get(Calendar.YEAR)-b.getYear();
+        i4.setText("Age : "+i);
+
+
+
 
 
 

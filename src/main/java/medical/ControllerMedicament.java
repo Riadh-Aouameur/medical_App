@@ -1,16 +1,9 @@
 package medical;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import medical.Medicament;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,6 +16,8 @@ public class ControllerMedicament implements Initializable {
     Label l2;
     @FXML
     Label l3;
+    @FXML
+    Label l4;
 
  AnchorPane root;
 
@@ -41,6 +36,7 @@ this.medicament = medicament;
     public void initialize(URL url, ResourceBundle resourceBundle) {
         l1.setText(medicament.getNameMedicament());
         l3.setText("QSP : "+medicament.getQsp());
+        l4.setText("Number : "+medicament.getEntityNumber());
         l2.setText("Dosage : "+medicament.getDosage());
 
     }

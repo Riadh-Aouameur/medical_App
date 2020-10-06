@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="321.0" prefWidth="658.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="medical.ControllerDelete">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="321.0" prefWidth="658.0" style="-fx-background-color: #fff; -fx-border-color: #2d4059;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="medical.ControllerDDelete">
    <children>
       <AnchorPane prefHeight="66.0" prefWidth="658.0" style="-fx-background-color: #2d4059;">
          <children>
@@ -39,11 +39,6 @@
             <Font name="Arial Rounded MT Bold" size="17.0" />
          </font>
       </JFXButton>
-      <Label fx:id="text" layoutX="56.0" layoutY="259.0" prefHeight="33.0" prefWidth="216.0" text="Deleted" textFill="#37d129" visible="false">
-         <font>
-            <Font name="Arial Rounded MT Bold" size="28.0" />
-         </font>
-      </Label>
       <ImageView fx:id="img" fitHeight="77.0" fitWidth="72.0" layoutX="54.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/alert.png" />
@@ -59,7 +54,7 @@
             <Font name="Arial Rounded MT Bold" size="13.0" />
          </font>
       </Label>
-      <Label fx:id="fStats" layoutX="371.0" layoutY="146.0" prefHeight="27.0" prefWidth="182.0" text="Status :    ">
+      <Label fx:id="fStats" layoutX="358.0" layoutY="146.0" prefHeight="27.0" prefWidth="229.0" text="Status :    ">
          <font>
             <Font name="Arial Rounded MT Bold" size="13.0" />
          </font>
@@ -70,16 +65,24 @@
             <Font name="Arial Rounded MT Bold" size="17.0" />
          </font>
       </JFXButton>
-      <Label fx:id="lab1" layoutX="140.0" layoutY="262.0" prefHeight="17.0" prefWidth="207.0" text="Label" />
       <Label fx:id="fDateOne" layoutX="154.0" layoutY="173.0" prefHeight="27.0" prefWidth="182.0" text="Day">
          <font>
             <Font name="Arial Rounded MT Bold" size="13.0" />
          </font>
       </Label>
-      <Label fx:id="fDateTwo" layoutX="371.0" layoutY="173.0" prefHeight="27.0" prefWidth="182.0" text="Appointment Day : ">
+      <Label fx:id="fDateTwo" layoutX="358.0" layoutY="173.0" prefHeight="27.0" prefWidth="271.0" text="Appointment Day : ">
          <font>
             <Font name="Arial Rounded MT Bold" size="13.0" />
          </font>
       </Label>
+      <AnchorPane fx:id="paneMassage" layoutX="33.0" layoutY="260.0" prefHeight="31.0" prefWidth="444.0" style="-fx-background-color: red; -fx-background-radius: 10;" visible="false">
+         <children>
+            <Label fx:id="message" layoutX="14.0" layoutY="8.0" prefHeight="17.0" prefWidth="415.0" text="Label" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="13.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

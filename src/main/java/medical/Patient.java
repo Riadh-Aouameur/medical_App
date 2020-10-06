@@ -11,7 +11,7 @@ public class Patient {
     private SimpleStringProperty lastName;
     private SimpleStringProperty firstName;
     private SimpleObjectProperty birthday;
-    private  SimpleStringProperty gender;
+    private  SimpleStringProperty gender ;
     private  SimpleStringProperty profession ;
     private  SimpleStringProperty phone ;
     private  SimpleStringProperty marritalStatus ;
@@ -23,7 +23,7 @@ public class Patient {
         this.lastName = new SimpleStringProperty(lastName);
         this.firstName = new SimpleStringProperty(firstName);
         this.birthday = new SimpleObjectProperty(birthday);
-        this.gender = new SimpleStringProperty(gender);
+       this.gender = new SimpleStringProperty(gender);
         this.profession = new SimpleStringProperty( profession);
         this.phone = new SimpleStringProperty(phone);
         this.marritalStatus = new SimpleStringProperty(marritalStatus);
@@ -41,6 +41,18 @@ public class Patient {
         this.phone = new SimpleStringProperty(phone);
         this.marritalStatus = new SimpleStringProperty(marritalStatus);
         this.status = new SimpleStringProperty(status);
+    }
+
+    public String getGender() {
+        return gender.get();
+    }
+
+    public SimpleStringProperty genderProperty() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender.set(gender);
     }
 
     public Patient() {
@@ -146,6 +158,8 @@ public class Patient {
         return birthday.get();
     }
 
+
+
     public void setBirthday(Object birthday) {
         this.birthday.set(birthday);
     }
@@ -154,17 +168,7 @@ public class Patient {
         return birthday;
     }
 
-    public String getGender() {
-        return gender.get();
-    }
 
-    public void setGender(String gender) {
-        this.gender.set(gender);
-    }
-
-    public SimpleStringProperty genderProperty() {
-        return gender;
-    }
 
 
 

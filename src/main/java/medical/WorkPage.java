@@ -50,18 +50,7 @@ public class WorkPage  implements Initializable {
     public TextField fProfession;
     public TextField fChildren;
     public ComboBox <String> fMaritalStatus;
-    @FXML
-    TableView <Patient>table;
-    @FXML
-    TableColumn <Patient, String>  columnId;
-    @FXML
-    TableColumn <Patient, String> columnFirstName;
-    @FXML
-    TableColumn <Patient, String> columnLastName;
-    @FXML
-    TableColumn <Patient, String>  columnGander;
-    @FXML
-    TableColumn<Patient, String> columnBirthday;
+
 
     public Tab appointementTab;
     public Tab patientsTab;
@@ -102,7 +91,8 @@ public class WorkPage  implements Initializable {
 
         dr.setText("Dr."+DoctorInformationSingle.getInstance(0).getFirstName());
         if(DoctorInformationSingle.getInstance(0).getGender().equals("Female")) {
-            Image imProfile = new Image(getClass().getResourceAsStream("img/femalepatient.png"));
+            //Todo change image
+            Image imProfile = new Image(getClass().getResourceAsStream("img/d2.png"));
             drg.setImage(imProfile);
         }
 
@@ -110,7 +100,7 @@ public class WorkPage  implements Initializable {
             tabpane.getTabs().remove(appointementTab);
         tabpane.getTabs().remove(patientsTab);
         tabpane.getTabs().remove(medicalRecordTab);
-        observableList.addAll(db.getPatientData());
+
         try {
 
             FXMLLoader loader = new FXMLLoader(getClass().getResource("rghitdrawer.fxml"));
@@ -174,30 +164,26 @@ public class WorkPage  implements Initializable {
 
 
 
+    Stage primary ;
+    public void onAppointment(ActionEvent actionEvent) throws IOException {
 
-    public void onAppointment(ActionEvent actionEvent) {
-
-        tabpane.getTabs().add(appointementTab);
-        tabpane.getSelectionModel().select(appointementTab);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("appointment.fxml"));
+        primary = new Stage();
+        primary.initStyle(StageStyle.UTILITY);
+        Image icon = new Image(getClass().getResourceAsStream("img/appointment.png"));
+        primary.getIcons().add(icon);
+        primary.setTitle("Appointment");
+        primary.setScene(new Scene(loader.load()));
+        primary.show();
 
     }
 
 
 
     public void onClicked(MouseEvent mouseEvent) {
+        observableList.addAll(db.getPatientData());
+        searchList.setCellFactory(param -> new MyListCell_18());
 
-        searchList.setCellFactory(param -> new ListCell<Patient>() {
-            @Override
-            protected void updateItem(Patient item, boolean empty) {
-                super.updateItem(item, empty);
-
-                if (empty || item == null || item.getFirstName()+item.getLastName() == null) {
-                    setText(null);
-                } else {
-                    setText(item.getFirstName()+" "+item.getLastName());
-                }
-            }
-        });
         searchList.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
             @Override
@@ -361,6 +347,10 @@ public class WorkPage  implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Patients.fxml"));
         Parent root = loader.load();
         primaryStage.setScene(new Scene(root));
+        primaryStage.initStyle(StageStyle.UTILITY);
+        primaryStage.setTitle("Patients");
+        Image icon = new Image(getClass().getResourceAsStream("img/patients.png"));
+        primaryStage.getIcons().add(icon);
 
         primaryStage.show();
 
@@ -426,6 +416,11 @@ public class WorkPage  implements Initializable {
                         stage.getIcons().add(icon);
                     } catch (IOException e) {
                         e.printStackTrace();
+                        Alert alert2 = new Alert(Alert.AlertType.ERROR);
+                        alert2.setContentText(e.getMessage());
+                        alert2.setTitle("ERROR");
+                        alert2.setHeaderText("");
+                        alert2.showAndWait();
                     }
                     stage.show();
                     stage1.close();
@@ -501,6 +496,11 @@ public class WorkPage  implements Initializable {
                         Image icon = new Image(getClass().getResourceAsStream("img/consultation.png"));
                         stage.getIcons().add(icon);
                     } catch (IOException e) {
+                        Alert alert2 = new Alert(Alert.AlertType.ERROR);
+                        alert2.setContentText(e.getMessage());
+                        alert2.setTitle("ERROR");
+                        alert2.setHeaderText("");
+                        alert2.showAndWait();
                         e.printStackTrace();
                     }
                     stage.show();
@@ -530,18 +530,39 @@ public class WorkPage  implements Initializable {
     }
 
 
-    public void onCalculater(ActionEvent actionEvent) throws IOException {
+    public void onCalculater(ActionEvent actionEvent)  {
+        try {
         String params ;
         params = "C:\\Windows\\System32\\calc.exe";
 
-        Runtime.getRuntime().exec(params);
+
+            Runtime.getRuntime().exec(params);
+        } catch (IOException e) {
+            e.printStackTrace();
+            Alert alert2 = new Alert(Alert.AlertType.ERROR);
+            alert2.setContentText(e.getMessage());
+            alert2.setTitle("ERROR");
+            alert2.setHeaderText("");
+            alert2.showAndWait();
+        }
     }
 
-    public void onOpenNotes(ActionEvent actionEvent) throws IOException {
+    public void onOpenNotes(ActionEvent actionEvent) {
+        try {
         String params ;
         params = "C:\\Program Files\\Notes 0.9.0\\Notes.exe";
 
-        Runtime.getRuntime().exec(params);
+
+            Runtime.getRuntime().exec(params);
+        } catch (IOException e) {
+            e.printStackTrace();
+
+            Alert alert2 = new Alert(Alert.AlertType.ERROR);
+            alert2.setContentText(e.getMessage());
+            alert2.setTitle("ERROR");
+            alert2.setHeaderText("");
+            alert2.showAndWait();
+        }
 
     }
 
@@ -622,96 +643,10 @@ public class WorkPage  implements Initializable {
 
     }
 
-    public void onOpenPrescriptionMenu(ActionEvent actionEvent) {
-        if(table.getSelectionModel().getSelectedItem()==null){
-            Alert alert= new Alert(Alert.AlertType.ERROR,"No patient selected ");
-            alert.show();
-            return;
-        }
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("ord.fxml"));
-
-        loader.setControllerFactory(e->{
-
-            return new ControllerPrescription(table.getSelectionModel().getSelectedItem());
-        });
-
-
-        Stage stage =   new Stage();
-        try {
-            ;
-            stage.setScene(new Scene(loader.load()));
-            stage.setTitle("ControllerPrescription");
-            Image icon = new Image(getClass().getResourceAsStream("img/prescription.png"));
-            stage.getIcons().add(icon);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        stage.show();
 
 
 
-
-    }
-
-    public void onOpenConsultationMenu(ActionEvent actionEvent) {
-        if(table.getSelectionModel().getSelectedItem()==null){
-            Alert alert= new Alert(Alert.AlertType.ERROR,"No patient selected ");
-            alert.show();
-            return;
-        }
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("fconsultation.fxml"));
-        loader.setControllerFactory(e->{
-            return new ControllerConsultation(table.getSelectionModel().getSelectedItem());
-        });
-
-        Stage stage =   new Stage();
-        try {
-            stage.setScene(new Scene(loader.load()));
-            stage.setTitle("ControllerConsultation");
-            Image icon = new Image(getClass().getResourceAsStream("img/consultation.png"));
-            stage.getIcons().add(icon);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        stage.show();
-
-
-    }
-    public void onMedicalAnalysisMenu(ActionEvent actionEvent) {
-
-        if(table.getSelectionModel().getSelectedItem()==null){
-            Alert alert= new Alert(Alert.AlertType.ERROR,"No patient selected ");
-            alert.show();
-            return;
-        }
-
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("checkup.fxml"));
-        loader.setControllerFactory(e->{
-
-
-            return new ControllerCheckup(table.getSelectionModel().getSelectedItem());
-
-        });
-
-        Stage stage =   new Stage();
-        try {
-            stage.setScene(new Scene(loader.load()));
-            stage.setTitle("Medical Analysis");
-            Image icon = new Image(getClass().getResourceAsStream("img/health.png"));
-            stage.getIcons().add(icon);
-            stage.initStyle(StageStyle.TRANSPARENT);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        stage.show();
-
-
-
-
-    }
+//TODO eRRor hear
     Patient patient;
     public void onOpenMedicalRecord(ActionEvent actionEvent) {
 
@@ -777,7 +712,7 @@ public class WorkPage  implements Initializable {
                     tabpane.getSelectionModel().select(medicalRecordTab);
 
 
-
+                    stage1.close();
 
                 }
             }
@@ -807,6 +742,10 @@ public class WorkPage  implements Initializable {
         });
 
         Stage stage =   new Stage();
+        stage.setTitle("Prescription");
+        Image icon = new Image(getClass().getResourceAsStream("img/prescription.png"));
+        stage.getIcons().add(icon);
+        stage.initStyle(StageStyle.UTILITY);
         try {
             stage.setScene(new Scene(loader.load()));
 
@@ -829,21 +768,30 @@ public class WorkPage  implements Initializable {
             Runtime.getRuntime().exec(params);
         } catch (IOException e) {
             e.printStackTrace();
+            Alert alert2 = new Alert(Alert.AlertType.ERROR);
+            alert2.setContentText(e.getMessage());
+            alert2.setTitle("ERROR");
+            alert2.setHeaderText("");
+            alert2.showAndWait();
 
         }
     }
 
     public void onOpenHistoryOfConsultation(ActionEvent actionEvent) {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("history1.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("hc.fxml"));
         loader.setControllerFactory(e->{
 
 
-            return new ControllerHistory1(patient);
+            return new ControllerHistoryConsultation(patient);
 
         });
 
         Stage stage =   new Stage();
+        stage.setTitle("Consultation");
+        stage.initStyle(StageStyle.TRANSPARENT);
+        Image icon = new Image(getClass().getResourceAsStream("img/consultation.png"));
+        stage.getIcons().add(icon);
         try {
             stage.setScene(new Scene(loader.load()));
 
@@ -851,6 +799,11 @@ public class WorkPage  implements Initializable {
 
         } catch (IOException e) {
             e.printStackTrace();
+            Alert alert2 = new Alert(Alert.AlertType.ERROR);
+            alert2.setContentText(e.getMessage());
+            alert2.setTitle("ERROR");
+            alert2.setHeaderText("");
+            alert2.showAndWait();
         }
         stage.show();
 
@@ -866,6 +819,10 @@ public class WorkPage  implements Initializable {
         });
 
         Stage stage =   new Stage();
+        stage.setTitle("Documents");
+        Image icon = new Image(getClass().getResourceAsStream("img/doc.png"));
+        stage.getIcons().add(icon);
+        stage.initStyle(StageStyle.UTILITY);
         try {
             stage.setScene(new Scene(loader.load()));
 
@@ -873,6 +830,11 @@ public class WorkPage  implements Initializable {
 
         } catch (IOException e) {
             e.printStackTrace();
+            Alert alert2 = new Alert(Alert.AlertType.ERROR);
+            alert2.setContentText(e.getMessage());
+            alert2.setTitle("ERROR");
+            alert2.setHeaderText("");
+            alert2.showAndWait();
         }
         stage.show();
     }
@@ -887,6 +849,10 @@ public class WorkPage  implements Initializable {
         });
 
         Stage stage =   new Stage();
+        stage.setTitle("Medical Analysis");
+        stage.initStyle(StageStyle.UTILITY);
+        Image icon = new Image(getClass().getResourceAsStream("img/health.png"));
+        stage.getIcons().add(icon);
         try {
             stage.setScene(new Scene(loader.load()));
 
@@ -894,6 +860,11 @@ public class WorkPage  implements Initializable {
 
         } catch (IOException e) {
             e.printStackTrace();
+            Alert alert2 = new Alert(Alert.AlertType.ERROR);
+            alert2.setContentText(e.getMessage());
+            alert2.setTitle("ERROR");
+            alert2.setHeaderText("");
+            alert2.showAndWait();
         }
         stage.show();
     }
@@ -915,6 +886,11 @@ public class WorkPage  implements Initializable {
 
         } catch (IOException e) {
             e.printStackTrace();
+            Alert alert2 = new Alert(Alert.AlertType.ERROR);
+            alert2.setContentText(e.getMessage());
+            alert2.setTitle("ERROR");
+            alert2.setHeaderText("");
+            alert2.showAndWait();
         }
         stage.setTitle("About");
         stage.show();
@@ -927,6 +903,7 @@ public class WorkPage  implements Initializable {
 //        2 - Widowed (including living common law) ...
 //        3 - Separated (including living common law) ...
 //        4 - Divorced (including living common law) ...
-//        5 - Single (including living common law
+//   Piggy bank
+//paying off     5 - Single (including living common law
 
 

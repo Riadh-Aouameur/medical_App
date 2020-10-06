@@ -123,9 +123,6 @@
 	<group name="patientID">
 		<groupExpression><![CDATA[$F{patientID}]]></groupExpression>
 	</group>
-	<background>
-		<band splitType="Stretch"/>
-	</background>
 	<title>
 		<band height="90" splitType="Stretch">
 			<textField>
@@ -265,21 +262,20 @@
 		</band>
 	</detail>
 	<summary>
-		<band height="42" splitType="Stretch">
+		<band height="70" splitType="Stretch">
 			<line>
 				<reportElement x="-22" y="2" width="600" height="1" uuid="d3df6087-5e18-43ed-8479-d6fe40016da1"/>
 			</line>
-			<textField isBlankWhenNull="true">
-				<reportElement x="450" y="10" width="120" height="10" uuid="c24e7ebe-c59b-4a8f-9aad-09f549ee51a8">
+			<textField>
+				<reportElement x="20" y="20" width="470" height="30" uuid="9356bfcc-42ce-4079-a692-70449904bf45">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
-				<textElement textAlignment="Right" markup="none">
-					<font fontName="Arial Rounded MT Bold" size="7"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="Arial Rounded MT Bold" size="16"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Document ID : "+$F{prescriptionID}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["The wich for healing has always been half of health"]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>
 </jasperReport>
-

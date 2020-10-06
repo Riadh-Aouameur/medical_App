@@ -6,8 +6,6 @@ import javafx.scene.control.ListCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import medical.Medicament;
-import medical.ControllerMedicament;
 
 import java.io.IOException;
 
@@ -28,21 +26,17 @@ import java.io.IOException;
             HBox Box =new HBox();
             Button btn = new Button();
             btn.getStylesheets().add("Css/button1.css");
-            Button btn1 = new Button();
-            btn1.getStylesheets().add("Css/button1.css");
+
 
             btn.setOnAction(e->getListView().getItems().remove(item));
 
 
             Image image = new Image("medical/img/delete.png", 35, 35, false, false);
             btn.setGraphic(new ImageView(image));
-            Image image1 = new Image("medical/img/plss.png", 35, 35, false, false);
-            btn1.setGraphic(new ImageView(image1));
-
 
 
             try {
-                Box.getChildren().addAll(loader.load(),btn1,btn);
+                Box.getChildren().addAll(loader.load(),btn);
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -19,7 +19,7 @@ public class MyListCell extends ListCell<String> {
             imageView.setFitWidth(25);
             Label label =new Label(item);
             label.setStyle("-fx-text-fill: #fff;");
-            setGraphic(new HBox(imageView));
+            setGraphic(new HBox(imageView,label));
         }
 
         setText("");

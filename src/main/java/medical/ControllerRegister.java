@@ -16,6 +16,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -66,6 +67,8 @@ public class ControllerRegister  implements Initializable {
     public TextField tLastName;
     public TextField tFirsstName;
     BorderPane root;
+    private double x;
+    private double y;
 
 
 
@@ -77,12 +80,21 @@ public class ControllerRegister  implements Initializable {
     String emailOrPhone ;
     String pass ;
     String cpass ;
-    String idOfApproval ;
+
     String gender = "Male";
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        anchorPaneRoot.setOnMousePressed(mouseEvent -> {
+            x=mouseEvent.getSceneX();
+            y=mouseEvent.getSceneY();
+        });
+        anchorPaneRoot.setOnMouseDragged(e->{
+            Stage stage = (Stage) anchorPaneRoot.getScene().getWindow();
+            stage.setX(e.getScreenX()-x);
+            stage.setY(e.getScreenY()-y);
+        });
         iEmailOrPhone.lengthProperty().addListener(new ChangeListener<Number>() {
 
             @Override
@@ -274,6 +286,25 @@ public class ControllerRegister  implements Initializable {
 
             }
         });
+        Db db = new Db();
+        String  licenses= db.getLicenses();
+        iIdOfApproval.addEventFilter(KeyEvent.KEY_TYPED, new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                String character=event.getCharacter();
+
+                System.out.println(character);
+
+                iIdOfApproval.setText(iIdOfApproval.getText()+character);
+                iIdOfApproval.positionCaret((iIdOfApproval.getText()+character).length());
+                if(iIdOfApproval.getText().equals(licenses)){
+                    i10.setImage(new Image(getClass().getResourceAsStream("img/f.png")));
+                }else {
+                    i10.setImage(new Image(getClass().getResourceAsStream("img/eror.png")));
+                }
+
+                event.consume();
+            }});
 
         iConfirmPassword.addEventFilter(KeyEvent.KEY_TYPED, new EventHandler<KeyEvent>() {
             @Override
@@ -288,6 +319,7 @@ public class ControllerRegister  implements Initializable {
                          i4.setImage(new Image(getClass().getResourceAsStream("img/f.png")));
                          i3.setImage(new Image(getClass().getResourceAsStream("img/f.png")));
                      }else if (!iConfirmPassword.getText().isEmpty()){
+
                          i4.setImage(new Image(getClass().getResourceAsStream("img/eror.png")));
                      }
                     System.out.println(iConfirmPassword.getText());
@@ -332,105 +364,116 @@ public class ControllerRegister  implements Initializable {
     }
 
     public void onRegister(ActionEvent actionEvent) {
+        Db db = new Db();
+        String  licenses= db.getLicenses();
+        if(iIdOfApproval.getText().equals(licenses)){
+            if (iFirstName.getText()== null||iFirstName.getText().isEmpty()){
+                i1.setImage(new Image(getClass().getResourceAsStream("img/eror.png")));
 
-        if (iFirstName.getText()== null||iFirstName.getText().isEmpty()){
-             i1.setImage(new Image(getClass().getResourceAsStream("img/eror.png")));
+                firstName = null;
+            }else {
+                firstName = iFirstName.getText();
+            }
+            if (iLastName.getText()== null||iLastName.getText().isEmpty()){
+                i2.setImage(new Image(getClass().getResourceAsStream("img/eror.png")));
+                lastName= null;
+            }else {
+                lastName= iLastName.getText();
+            }
 
-            firstName = null;
-        }else {
-            firstName = iFirstName.getText();
+            if (iPassword.getText()== null||iPassword.getText().isEmpty()){
+                i3.setImage(new Image(getClass().getResourceAsStream("img/eror.png")));
+                pass = null;
+
+            }else {
+                pass =iPassword.getText();
+            }
+
+            if (iConfirmPassword.getText()== null||iConfirmPassword.getText().isEmpty()){
+                i4.setImage(new Image(getClass().getResourceAsStream("img/eror.png")));
+                cpass = null;
+            }else {
+                cpass = iConfirmPassword.getText();
+            }
+
+
+            if (iAddress.getText()== null||iAddress.getText().isEmpty()){
+                i7.setImage(new Image(getClass().getResourceAsStream("img/eror.png")));
+                address= null;
+            }else {
+                address= iAddress.getText();
+            }
+            if (iBirthday.getValue()== null){
+                i6.setImage(new Image(getClass().getResourceAsStream("img/eror.png")));
+                birthday =null;
+            }else{
+                birthday =iBirthday.getValue();
+            }
+
+            if (iSpecialties.getText()== null||iSpecialties.getText().isEmpty()){
+                i9.setImage(new Image(getClass().getResourceAsStream("img/eror.png")));
+                specialty= null;
+            }else {
+                specialty= iSpecialties.getText();
+            }
+            if (iEmailOrPhone.getText()== null||iEmailOrPhone.getText().isEmpty()){
+                i8.setImage(new Image(getClass().getResourceAsStream("img/eror.png")));
+                emailOrPhone=null;
+            }else{
+                emailOrPhone=iEmailOrPhone.getText();
+            }
+
+
+            if (firstName != null && lastName != null
+                    && birthday != null && specialty != null
+                    && address != null && emailOrPhone != null
+                    && cpass != null && cpass.equals(pass)){
+                System.out.println("done");
+
+                DoctorInformation doctorInformation = new DoctorInformation(firstName,lastName,birthday,specialty,address,emailOrPhone,pass,gender);
+
+                db.InsertData(doctorInformation);
+                firstName=null;
+                lastName=null;
+                birthday=null;
+                specialty=null;address=null;
+                emailOrPhone=null;
+                pass=null;
+
+
+                password.clear();
+
+                iIdOfApproval.clear();
+                iSpecialties.clear();
+
+                iPassword.clear();
+                iAddress.clear();
+                iLastName.clear();
+                iFirstName.clear();
+
+                iEmailOrPhone.clear();
+                iBirthday.setValue(null);
+                iConfirmPassword.clear();
+                DoctorInformationSingle.getInstance(doctorInformation.getId());
+                try {
+                    root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                Stage primaryStage = new Stage();
+                Scene scene = new Scene(root);
+                primaryStage.setScene(scene);
+                primaryStage.initStyle(StageStyle.UNDECORATED);
+                primaryStage.setMaximized(true);
+
+                Image icon = new Image(getClass().getResourceAsStream("img/care.png"));
+                primaryStage.getIcons().add(icon);
+
+                primaryStage.show();
+                anchorPaneRoot.getScene().getWindow().hide();
+
+            }
         }
-        if (iLastName.getText()== null||iLastName.getText().isEmpty()){
-            i2.setImage(new Image(getClass().getResourceAsStream("img/eror.png")));
-            lastName= null;
-        }else {
-            lastName= iLastName.getText();
-        }
-
-        if (iPassword.getText()== null||iPassword.getText().isEmpty()){
-            i3.setImage(new Image(getClass().getResourceAsStream("img/eror.png")));
-            pass = null;
-
-        }else {
-            pass =iPassword.getText();
-        }
-
-        if (iConfirmPassword.getText()== null||iConfirmPassword.getText().isEmpty()){
-            i4.setImage(new Image(getClass().getResourceAsStream("img/eror.png")));
-            cpass = null;
-        }else {
-            cpass = iConfirmPassword.getText();
-        }
-
-        if (iIdOfApproval.getText()== null||iIdOfApproval.getText().isEmpty()){
-            i10.setImage(new Image(getClass().getResourceAsStream("img/eror.png")));
-            idOfApproval= null;
-        }else {
-            idOfApproval= iIdOfApproval.getText();
-        }
-        if (iAddress.getText()== null||iAddress.getText().isEmpty()){
-            i7.setImage(new Image(getClass().getResourceAsStream("img/eror.png")));
-            address= null;
-        }else {
-            address= iAddress.getText();
-        }
-        if (iBirthday.getValue()== null){
-            i6.setImage(new Image(getClass().getResourceAsStream("img/eror.png")));
-            birthday =null;
-        }else{
-            birthday =iBirthday.getValue();
-        }
-
-        if (iSpecialties.getText()== null||iSpecialties.getText().isEmpty()){
-            i9.setImage(new Image(getClass().getResourceAsStream("img/eror.png")));
-            specialty= null;
-        }else {
-            specialty= iSpecialties.getText();
-        }
-        if (iEmailOrPhone.getText()== null||iEmailOrPhone.getText().isEmpty()){
-            i8.setImage(new Image(getClass().getResourceAsStream("img/eror.png")));
-            emailOrPhone=null;
-        }else{
-            emailOrPhone=iEmailOrPhone.getText();
-        }
-
-
-if (firstName != null && lastName != null
-        && birthday != null && specialty != null
-        && address != null && emailOrPhone != null
-        && idOfApproval != null && cpass != null && cpass.equals(pass)){
-    System.out.println("done");
-
-    DoctorInformation doctorInformation = new DoctorInformation(firstName,lastName,birthday,specialty,address,emailOrPhone,pass,gender,idOfApproval);
-    Db db= new Db();
-    db.InsertData(doctorInformation);
-    firstName=null;
-    lastName=null;
-    birthday=null;
-    specialty=null;address=null;
-    emailOrPhone=null;
-    pass=null;
-
-    idOfApproval=null;
-    password.clear();
-
-   iIdOfApproval.clear();
-   iSpecialties.clear();
-
-iPassword.clear();
-iAddress.clear();
-iLastName.clear();
-  iFirstName.clear();
-
-iEmailOrPhone.clear();
-   iBirthday.setValue(null);
-iConfirmPassword.clear();
-anchor_3.toFront();
-}else
-{
-
-}
-
 
 
 
@@ -448,7 +491,7 @@ anchor_3.toFront();
 
         MemberLogin memberLogin;
       if (tFirsstName.getText().isEmpty()||tLastName.getText().isEmpty()||tFirsstName.getText()== null||tLastName.getText()== null||password.getText().isEmpty()||password.getText()== null){
-          labErorr.setText("Must specify an username and password");
+          labErorr.setText("Must Fill Empty Fields");
           anchorError.setVisible(true);
       }
       else
@@ -457,11 +500,11 @@ anchor_3.toFront();
           Db db = new Db();
 
           if (db.memberLogin(memberLogin)){
-              System.out.println("iddddddd "+memberLogin.getDoctorID());
+
 
 
               DoctorInformationSingle.getInstance(memberLogin.getDoctorID());
-              System.out.println("this doctor Name "+DoctorInformationSingle.getInstance(0).getFirstName());
+
               try {
                   root = FXMLLoader.load(getClass().getResource("sample.fxml"));
               } catch (IOException e) {
@@ -480,10 +523,14 @@ anchor_3.toFront();
               anchorPaneRoot.getScene().getWindow().hide();
           }else{
 
-              labErorr.setText("The username or password you entered is invalid");
+              labErorr.setText("Invalid Inputs");
               anchorError.setVisible(true);
           }
       }
 
+    }
+    public void onExit(MouseEvent mouseEvent) {
+        Stage stage = (Stage) anchorPaneRoot.getScene().getWindow();
+        stage.close();
     }
 }

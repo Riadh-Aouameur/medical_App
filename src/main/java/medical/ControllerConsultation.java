@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import medical.DataBase.Db;
 import org.controlsfx.control.textfield.AutoCompletionBinding;
 
@@ -150,25 +151,58 @@ public class ControllerConsultation implements Initializable {
         if (!(tMedicalHistory.getText().isEmpty())){
             medicalHistory= tMedicalHistory.getText();
         }
-        int doctorID = Integer.parseInt(DoctorInformationSingle.getInstance(0).getDoctorID());
-        Consultation consultation = new Consultation(historyOfTheIllness,physicalActivity,addictions,diagnosis,treatment,reasons,clinicalExamination,resultsOfTest,diet,LocalDate.now(),familyHistory,surgicalHistory,medicalHistory,allergies,patient.getId(),doctorID);
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setContentText("");
-        alert.setTitle("");
-        alert.setHeaderText("");
+        if(!(historyOfTheIllness.equals("no change")&&physicalActivity.equals("no change")&&addictions.equals("no change")&&diagnosis.equals("no change")&&treatment.equals("no change")&&reasons.equals("no change")&&clinicalExamination.equals("no change")&&resultsOfTest.equals("no change")&&diet.equals("no change")&&familyHistory.equals("no change")&&surgicalHistory.equals("no change")&&medicalHistory.equals("no change")&&allergies.equals("no change"))){
+            int doctorID = Integer.parseInt(DoctorInformationSingle.getInstance(0).getDoctorID());
+            Consultation consultation = new Consultation(historyOfTheIllness,physicalActivity,addictions,diagnosis,treatment,reasons,clinicalExamination,resultsOfTest,diet,LocalDate.now(),familyHistory,surgicalHistory,medicalHistory,allergies,doctorID,patient.getId());
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("Are you sure to save ?");
+            alert.setTitle("CONFIRMATION");
+            alert.setHeaderText("");
+            ButtonType buttonCancel=  new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+            alert.getDialogPane().getButtonTypes().add(buttonCancel);
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.isPresent() && result.get() == ButtonType.OK){
+                Db db = new Db();
+                db.InsertConsultation(consultation);
+                historyOfTheIllness = "no change";
+               physicalActivity= "no change";
+              addictions= "no change";
+                diagnosis= "no change";
+                 treatment= "no change";
+              reasons= "no change";
+                clinicalExamination= "no change";
+                resultsOfTest= "no change";
+                 diet= "no change";
+                familyHistory= "no change";
+                 surgicalHistory= "no change";
+                medicalHistory= "no change";
+                 allergies= "no change";
 
-        ButtonType buttonCancel=  new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-        alert.getDialogPane().getButtonTypes().add(buttonCancel);
-        Optional <ButtonType> result = alert.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK){
-            Db db = new Db();
+               tHistoryOfTheIllness.clear();
+                 tPhysicalActivity.clear();
+                 tAddictions.clear();
+               tDiagnosis.clear();
+                 tTreatment.clear();
+                tReasons.clear();
+               tClinicalExamination.clear();
+                tResultsOfTest.clear();
+                tDiet.clear();
+                tFamilyHistory.clear();
+                tSurgicalHistory.clear();
+               tMedicalHistory.clear();
+               tAllergies.clear();
 
-            db.InsertConsultation(consultation);
-            System.out.println("save");
+            }
+        }else{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setContentText("Must Fill Empty Fields");
+            alert.setTitle("CONFIRMATION");
+            alert.setHeaderText("");
+            alert.show();
 
-            //TODO database
         }
-        System.out.println("NOT save");
+
+
 
     }
 
@@ -183,7 +217,8 @@ public class ControllerConsultation implements Initializable {
         });
 
         Parent root = loader.load();
-
+        primaryStage.setTitle("History Of The Illness");
+        primaryStage.initStyle(StageStyle.UTILITY);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
@@ -199,7 +234,8 @@ public class ControllerConsultation implements Initializable {
         });
 
         Parent root = loader.load();
-
+        primaryStage.setTitle("Clinical Examination");
+        primaryStage.initStyle(StageStyle.UTILITY);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
@@ -215,7 +251,8 @@ public class ControllerConsultation implements Initializable {
         });
 
         Parent root = loader.load();
-
+        primaryStage.setTitle("Medical Record");
+        primaryStage.initStyle(StageStyle.UTILITY);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
@@ -231,7 +268,8 @@ public class ControllerConsultation implements Initializable {
         });
 
         Parent root = loader.load();
-
+        primaryStage.setTitle("Test Results");
+        primaryStage.initStyle(StageStyle.UTILITY);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
@@ -247,7 +285,8 @@ public class ControllerConsultation implements Initializable {
         });
 
         Parent root = loader.load();
-
+        primaryStage.setTitle("Diagnosis And Treatment");
+        primaryStage.initStyle(StageStyle.UTILITY);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
@@ -263,7 +302,8 @@ public class ControllerConsultation implements Initializable {
         });
 
         Parent root = loader.load();
-
+        primaryStage.setTitle("Life Style");
+        primaryStage.initStyle(StageStyle.UTILITY);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
 

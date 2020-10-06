@@ -8,6 +8,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import medical.DataBase.Db;
 
 import java.net.URL;
@@ -22,12 +24,15 @@ public class ControllerAdd implements Initializable {
     public ComboBox <String>children;
     public ComboBox  <String> marritalStatus;
     public TextField profession;
-    public Label massage;
+    public AnchorPane paneMassage;
+    public Label message;
     @FXML
     TextField firstName ;
     @FXML
     TextField lastName;
-
+    public AnchorPane root;
+    private double x;
+    private double y;
     @FXML
     DatePicker birthday;
     public RadioButton ima;
@@ -49,12 +54,61 @@ public class ControllerAdd implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        lastName.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\sa-zA-Z*")) {
+                lastName.setText(newValue.replaceAll("[^\\sa-zA-Z]", ""));
+            }
+        });
+        firstName.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\sa-zA-Z*")) {
+                firstName.setText(newValue.replaceAll("[^\\sa-zA-Z]", ""));
+            }
+        });
+        profession.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\sa-zA-Z*")) {
+                profession.setText(newValue.replaceAll("[^\\sa-zA-Z]", ""));
+            }
+        });
+        phone.lengthProperty().addListener(new ChangeListener<Number>() {
+
+            @Override
+            public void changed(ObservableValue<? extends Number> observable,
+                                Number oldValue, Number newValue) {
+                if (newValue.intValue() > oldValue.intValue()) {
+                    // Check if the new character is greater than LIMIT
+                    if (phone.getText().length() >= 10) {
+
+                        // if it's 11th character then just setText to previous
+                        // one
+                        phone.setText(phone.getText().substring(0, 10));
+                    }
+                }
+            }
+        });
+        phone.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    phone.setText(newValue.replaceAll("[^\\d]", ""));
+                }
+            }
+        });
+        root.setOnMousePressed(mouseEvent -> {
+            x=mouseEvent.getSceneX();
+            y=mouseEvent.getSceneY();
+        });
+        root.setOnMouseDragged(e->{
+            Stage stage = (Stage) root.getScene().getWindow();
+            stage.setX(e.getScreenX()-x);
+            stage.setY(e.getScreenY()-y);
+        });
         marritalStatus.setItems(FXCollections.observableArrayList("Single","Married","Divorced","Widowed"));
         marritalStatus.setCellFactory(param -> new MyListCell());
         marritalStatus.setButtonCell(new MyListCell());
         children.setItems(FXCollections.observableArrayList("0","1","2","3","4","5","More"));
-        children.setCellFactory(param -> new MyListCell());
-        children.setButtonCell(new MyListCell());
+        children.setCellFactory(param -> new MyListCell_19());
+        children.setButtonCell(new MyListCell_19());
         ima.fire();
         group = new ToggleGroup();
         ife.setToggleGroup(group);
@@ -100,6 +154,12 @@ public class ControllerAdd implements Initializable {
         }
 
         if (iFirstName != null && iLastName != null&& iBirthday != null){
+
+            if (!iBirthday.isBefore(LocalDate.now())){
+                message.setText("This Date Not Available");
+                paneMassage.setVisible(true);
+                return;
+            }
             patient = new Patient(iLastName,iFirstName,Integer.parseInt(iChildren),iBirthday,gender,iProfession,iPhone,iMarritalStatus,"Active");
             Db db = new Db();
             db.InsertPatientData(patient);
@@ -109,7 +169,7 @@ public class ControllerAdd implements Initializable {
             iLastName = null;
              iBirthday = null;
              iPhone =" ";
-             iChildren="-1" ;
+             iChildren="0" ;
             iMarritalStatus ="";
             iProfession ="";
             firstName.setText("");
@@ -120,15 +180,15 @@ public class ControllerAdd implements Initializable {
             children.setValue(null);
             marritalStatus.setValue(null);
 
-            massage.setText("good");
+            message.setText("Successful");
 
 
 
 
-            System.out.println(iFirstName+" "+iLastName+" "+iBirthday+" "+iChildren+" "+gender);
+
         }else {
-            System.out.println("error");
-            massage.setText("error");
+            message.setText("Must Fill Empty Fields");
+            paneMassage.setVisible(true);
         }
 
 
@@ -138,6 +198,10 @@ public class ControllerAdd implements Initializable {
 
 
     }
+    public void onExit(ActionEvent actionEvent) {
+        Stage stage = (Stage) root.getScene().getWindow();
+        stage.close();
 
+    }
 
 }

@@ -3,6 +3,7 @@ package medical.DataBase;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import medical.*;
 
@@ -22,11 +23,17 @@ public class Db {
     public Db (){
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3305/medical","root","1234");
+            con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3305/medical?autoReconnect=true&&useSSL=false","root","1234");
             st = con.createStatement();
 
         }catch(Exception ex){
             System.out.println("Errer : " + ex);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+            alert.setHeaderText("");
+            alert.setContentText("Database Connection Time Out");
+            alert.setTitle("Connection Error");
+            alert.showAndWait();
 
         }
 
@@ -101,14 +108,150 @@ public class Db {
 
 
     }
+    public Patient getPatient(int id){
+        Patient patient = null;
+
+        try {
+            System.out.println("records from Db");
+            String query = "SELECT * FROM patient where patientID="+id;
+            rs = st.executeQuery(query);
+            while(rs.next()){
+
+               Integer children = rs.getInt("children");
+               String lastName= rs.getString("lastname");
+               String firstName = rs.getString("firstname") ;
+               String birthday= rs.getString("birthday");
+               String gender= rs.getString("gender");
+               String profession= rs.getString("Profession") ;
+               String phone = rs.getString("phone");
+               String marritalStatus = rs.getString("MarritalStatus");
+               String status = rs.getString("pstatus");
+             patient = new Patient(id,lastName,firstName,children,LocalDate.parse(birthday),gender,profession,phone,marritalStatus,status);
+
+            }
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+        System.out.println("records from Db");
+
+            return  patient;
 
 
+
+    }
+
+    public ObservableList <Patient>getPatientDataNoActive(){
+
+        ObservableList <Patient>observableList = FXCollections.observableArrayList();
+        try {
+            System.out.println("records from Db");
+            String query = "SELECT * FROM patient where pstatus = 'No Active'";
+            rs = st.executeQuery(query);
+            while(rs.next()){
+                int id = rs.getInt("patientID");
+                Integer children = rs.getInt("children");
+                String lastName= rs.getString("lastname");
+                String firstName = rs.getString("firstname") ;
+                String birthday= rs.getString("birthday");
+                String gender= rs.getString("gender");
+                String profession= rs.getString("Profession") ;
+                String phone = rs.getString("phone");
+                String marritalStatus = rs.getString("MarritalStatus");
+                String status = rs.getString("pstatus");
+                Patient patient = new Patient(id,lastName,firstName,children,LocalDate.parse(birthday),gender,profession,phone,marritalStatus,status);
+                observableList.add(patient);
+            }
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+        System.out.println("records from Db");
+
+        return  observableList ;
+
+
+
+    }
+    public ObservableList <Patient>getPatientDataActive(){
+
+        ObservableList <Patient>observableList = FXCollections.observableArrayList();
+        try {
+
+            String query = "SELECT * FROM patient where pstatus = 'Active'";
+            rs = st.executeQuery(query);
+            while(rs.next()){
+                int id = rs.getInt("patientID");
+                Integer children = rs.getInt("children");
+                String lastName= rs.getString("lastname");
+                String firstName = rs.getString("firstname") ;
+                String birthday= rs.getString("birthday");
+                String gender= rs.getString("gender");
+                String profession= rs.getString("Profession") ;
+                String phone = rs.getString("phone");
+                String marritalStatus = rs.getString("MarritalStatus");
+                String status = rs.getString("pstatus");
+                Patient patient = new Patient(id,lastName,firstName,children,LocalDate.parse(birthday),gender,profession,phone,marritalStatus,status);
+                observableList.add(patient);
+            }
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+
+
+        return  observableList ;
+
+
+
+    }
+    public void updatePatient(Patient patient) {
+
+
+        String sql = "UPDATE patient SET firstname ='" + patient.getFirstName() +"'"+",birthday ='"+patient.getBirthday()+"',lastname = '" + patient.getLastName() + "',phone='" + patient.getPhone() + "',gender= '" + patient.getGender() + "',pstatus = '" + patient.getStatus() +"', marritalStatus = '"+patient.getMarritalStatus()+"',profession = '"+patient.getProfession()+"',children = "+patient.getChildren()+" WHERE patientID =" + patient.getId();
+        try     {
+            st.executeUpdate(sql);
+            System.out.println("saveeeeeee");
+        } catch (SQLException e) {
+            System.out.println("Patient update"+e.getMessage());
+
+        }
+
+    }
+    public ObservableList <Patient>getPatientPatient(String iFirstName,String iLastName){
+
+        ObservableList <Patient>observableList = FXCollections.observableArrayList();
+        try {
+
+            String query = "SELECT * FROM patient  WHERE lower(firstname) = '"+iFirstName+"' || lower(lastname) ='"+iLastName+"' ";
+            rs = st.executeQuery(query);
+            while(rs.next()){
+                int id = rs.getInt("patientID");
+                Integer children = rs.getInt("children");
+                String lastName= rs.getString("lastname");
+                String firstName = rs.getString("firstname") ;
+                String birthday= rs.getString("birthday");
+                String gender= rs.getString("gender");
+                String profession= rs.getString("Profession") ;
+                String phone = rs.getString("phone");
+                String marritalStatus = rs.getString("MarritalStatus");
+                String status = rs.getString("pstatus");
+                Patient patient = new Patient(id,lastName,firstName,children,LocalDate.parse(birthday),gender,profession,phone,marritalStatus,status);
+                observableList.add(patient);
+            }
+        }catch(Exception ex){
+            System.out.println(ex);
+        }
+
+
+        return  observableList ;
+
+
+
+    }
 
 
 
     public int InsertData(DoctorInformation doctorInformation)  {
         PreparedStatement pstmt;
-        String query = "insert into doctor(firstname,lastname,birthday,address,specialty,emailorphone,pass,gender,idofapproval)values (?,?,?,?,?,?,?,?,?)";
+        String query = "insert into doctor(firstname,lastname,birthday,address,specialty,emailorphone,pass,gender)values (?,?,?,?,?,?,?,?)";
         try {
             pstmt = (PreparedStatement) con.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, doctorInformation.getFirstName());
@@ -119,7 +262,7 @@ public class Db {
             pstmt.setString(6, doctorInformation.getEmailOrPhone());
             pstmt.setString(7, doctorInformation.getPass());
             pstmt.setString(8, doctorInformation.getGender());
-            pstmt.setString(9, doctorInformation.getIdOfApproval());
+
 
             pstmt.executeUpdate();
             rs = pstmt.getGeneratedKeys();
@@ -139,34 +282,223 @@ public class Db {
         return 0;
 
     }
+    public int getTestAppointment(LocalDate date) {
+
+        int i = 0;
+        try {
+
+            System.out.println("records from Db");
+            String query = "select * from  appointment where dateOne =" + "'" + date + "'";
+
+            rs = st.executeQuery(query);
+
+            while (rs.next()) {
+
+                i++;
+
+            }
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+        System.out.println("records from Db");
+
+        return i;
 
 
+    }
+    public void deleteAppointment(int id) {
+        System.out.println("test");
+        String sql = "DELETE FROM appointment WHERE appointmentID=" + id;
+        try {
+
+            st.executeUpdate(sql);
+        } catch (SQLException e) {
+            System.out.println("Error");
+
+        }
+    }
+    public boolean updateTestAppointment(LocalDate localDate) {
+        boolean b = true;
+        int a = getTestAppointment(localDate);
+        b = a < 5;
+        return b;
+
+    }
+
+    public void updateAppointment(PatientForAppointment patientForAppointment) {
+        boolean b = true;
+
+        String sql = "UPDATE appointment SET firstname ='" + patientForAppointment.getFirstName() + "'" + ",dateOne ='" + patientForAppointment.getDateOne() + "',lastname = '" + patientForAppointment.getLastName() + "',phone='" + patientForAppointment.getPhone() + "',gender= '" + patientForAppointment.getGender() + "',pstatus = '" + patientForAppointment.getStatus() + "' WHERE appointmentID =" + patientForAppointment.getId();
+        try {
+            st.executeUpdate(sql);
+        } catch (SQLException e) {
+
+        }
+
+
+    }
+    public boolean InsertAppointment(PatientForAppointment patient) {
+        PreparedStatement pstmt;
+        String query = "insert into appointment(firstname,lastname,pstatus,dateOne,dateTwo,phone,gender)values (?,?,?,?,?,?,?)";
+        try {
+            if (getTestAppointment(patient.getDateOne()) < 5) {
+                pstmt = (PreparedStatement) con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+                pstmt.setString(1, patient.getFirstName());
+                pstmt.setString(2, patient.getLastName());
+                pstmt.setString(3, patient.getStatus());
+                pstmt.setObject(4, patient.getDateOne());
+                pstmt.setObject(5, patient.getDateTwo());
+                pstmt.setString(6, patient.getPhone());
+                pstmt.setString(7, patient.getGender());
+
+
+                pstmt.executeUpdate();
+                rs = pstmt.getGeneratedKeys();
+                if (rs != null && rs.next()) {
+                    System.out.println("Generated Emp Id: " + rs.getInt(1));
+                    patient.setId(rs.getInt(1));
+
+                }
+            } else {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        return true;
+
+
+    }
+    public ObservableList<PatientForAppointment> getAppointmentAll() {
+
+        ObservableList<PatientForAppointment> observableList = FXCollections.observableArrayList();
+        try {
+
+            System.out.println("records from Db");
+            String query = "select * from  appointment";
+
+            rs = st.executeQuery(query);
+            while (rs.next()) {
+                int appointmentID = rs.getInt("appointmentID");
+                String firstNName = rs.getString("firstname");
+                String lastName = rs.getString("lastname");
+                String phone = rs.getString("phone");
+                String gender = rs.getString("gender");
+                String dateOne = rs.getString("dateOne");
+                String dateTwo = rs.getString("dateTwo");
+                String status = rs.getString("pstatus");
+
+                PatientForAppointment patientForAppointment = new PatientForAppointment(appointmentID, firstNName, lastName, gender, phone, LocalDate.parse(dateOne), LocalDate.parse(dateTwo), status);
+                observableList.add(patientForAppointment);
+
+
+            }
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+        System.out.println("records from Db");
+
+        return observableList;
+
+
+    }
+
+    public ObservableList<PatientForAppointment> getAppointmentWaiting() {
+
+        ObservableList<PatientForAppointment> observableList = FXCollections.observableArrayList();
+        try {
+
+            System.out.println("records from Db");
+            String query = "select * from  appointment where pstatus = 'Waiting'";
+
+            rs = st.executeQuery(query);
+            while (rs.next()) {
+                int appointmentID = rs.getInt("appointmentID");
+                String firstNName = rs.getString("firstname");
+                String lastName = rs.getString("lastname");
+                String phone = rs.getString("phone");
+                String gender = rs.getString("gender");
+                String dateOne = rs.getString("dateOne");
+                String dateTwo = rs.getString("dateTwo");
+                String status = rs.getString("pstatus");
+
+                PatientForAppointment patientForAppointment = new PatientForAppointment(appointmentID, firstNName, lastName, gender, phone, LocalDate.parse(dateOne), LocalDate.parse(dateTwo), status);
+                observableList.add(patientForAppointment);
+
+
+            }
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+        System.out.println("records from Db");
+
+        return observableList;
+
+
+    }
+
+    public ObservableList<PatientForAppointment> getAppointmentPass() {
+
+        ObservableList<PatientForAppointment> observableList = FXCollections.observableArrayList();
+        try {
+
+            System.out.println("records from Db");
+            String query = "select * from  appointment where pstatus = 'Pass'";
+
+            rs = st.executeQuery(query);
+            while (rs.next()) {
+                int appointmentID = rs.getInt("appointmentID");
+                String firstNName = rs.getString("firstname");
+                String lastName = rs.getString("lastname");
+                String phone = rs.getString("phone");
+                String gender = rs.getString("gender");
+                String dateOne = rs.getString("dateOne");
+                String dateTwo = rs.getString("dateTwo");
+                String status = rs.getString("pstatus");
+
+                PatientForAppointment patientForAppointment = new PatientForAppointment(appointmentID, firstNName, lastName, gender, phone, LocalDate.parse(dateOne), LocalDate.parse(dateTwo), status);
+                observableList.add(patientForAppointment);
+
+
+            }
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+        System.out.println("records from Db");
+
+        return observableList;
+
+
+    }
     public int InsertConsultation(Consultation consultation)  {
         PreparedStatement pstmt;
-        String query = "insert into consultation(patientID,historyOfTheIllness,dateofconsultation,physicalActivity,addictions,diagnosis,treatment,reasons,clinicalExamination,resultsOfTest,diet,familyHistory,surgicalHistory,medicalHistory,allergies,doctorID)values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String query = "insert into consultation(historyOfTheIllness,dateofconsultation,physicalActivity,addictions,diagnosis,treatment,reasons,clinicalExamination,resultsOfTest,diet,familyHistory,surgicalHistory,medicalHistory,allergies,patientID,doctorID) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try {
             pstmt = (PreparedStatement) con.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
-            pstmt.setInt(1, consultation.getPatientID());
-            pstmt.setString(2, consultation.getHistoryOfTheIllness());
-            pstmt.setObject(3, consultation.getDate());
-            pstmt.setString(4,consultation.getPhysicalActivity());
-            pstmt.setString(5,consultation.getAddictions());
-            pstmt.setString(6, consultation.getDiagnosis());
-            pstmt.setString(7, consultation.getTreatment());
-            pstmt.setString(8, consultation.getReasons());
-            pstmt.setString(9,consultation.getClinicalExamination());
-            pstmt.setString(10,consultation.getResultsOfTest());
-            pstmt.setString(11,consultation.getDiet());
-            pstmt.setString(12,consultation.getFamilyHistory());
-            pstmt.setString(13,consultation.getSurgicalHistory());
-            pstmt.setString(14,consultation.getMedicalHistory());
-            pstmt.setString(15,consultation.getAllergies());
+
+            pstmt.setString(1, consultation.getHistoryOfTheIllness());
+            pstmt.setObject(2, consultation.getDate());
+            pstmt.setString(3,consultation.getPhysicalActivity());
+            pstmt.setString(4,consultation.getAddictions());
+            pstmt.setString(5, consultation.getDiagnosis());
+            pstmt.setString(6, consultation.getTreatment());
+            pstmt.setString(7, consultation.getReasons());
+            pstmt.setString(8,consultation.getClinicalExamination());
+            pstmt.setString(9,consultation.getResultsOfTest());
+            pstmt.setString(10,consultation.getDiet());
+            pstmt.setString(11,consultation.getFamilyHistory());
+            pstmt.setString(12,consultation.getSurgicalHistory());
+            pstmt.setString(13,consultation.getMedicalHistory());
+            pstmt.setString(14,consultation.getAllergies());
+            pstmt.setInt(15, consultation.getPatientID());
             pstmt.setInt(16,consultation.getDoctorID());
 
             pstmt.executeUpdate();
             rs = pstmt.getGeneratedKeys();
             if(rs != null && rs.next()){
-                System.out.println("Generated Emp Id: "+rs.getInt(1));
+
                 consultation.setId(rs.getInt(1));
 
             }
@@ -489,11 +821,13 @@ public class Db {
             while(rs.next()){
                 int documentID = rs.getInt("documentID");
                 int doctorID = rs.getInt("doctorID");
+                int patientID = rs.getInt("patientID");
                 String date= rs.getString("dateofdocumentdate");
                 String content= rs.getString("content");
                 String type= rs.getString("typeofdocument");
 
-             Document document  = new Document(id,content,type,LocalDate.parse(date),doctorID);
+             Document document  = new Document(id,content,type,LocalDate.parse(date),doctorID,patientID);
+
                 observableList.add(document);
             }
         }catch(Exception ex){
@@ -818,7 +1152,8 @@ public class Db {
 
 
 
-    }    public ObservableList <String>getDiet(int id){
+    }
+    public ObservableList <String>getDiet(int id){
 
         ObservableList <String>observableList = FXCollections.observableArrayList();
         try {
@@ -875,7 +1210,7 @@ public class Db {
 
         ObservableList  <String>observableList = FXCollections.observableArrayList();
         try {
-            System.out.println("records from Db");
+
             String query = "select*from  doctor where doctorID ="+x;
             rs = st.executeQuery(query);
             while(rs.next()){
@@ -884,24 +1219,25 @@ public class Db {
                 String firstName = rs.getString("firstname") ;
                 String birthday= rs.getString("birthday");
                 String gender= rs.getString("gender");
-                String idOfApproval= rs.getString("idofapproval") ;
                 String emailOrPhone = rs.getString("emailorphone");
                 String specialty = rs.getString("specialty");
                 String address= rs.getString("address");
-                observableList.addAll(firstName,lastName,birthday,gender,idOfApproval,emailOrPhone,specialty,address);
+                observableList.addAll(firstName,lastName,birthday,gender,emailOrPhone,specialty,address);
 
 
             }
         }catch(Exception ex){
             System.out.println(ex);
         }
-        System.out.println("records from Db");
+
 
         return   observableList;
 
 
 
     }
+
+
 
     public DoctorInformation getDoctor(int x){
 
@@ -916,11 +1252,11 @@ public class Db {
                 String firstName = rs.getString("firstname") ;
                 String birthday= rs.getString("birthday");
                 String gender= rs.getString("gender");
-                String idOfApproval= rs.getString("idofapproval") ;
+
                 String emailOrPhone = rs.getString("emailorphone");
                 String specialty = rs.getString("specialty");
                 String address= rs.getString("address");
-            doctorInformation = new DoctorInformation(firstName,lastName,LocalDate.parse(birthday),specialty,address,emailOrPhone,x,gender,idOfApproval);
+            doctorInformation = new DoctorInformation(firstName,lastName,LocalDate.parse(birthday),specialty,address,emailOrPhone,x,gender);
 
 
             }
@@ -935,8 +1271,68 @@ public class Db {
 
     }
     public void deletePatient(int id){
-        System.out.println("test");
+        deleteConsultation(id);
+        deleteCheckUp(id);
+        deletePrescription(id);
+        deleteDocument(id);
+
         String sql = "DELETE FROM patient WHERE patientID="+id;
+
+        try {
+
+            st.executeUpdate(sql);
+        }catch(SQLException e) {
+            System.out.println("Error");
+
+        }
+    }
+   private void deleteConsultation(int id){
+        String sql = "DELETE FROM consultation WHERE patientID="+id;
+
+        try {
+
+            st.executeUpdate(sql);
+        }catch(SQLException e) {
+            System.out.println("Error");
+
+        }
+    }
+    private void deleteDocument(int id){
+        String sql = "delete FROM document WHERE patientID="+id;
+
+        try {
+
+            st.executeUpdate(sql);
+        }catch(SQLException e) {
+            System.out.println("Error");
+
+        }
+    }
+    private void deleteCheckUp(int id){
+        String sql = "delete FROM checkup WHERE patientID="+id;
+
+        try {
+
+            st.executeUpdate(sql);
+        }catch(SQLException e) {
+            System.out.println("Error");
+
+        }
+    }
+    private void deletePrescription(int id){
+        String sql = "delete FROM Prescription WHERE patientID="+id;
+
+        try {
+
+            st.executeUpdate(sql);
+        }catch(SQLException e) {
+            System.out.println("Error");
+
+        }
+    }
+    public void deleteMedi(int id){
+        System.out.println("test");
+        String sql = "DELETE FROM MedicamentName WHERE MedicamentNameID="+id;
         try {
 
             st.executeUpdate(sql);
@@ -948,20 +1344,7 @@ public class Db {
 
 
     }
-    public void deleteMedi(int id){
-        System.out.println("test");
-        String sql = "DELETE FROM patient WHERE patientID="+id;
-        try {
-
-            st.executeUpdate(sql);
-        }catch(SQLException e) {
-            System.out.println("Error");
-
-        }
-
-
-
-    }    public void deleteCheckup(int id){
+    public void deleteCheckup(int id){
         System.out.println("test");
         String sql = "DELETE FROM checkupName WHERE checkupNameID="+id;
         try {
@@ -987,6 +1370,7 @@ public class Db {
             rs = pstmt.getGeneratedKeys();
             if(rs != null && rs.next()){
                 id= rs.getInt(1);
+
             }
 
         } catch (SQLException e) {
@@ -1047,7 +1431,7 @@ public class Db {
         ObservableList <CheckupName>observableList = FXCollections.observableArrayList();
         try {
             System.out.println("records from Db");
-            String query = "SELECT * FROM MedicamentName";
+            String query = "SELECT * FROM checkupName";
             rs = st.executeQuery(query);
             while(rs.next()){
                 int id = rs.getInt("checkupNameID");
@@ -1064,5 +1448,59 @@ public class Db {
 
 
     }
+
+    public ObservableList<APatientForWaitingRoom> getPatientDataa() {
+
+        ObservableList<APatientForWaitingRoom> observableList = FXCollections.observableArrayList();
+        try {
+            System.out.println("records from Db");
+            String query = "select*from  waiting where firstname != \"\"and  lastname!=\"\" ;";
+            rs = st.executeQuery(query);
+            while (rs.next()) {
+                int id = rs.getInt("waitingID");
+                String lastName = rs.getString("lastname");
+                String firstName = rs.getString("firstname");
+                String gender = rs.getString("gender");
+                String phone = rs.getString("phone");
+                String pstatus = rs.getString("pstatus");
+                APatientForWaitingRoom p = new APatientForWaitingRoom(firstName, lastName, gender, phone, id, pstatus);
+                observableList.add(p);
+            }
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+
+
+        return observableList;
+
+
+    }
+    public String getLicenses() {
+
+        String limiteWait = null;
+        try {
+
+
+            String query = "SELECT * FROM limite ";
+
+            rs = st.executeQuery(query);
+            while (rs.next()) {
+                limiteWait = rs.getString("licenses2");
+            }
+        } catch (Exception ex) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText(ex.getMessage());
+            alert.setTitle("ERROR");
+            alert.setHeaderText("");
+            alert.showAndWait();
+
+        }
+
+        return limiteWait;
+
+
+
+    }
+
 }
 

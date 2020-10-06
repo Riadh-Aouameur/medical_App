@@ -20,6 +20,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import medical.DataBase.Db;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -234,41 +235,10 @@ public class ControllerPrescription implements Initializable {
         m.setDisable(true);
     }
 
-    public void onSave(ActionEvent actionEvent) {
-    }
 
-    public void onPrinted(ActionEvent actionEvent) {
-    }
 
     public void onClicked(MouseEvent mouseEvent) {
-        observableList = FXCollections.observableArrayList(new MedicamentName("Amoxicilline","125 mg"),
-                new MedicamentName("Amoxicilline","250mg"),
-                new MedicamentName("Amoxicilline","500 mg /5 ml"),
-                new MedicamentName("Paracetamol","100 mg"),
-                new MedicamentName("Paracetamol","200 mg"),
-                new MedicamentName("Paracetamol","150 mg"),
-                new MedicamentName("Paracetamol","300 mg"),
-                new MedicamentName("Paracetamol","500 mg"),
-                new MedicamentName("Paracetamol","1000 mg"),
-                new MedicamentName("Flgyl","125 mg / 5 ml"),
-                new MedicamentName("Flgyl","250 mg / 10 ml"),
-                new MedicamentName("Flgyl","500 mg"),
-                new MedicamentName("Smecta"),
-                new MedicamentName("Domperidone","10 mg"),
-                new MedicamentName("Domperidone","1 mg / 1 ml"),
-                new MedicamentName("Ibuprofene","200 mg"),
-                new MedicamentName("Ibuprofene","400 mg"),
-                new MedicamentName("Ibuprofene","600 mg"),
-                new MedicamentName("Bedelix"),
-                new MedicamentName("Dicetel","50 mg"),
-                new MedicamentName("Dicetel","100 mg"),
-                new MedicamentName("Duspatalin","100 mg"),
-                new MedicamentName("Duspatalin","200 mg"),
-                new MedicamentName("Calcium","500 mg"),
-                new MedicamentName("Tiralor","10 mg")
-
-
-        );
+        observableList = FXCollections.observableArrayList(db.getMedi());
         if(paneLIstOFMedicament.isVisible())
              paneLIstOFMedicament.setVisible(false);
         else
@@ -371,8 +341,8 @@ public class ControllerPrescription implements Initializable {
 
         if(listOfMedication.getItems().isEmpty()){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("");
-            alert.setTitle("");
+            alert.setContentText("Medicaments List Is Empty");
+            alert.setTitle("INFORMATION");
             alert.setHeaderText("");
             alert.showAndWait();
 
@@ -380,10 +350,10 @@ public class ControllerPrescription implements Initializable {
         else
             {
                 Prescription prescription = new Prescription(LocalDate.now(),listOfMedication.getItems());
-                System.out.println("down");
+
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setContentText("");
-                alert.setTitle("");
+                alert.setContentText("Are you sure to save ?");
+                alert.setTitle("CONFIRMATION");
                 alert.setHeaderText("");
 
                 ButtonType buttonCancel=  new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
@@ -416,7 +386,11 @@ public class ControllerPrescription implements Initializable {
 
                         JasperViewer.viewReport(jP,false);
                     } catch (Exception e) {
-                        e.printStackTrace();
+                        Alert alert2 = new Alert(Alert.AlertType.ERROR);
+                        alert2.setContentText(e.getMessage());
+                        alert2.setTitle("ERROR");
+                        alert2.setHeaderText("");
+                        alert2.showAndWait();
                     }
 
                 }
@@ -438,9 +412,42 @@ public class ControllerPrescription implements Initializable {
 
 
         } catch (IOException e) {
-            e.printStackTrace();
+
+            Alert alert2 = new Alert(Alert.AlertType.ERROR);
+            alert2.setContentText(e.getMessage());
+            alert2.setTitle("ERROR");
+            alert2.setHeaderText("");
+            alert2.showAndWait();
         }
-        stage.setTitle("About");
+        stage.setTitle("Medicament");
+        Image icon = new Image(getClass().getResourceAsStream("img/plus.png"));
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.getIcons().add(icon);
         stage.show();
     }
 }
+//new MedicamentName("Amoxicilline","125 mg"),
+//                new MedicamentName("Amoxicilline","250mg"),
+//                new MedicamentName("Amoxicilline","500 mg /5 ml"),
+//                new MedicamentName("Paracetamol","100 mg"),
+//                new MedicamentName("Paracetamol","200 mg"),
+//                new MedicamentName("Paracetamol","150 mg"),
+//                new MedicamentName("Paracetamol","300 mg"),
+//                new MedicamentName("Paracetamol","500 mg"),
+//                new MedicamentName("Paracetamol","1000 mg"),
+//                new MedicamentName("Flgyl","125 mg / 5 ml"),
+//                new MedicamentName("Flgyl","250 mg / 10 ml"),
+//                new MedicamentName("Flgyl","500 mg"),
+//                new MedicamentName("Smecta"),
+//                new MedicamentName("Domperidone","10 mg"),
+//                new MedicamentName("Domperidone","1 mg / 1 ml"),
+//                new MedicamentName("Ibuprofene","200 mg"),
+//                new MedicamentName("Ibuprofene","400 mg"),
+//                new MedicamentName("Ibuprofene","600 mg"),
+//                new MedicamentName("Bedelix"),
+//                new MedicamentName("Dicetel","50 mg"),
+//                new MedicamentName("Dicetel","100 mg"),
+//                new MedicamentName("Duspatalin","100 mg"),
+//                new MedicamentName("Duspatalin","200 mg"),
+//                new MedicamentName("Calcium","500 mg"),
+//                new MedicamentName("Tiralor","10 mg")

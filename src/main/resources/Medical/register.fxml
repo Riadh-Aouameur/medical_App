@@ -18,7 +18,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchorPaneRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="1175.0" style="-fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #1530CC, #5EE6E4);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="medical.ControllerRegister">
+<AnchorPane fx:id="anchorPaneRoot" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="440.0" prefWidth="1212.0" style="-fx-background-color: linear-gradient(from 25% 25% to 100% 100%, #1530CC, #5EE6E4);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="medical.ControllerRegister">
    <children>
       <AnchorPane fx:id="anchor_1" focusTraversable="true" layoutX="295.0" layoutY="20.0" prefHeight="387.0" prefWidth="865.0" style="-fx-background-color: #fff; -fx-background-radius: 60 600 6;">
          <children>
@@ -132,7 +132,7 @@
             <Font name="Arial Rounded MT Bold" size="35.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" layoutX="22.0" layoutY="310.0" prefHeight="51.0" prefWidth="258.0" text="Our ultimate goal, after all, is not a good death &#10;but a good life to the very end" textFill="WHITE" wrapText="true">
+      <Label alignment="CENTER" layoutX="22.0" layoutY="310.0" prefHeight="51.0" prefWidth="258.0" text="The best preparation for tomorrow is doing your best today .&#10;" textFill="WHITE" wrapText="true">
          <font>
             <Font name="Arial Rounded MT Bold" size="10.0" />
          </font>
@@ -204,7 +204,7 @@
                   <Font name="Arial Rounded MT Bold" size="17.0" />
                </font>
             </Button>
-            <TextField fx:id="iIdOfApproval" layoutX="568.0" layoutY="227.0" prefHeight="25.0" prefWidth="194.0" promptText=" Id of approval" />
+            <TextField fx:id="iIdOfApproval" layoutX="568.0" layoutY="227.0" prefHeight="25.0" prefWidth="194.0" promptText="Licence key" style="-fx-border-color: #05e39c;" />
             <TextField fx:id="iSpecialties" layoutX="520.0" layoutY="189.0" prefHeight="25.0" prefWidth="194.0" promptText="Specialties" />
             <TextField fx:id="iAddress" layoutX="423.0" layoutY="120.0" prefHeight="12.0" prefWidth="194.0" promptText="Address" />
             <PasswordField fx:id="iPassword" layoutX="136.0" layoutY="154.0" prefHeight="25.0" prefWidth="194.0" promptText="Password" />
@@ -289,5 +289,10 @@
             <ImageView fx:id="i5" fitHeight="25.0" fitWidth="25.0" layoutX="420.0" layoutY="227.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </AnchorPane>
+      <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="1177.0" layoutY="8.0" onMouseClicked="#onExit" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../../Application/appAssistant/src/main/resources/medical/img/eror.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

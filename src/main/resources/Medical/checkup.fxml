@@ -17,11 +17,26 @@
    <children>
       <HBox prefHeight="46.0" prefWidth="860.0" style="-fx-background-color: #fff;">
          <children>
-            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#onPrint" prefHeight="37.0" prefWidth="145.0" style="-fx-background-color: #fff;" text="print" textFill="#1632cc">
+            <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#onPrint" prefHeight="37.0" prefWidth="168.0" style="-fx-background-color: #fff;" text="Save And Print" textFill="#1632cc">
                <graphic>
                   <ImageView fitHeight="23.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@img/print.png" />
+                        <Image url="@img/save.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button alignment="BASELINE_LEFT" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#onOpenMedicalAnalysis" prefHeight="37.0" prefWidth="194.0" style="-fx-background-color: #fff;" text="Medical Analysis" textFill="#1632cc">
+               <graphic>
+                  <ImageView fitHeight="23.0" fitWidth="28.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/plus.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -89,7 +104,7 @@
       </AnchorPane>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="494.0" prefWidth="859.0" style="-fx-background-color: #fff;">
          <children>
-            <Label layoutX="37.0" layoutY="8.0" prefHeight="58.0" prefWidth="266.0" text="Medical analysit" textFill="#1632cc">
+            <Label layoutX="37.0" layoutY="8.0" prefHeight="58.0" prefWidth="266.0" text="Medical analysis" textFill="#1632cc">
                <font>
                   <Font name="Arial Rounded MT Bold" size="30.0" />
                </font>

@@ -187,7 +187,7 @@ INNER JOIN doctor ON document.doctorID = doctor.doctorID
 				<textElement textAlignment="Left" markup="none">
 					<font fontName="Arial Rounded MT Bold" size="13"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Age : "+($F{dateofdocumentdate}.getYear()-$F{birthday}.getYear()) ]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Age : "+($F{dateofdocumentdate}.getYear()-$F{birthday}.getYear())]]></textFieldExpression>
 			</textField>
 		</band>
 	</title>
@@ -206,35 +206,32 @@ INNER JOIN doctor ON document.doctorID = doctor.doctorID
 		</band>
 	</pageHeader>
 	<detail>
-		<band height="151" splitType="Stretch">
-			<textField>
-				<reportElement x="0" y="0" width="560" height="151" uuid="a47f16be-d227-410f-844e-ac1921a41f65">
-					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
-					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					<property name="com.jaspersoft.studio.unit.firstLineIndent" value="px"/>
+		<band height="49" splitType="Stretch">
+			<textField textAdjust="StretchHeight">
+				<reportElement positionType="Float" x="0" y="10" width="556" height="18" uuid="d5dfb380-cc2d-4d96-95fe-5163bd188265">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="7e68c113-e1f4-49a2-8925-ce15529fad55"/>
 				</reportElement>
-				<textElement textAlignment="Left" markup="none">
-					<font fontName="Arial Rounded MT Bold" size="12"/>
-					<paragraph lineSpacing="Proportional" firstLineIndent="21"/>
+				<textElement>
+					<font size="14"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{content}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>
 	<summary>
-		<band height="101" splitType="Stretch">
+		<band height="54" splitType="Stretch">
 			<line>
 				<reportElement x="-22" y="2" width="600" height="1" uuid="80f8c552-fc89-409e-b314-5d929bf1bbbc"/>
 			</line>
-			<textField isBlankWhenNull="true">
-				<reportElement x="450" y="10" width="120" height="10" uuid="65a80198-9635-40b7-91df-99a73c4893fb">
+			<textField>
+				<reportElement x="20" y="15" width="470" height="25" uuid="bce30bec-5837-4e1b-9591-2da852c4d08b">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
-				<textElement textAlignment="Right" markup="none">
-					<font fontName="Arial Rounded MT Bold" size="7"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="Arial Rounded MT Bold" size="16"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Document ID : "+$F{documentID}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["The wich for healing has always been half of health"]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

@@ -48,6 +48,6 @@
             <Font size="13.0" />
          </font>
       </Label>
-      <TextArea fx:id="content" layoutY="193.0" prefHeight="374.0" prefWidth="680.0" />
+      <TextArea fx:id="content" editable="false" layoutY="193.0" prefHeight="374.0" prefWidth="680.0" wrapText="true" />
    </children>
 </AnchorPane>

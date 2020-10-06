@@ -48,7 +48,8 @@ public class ControllerDocument implements Initializable {
             Image imProfile = new Image(getClass().getResourceAsStream("img/femalepatient.png"));
             imgeGander.setImage(imProfile);
         }
-        documentType.setItems(FXCollections.observableArrayList("t1","t2","t3"));
+        documentType.setItems(FXCollections.observableArrayList("Letter","Work absences"));
+        documentType.setButtonCell(new MyListCell_22());
         fName.setText(patient.getFirstName()+" "+patient.getLastName());
         fBirthday.setText(patient.getBirthday().toString());
         LocalDate b= (LocalDate) patient.getBirthday();
@@ -65,20 +66,22 @@ public class ControllerDocument implements Initializable {
 
         if (documentContent.getText()== null||documentContent.getText().isEmpty()){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("Document content vied");
-            alert.setTitle("");
+            alert.setContentText("Document Content Empty");
+            alert.setTitle("INFORMATION");
             alert.setHeaderText("");
             alert.showAndWait();
+            return;
         }else {
             content = documentContent.getText();
             a = true ;
         }
         if (documentType.getSelectionModel().getSelectedItem() == null){
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("Select type of document");
-            alert.setTitle("");
+            alert.setContentText("Select Type Of Document");
+            alert.setTitle("INFORMATION");
             alert.setHeaderText("");
             alert.showAndWait();
+            return;
         }else {
             type = documentType.getSelectionModel().getSelectedItem();
             b =true;
@@ -90,8 +93,8 @@ public class ControllerDocument implements Initializable {
 
 
           Alert alert = new Alert(Alert.AlertType.INFORMATION);
-          alert.setContentText("");
-          alert.setTitle("");
+          alert.setContentText("Are you sure to save ?");
+          alert.setTitle("CONFIRMATION");
           alert.setHeaderText("");
 
           ButtonType buttonCancel=  new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
@@ -125,10 +128,14 @@ public class ControllerDocument implements Initializable {
 
                   JasperViewer.viewReport(jP,false);
               } catch (Exception e) {
-                  e.printStackTrace();
+                  Alert alert1 = new Alert(Alert.AlertType.ERROR);
+                  alert1.setContentText(e.getMessage());
+                  alert1.setTitle("Error");
+                  alert1.setHeaderText("");
+                  alert1.show();
               }
 
-              System.out.println("save");
+
 
 
           }

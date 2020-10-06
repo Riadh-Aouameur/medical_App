@@ -2,8 +2,10 @@ package medical;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.AnchorPane;
 import medical.DataBase.Db;
 
 import java.net.URL;
@@ -17,6 +19,8 @@ public class ControllerMedicalRecord implements Initializable {
     public TextArea text2;
     public TextArea text3;
     public TextArea text4;
+    public AnchorPane r2;
+    public AnchorPane r1;
     Patient patient;
 
     public ControllerMedicalRecord(Patient patient) {
@@ -79,5 +83,11 @@ public class ControllerMedicalRecord implements Initializable {
         }
 
 
+    }
+    public void onSetPane(ActionEvent actionEvent) {
+        r1.toFront();
+    }
+    public void onSetPane1(ActionEvent actionEvent) {
+        r2.toFront();
     }
 }

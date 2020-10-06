@@ -12,18 +12,18 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onDragDetected="#onSavePatient" prefHeight="349.0" prefWidth="659.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="medical.ControllerModify">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="355.0" prefWidth="659.0" style="-fx-background-color: #fff; -fx-border-color: #ffd571;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="medical.ControllerModify">
    <children>
       <TextField fx:id="firstName" layoutX="43.0" layoutY="90.0" prefHeight="35.0" prefWidth="249.0" promptText="First Name" />
       <TextField fx:id="lastName" layoutX="43.0" layoutY="141.0" prefHeight="35.0" prefWidth="249.0" promptText="Last Name" />
       <ComboBox fx:id="marritalStatus" layoutX="371.0" layoutY="141.0" prefHeight="31.0" prefWidth="249.0" stylesheets="@../Css/combobox3.css" />
       <TextField fx:id="profession" layoutX="371.0" layoutY="245.0" prefHeight="35.0" prefWidth="249.0" promptText="Profession" />
-      <Button layoutX="486.0" layoutY="297.0" mnemonicParsing="false" onAction="#onSavePatient" prefHeight="35.0" prefWidth="133.0" style="-fx-background-color: #ffd571;" text="Save" textFill="WHITE">
+      <Button layoutX="469.0" layoutY="293.0" mnemonicParsing="false" onAction="#onSavePatient" prefHeight="44.0" prefWidth="150.0" style="-fx-background-color: #ffd571;" text="Save And Close" textFill="WHITE">
          <font>
-            <Font name="Arial Rounded MT Bold" size="17.0" />
+            <Font name="Arial Rounded MT Bold" size="15.0" />
          </font></Button>
       <ComboBox fx:id="children" layoutX="371.0" layoutY="193.0" prefHeight="31.0" prefWidth="249.0" stylesheets="@../Css/combobox3.css" />
-      <RadioButton fx:id="ima" layoutX="99.0" layoutY="255.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="59.0" text="Male" textFill="#ffd573">
+      <RadioButton fx:id="ima" layoutX="94.0" layoutY="247.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="81.0" text="Male" textFill="#ffd573">
          <toggleGroup>
             <ToggleGroup fx:id="group" />
          </toggleGroup>
@@ -31,7 +31,7 @@
             <Font name="Arial Rounded MT Bold" size="12.0" />
          </font>
       </RadioButton>
-      <RadioButton fx:id="ife" layoutX="204.0" layoutY="255.0" mnemonicParsing="false" text="Female" textFill="#ffd571">
+      <RadioButton fx:id="ife" layoutX="186.0" layoutY="247.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="81.0" text="Female" textFill="#ffd571">
          <toggleGroup>
             <ToggleGroup fx:id="group" />
          </toggleGroup>
@@ -40,12 +40,7 @@
          </font>
       </RadioButton>
       <TextField fx:id="phone" layoutX="371.0" layoutY="90.0" prefHeight="35.0" prefWidth="249.0" promptText="Phone" />
-      <DatePicker fx:id="birthday" layoutX="43.0" layoutY="193.0" prefHeight="35.0" prefWidth="249.0" promptText="birthday" />
-      <Label fx:id="massage" layoutX="43.0" layoutY="300.0" prefHeight="29.0" prefWidth="249.0" text="Label" textFill="#03dd39">
-         <font>
-            <Font name="Arial Rounded MT Bold" size="19.0" />
-         </font>
-      </Label>
+      <DatePicker fx:id="birthday" editable="false" layoutX="43.0" layoutY="193.0" prefHeight="35.0" prefWidth="249.0" promptText="birthday" />
       <AnchorPane prefHeight="66.0" prefWidth="659.0" style="-fx-background-color: #ffd571;">
          <children>
             <ImageView fitHeight="54.0" fitWidth="52.0" layoutX="42.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
@@ -56,6 +51,40 @@
             <Label layoutX="136.0" layoutY="18.0" prefHeight="29.0" prefWidth="177.0" text="Modify" textFill="WHITE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="23.0" />
+               </font>
+            </Label>
+            <Button layoutX="576.0" layoutY="18.0" mnemonicParsing="false" onAction="#onExit" prefHeight="29.0" prefWidth="52.0" style="-fx-background-color: #ffd571;" textFill="WHITE">
+               <graphic>
+                  <ImageView fitHeight="28.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/eror.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </AnchorPane>
+      <RadioButton fx:id="iNoActive" layoutX="186.0" layoutY="272.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="81.0" text="No Active" textFill="#ffd571">
+         <toggleGroup>
+            <ToggleGroup fx:id="group1" />
+         </toggleGroup>
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font>
+      </RadioButton>
+      <RadioButton fx:id="iActive" layoutX="94.0" layoutY="272.0" mnemonicParsing="false" prefHeight="16.0" prefWidth="81.0" text="Active" textFill="#ffd573">
+         <toggleGroup>
+            <ToggleGroup fx:id="group2" />
+         </toggleGroup>
+         <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" />
+         </font>
+      </RadioButton>
+      <AnchorPane fx:id="paneMassage" layoutX="43.0" layoutY="301.0" prefHeight="31.0" prefWidth="398.0" style="-fx-background-color: red; -fx-background-radius: 10;" visible="false">
+         <children>
+            <Label fx:id="message" layoutX="7.0" layoutY="8.0" prefHeight="17.0" prefWidth="396.0" text="Label" textFill="WHITE">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="13.0" />
                </font>
             </Label>
          </children>

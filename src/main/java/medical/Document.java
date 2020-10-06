@@ -22,11 +22,13 @@ public class Document {
         this.patientID = new SimpleIntegerProperty(patientID);
         this.date = new SimpleObjectProperty<>(date);
     }
-    public Document(int id , String content, String type, LocalDate date,Integer doctorID) {
+
+    public Document(int id , String content, String type, LocalDate date,Integer doctorID,Integer patientID) {
         this.id = new SimpleIntegerProperty(id);
         this.content =  new SimpleStringProperty(content);
         this.type = new SimpleStringProperty( type);
         this.date = new SimpleObjectProperty<>(date);
+        this.patientID = new SimpleIntegerProperty(patientID);
         this.doctorID = new SimpleIntegerProperty(doctorID);
     }
 

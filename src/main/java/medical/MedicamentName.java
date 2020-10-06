@@ -20,7 +20,7 @@ public class MedicamentName {
         this.id = new SimpleIntegerProperty();
     }
     public MedicamentName(int id,String name, String dosage) {
-        this.name =new SimpleStringProperty( name);
+        this.name =new SimpleStringProperty(name);
         this.dosage.setValue(dosage);
         this.id = new SimpleIntegerProperty(id);
     }

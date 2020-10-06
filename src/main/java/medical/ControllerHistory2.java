@@ -41,7 +41,7 @@ public class ControllerHistory2 implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         Db db = new Db();
-        System.out.println(patient.getId());
+
 
         if(patient.getGender().equals("Female")){
             Image imProfile = new Image(getClass().getResourceAsStream("img/femalepatient.png"));

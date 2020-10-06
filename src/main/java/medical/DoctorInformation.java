@@ -16,9 +16,9 @@ public class DoctorInformation {
     SimpleStringProperty emailOrPhone ;
     SimpleStringProperty pass ;
     SimpleStringProperty gender ;
-    SimpleStringProperty idOfApproval ;
 
-    public DoctorInformation(String firstName, String lastName, LocalDate birthday, String specialty, String address, String emailOrPhone, String pass,String gender,String idOfApproval) {
+
+    public DoctorInformation(String firstName, String lastName, LocalDate birthday, String specialty, String address, String emailOrPhone, String pass,String gender) {
         this.id = new SimpleIntegerProperty();
         this.firstName =new SimpleStringProperty( firstName);
         LastName =new SimpleStringProperty( lastName);
@@ -27,10 +27,10 @@ public class DoctorInformation {
         this.address = new SimpleStringProperty(address);
         this.emailOrPhone = new SimpleStringProperty(emailOrPhone);
         this.pass = new SimpleStringProperty(pass);
-        this.idOfApproval = new SimpleStringProperty(idOfApproval);
+
         this.gender = new SimpleStringProperty(gender);
     }
-    public DoctorInformation(String firstName, String lastName, LocalDate birthday, String specialty, String address, String emailOrPhone, int id,String gender,String idOfApproval) {
+    public DoctorInformation(String firstName, String lastName, LocalDate birthday, String specialty, String address, String emailOrPhone, int id,String gender) {
         this.id = new SimpleIntegerProperty(id);
         this.firstName =new SimpleStringProperty( firstName);
         LastName =new SimpleStringProperty( lastName);
@@ -39,7 +39,6 @@ public class DoctorInformation {
         this.address = new SimpleStringProperty(address);
         this.emailOrPhone = new SimpleStringProperty(emailOrPhone);
         this.pass = new SimpleStringProperty();
-        this.idOfApproval = new SimpleStringProperty(idOfApproval);
         this.gender = new SimpleStringProperty(gender);
     }
 
@@ -55,17 +54,7 @@ public class DoctorInformation {
         this.gender.set(gender);
     }
 
-    public String getIdOfApproval() {
-        return idOfApproval.get();
-    }
 
-    public SimpleStringProperty idOfApprovalProperty() {
-        return idOfApproval;
-    }
-
-    public void setIdOfApproval(String idOfApproval) {
-        this.idOfApproval.set(idOfApproval);
-    }
 
     public int getId() {
         return id.get();

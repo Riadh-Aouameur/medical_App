@@ -42,7 +42,7 @@
                   <Image url="@img/patient.png" />
                </image>
             </ImageView>
-            <TextField fx:id="fName" layoutX="257.0" layoutY="53.0" prefHeight="26.0" prefWidth="348.0" stylesheets="@../Css/textArea.css" />
+            <TextField fx:id="fName" layoutX="257.0" layoutY="53.0" prefHeight="26.0" prefWidth="348.0" />
             <Label layoutX="163.0" layoutY="55.0" prefHeight="22.0" prefWidth="85.0" text="Patient" textFill="#1632cc">
                <font>
                   <Font name="Arial" size="17.0" />
@@ -58,8 +58,8 @@
                   <Font name="Arial" size="17.0" />
                </font>
             </Label>
-            <TextField fx:id="fBirthday" layoutX="257.0" layoutY="95.0" prefHeight="26.0" prefWidth="182.0" stylesheets="@../Css/textArea.css" />
-            <TextField fx:id="fPhone" layoutX="257.0" layoutY="139.0" prefHeight="26.0" prefWidth="182.0" stylesheets="@../Css/textArea.css" />
+            <TextField fx:id="fBirthday" layoutX="257.0" layoutY="95.0" prefHeight="26.0" prefWidth="182.0" />
+            <TextField fx:id="fPhone" layoutX="257.0" layoutY="139.0" prefHeight="26.0" prefWidth="182.0" />
             <Label layoutX="497.0" layoutY="97.0" prefHeight="22.0" prefWidth="85.0" text="Age" textFill="#1632cc">
                <font>
                   <Font name="Arial" size="17.0" />

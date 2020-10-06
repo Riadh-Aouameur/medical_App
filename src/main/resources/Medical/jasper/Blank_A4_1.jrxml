@@ -210,19 +210,19 @@ where checkupID = 3;]]>
 		</band>
 	</detail>
 	<summary>
-		<band height="26" splitType="Stretch">
+		<band height="50" splitType="Stretch">
 			<line>
 				<reportElement x="-22" y="2" width="600" height="1" uuid="b944bdaa-b0b8-47d6-b131-e3159906d12c"/>
 			</line>
-			<textField isBlankWhenNull="true">
-				<reportElement x="450" y="10" width="120" height="10" uuid="00954d7b-a654-4519-8d46-f18b8245b5e2">
+			<textField>
+				<reportElement x="20" y="15" width="470" height="25" uuid="90c8e2ec-a78f-4300-ad2d-8f0e2aa1dbc1">
 					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
-				<textElement textAlignment="Right" markup="none">
-					<font fontName="Arial Rounded MT Bold" size="7"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="Arial Rounded MT Bold" size="16"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Document ID : "+$F{checkupID}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["The wich for healing has always been half of health"]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

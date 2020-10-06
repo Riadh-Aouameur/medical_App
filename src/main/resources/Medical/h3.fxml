@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="565.0" prefWidth="680.0" style="-fx-background-color: #fff;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="medical.ControllerH3">
+   <children>
+      <Label fx:id="t1" alignment="CENTER" layoutX="29.0" layoutY="28.0" prefHeight="26.0" prefWidth="197.0" text="Dr. K. BOUZAR ESSAIDI" textFill="#181818">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Label>
+      <Label fx:id="t2" alignment="CENTER" contentDisplay="CENTER" layoutX="29.0" layoutY="59.0" prefHeight="17.0" prefWidth="197.0" text="MEDECINE GENERALE" textFill="#181818">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="t3" alignment="CENTER" layoutX="29.0" layoutY="87.0" prefHeight="17.0" prefWidth="197.0" text="Lotissement N 01 EL- Abadia" textFill="#181818">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="t4" alignment="CENTER" layoutX="29.0" layoutY="109.0" prefHeight="17.0" prefWidth="197.0" text="Tel :  06.66.62.55.83 " />
+      <Label fx:id="i1" layoutX="475.0" layoutY="32.0" prefHeight="17.0" prefWidth="168.0" text="Date : 19juil2020" textFill="#181818">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="type" alignment="CENTER" layoutX="244.0" layoutY="134.0" prefHeight="36.0" prefWidth="191.0" text="Prescription" textFill="#181818">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Label>
+      <Label fx:id="i2" layoutX="475.0" layoutY="54.0" prefHeight="17.0" prefWidth="168.0" text="ID : 1036520" textFill="#181818">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="i3" layoutX="475.0" layoutY="78.0" prefHeight="17.0" prefWidth="168.0" text="Patient : Riadh Aouameur " textFill="#181818">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="i4" layoutX="475.0" layoutY="100.0" prefHeight="17.0" prefWidth="168.0" text="Age : 19" textFill="#181818">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="content" editable="false" layoutY="193.0" prefHeight="374.0" prefWidth="680.0" wrapText="true" />
+   </children>
+</AnchorPane>

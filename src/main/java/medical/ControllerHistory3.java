@@ -79,8 +79,8 @@ public class ControllerHistory3 implements Initializable {
         observableList1.setAll(db.getCheckupHistory(patient.getId()));
 
 
-//        list_1.setCellFactory(l->new MyListCell_7());
-//        list_2.setCellFactory(l->new MyListCell_8());
+       list_1.setCellFactory(l->new MyListCell_16());
+       list_2.setCellFactory(l->new MyListCell_17());
                 list_1.setItems(observableList1);
                 list_2.setItems(observableList2);
 

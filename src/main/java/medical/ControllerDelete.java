@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 import medical.DataBase.Db;
 
 import java.net.URL;
@@ -17,15 +18,18 @@ import java.util.ResourceBundle;
 
 public class ControllerDelete implements Initializable {
     public Label fPatient;
-    public Label lab1;
+
 
     public ImageView img;
-    public Label text;
-    public AnchorPane root1;
-    public Label fDateTwo;
-    public Label fDateOne;
+
+    public AnchorPane paneMassage;
+    public Label message;
+    public AnchorPane root;
+
     public Label fPhone;
     public Label fStats;
+   private double x;
+    private  double y;
     public TextField fnb;
 Db db = new Db();
     ObservableList<Patient> observableList;
@@ -38,6 +42,16 @@ Patient patient;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        root.setOnMousePressed(mouseEvent -> {
+            x=mouseEvent.getSceneX();
+            y=mouseEvent.getSceneY();
+        });
+        root.setOnMouseDragged(e->{
+            Stage stage = (Stage) root.getScene().getWindow();
+            stage.setX(e.getScreenX()-x);
+            stage.setY(e.getScreenY()-y);
+        });
         if (patient!=null){
             fPatient.setText("Patient : "+patient.getFirstName()+" "+patient.getLastName());
             fPhone.setText("Phone : "+patient.getPhone());
@@ -56,13 +70,21 @@ Patient patient;
             public void changed(ObservableValue<? extends Number> observable,
                                 Number oldValue, Number newValue) {
                 if (newValue.intValue() > oldValue.intValue()) {
-                    // Check if the new character is greater than LIMIT
+
                     if (fnb.getText().length() >= 2) {
 
-                        // if it's 11th character then just setText to previous
-                        // one
+
                         fnb.setText(fnb.getText().substring(0, 2));
                     }
+                }
+            }
+        });
+        fnb.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue,
+                                String newValue) {
+                if (!newValue.matches("\\d*")) {
+                    fnb.setText(newValue.replaceAll("[^\\d]", ""));
                 }
             }
         });
@@ -74,22 +96,30 @@ Patient patient;
         if (patient !=null){
             db.deletePatient(patient.getId());
             observableList.remove(patient);
+            message.setText("Successful");
+            fPatient.setText("Patient : ...");
+            fPhone.setText("Phone :... ");
+            fStats.setText("Status :... ");
             patient= null;
-            text.setVisible(true);
 
+
+        }else {
+            message.setText("No Patient Selected");
+            paneMassage.setVisible(true);
         }
 
     }
 
     public void onExit(ActionEvent actionEvent) {
-        System.exit(0);
+        Stage stage = (Stage) root.getScene().getWindow();
+        stage.close();
 
     }
-
     public void onSelect(ActionEvent actionEvent) {
         int id;
         if(fnb.getText().isEmpty()){
-            lab1.setText("Enter your patient number");
+            message.setText("Enter Your Patient ID");
+            paneMassage.setVisible(true);
         }
         else{
             try {
@@ -97,22 +127,28 @@ Patient patient;
                  for (Patient p :observableList){
                      if(p.getId()==id){
                          patient = p;
+                         fPatient.setText("Patient : "+patient.getFirstName()+" "+patient.getLastName());
+                         fPhone.setText("Phone : "+patient.getPhone());
+                         fStats.setText("Status : "+patient.getStatus());
+                         if (patient.getGender().equals("Female")){
+                             Image imProfile = new Image(getClass().getResourceAsStream("img/femalepatient.png"));
+                             img.setImage(imProfile);
+                         }else {
+                             Image imProfile = new Image(getClass().getResourceAsStream("img/patient.png"));
+                             img.setImage(imProfile);
+                         }
+                         return;
                      }
                  }
-                fPatient.setText("Patient : "+patient.getFirstName()+" "+patient.getLastName());
-                fPhone.setText("Phone : "+patient.getPhone());
-                fStats.setText("Status : "+patient.getStatus());
-                if (patient.getGender().equals("Female")){
-                    Image imProfile = new Image(getClass().getResourceAsStream("img/femalepatient.png"));
-                    img.setImage(imProfile);
-                }else {
-                    Image imProfile = new Image(getClass().getResourceAsStream("img/patient.png"));
-                    img.setImage(imProfile);
-                }
 
+                fPatient.setText("Patient : ...");
+                fPhone.setText("Phone :... ");
+                fStats.setText("Status :... ");
+                message.setText("Out Of Rang");
+                paneMassage.setVisible(true);
 
             }catch (Exception e){
-                lab1.setText("Something is wrong");
+
             }
 
         }

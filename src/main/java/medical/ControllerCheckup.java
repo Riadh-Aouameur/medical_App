@@ -6,11 +6,15 @@ import javafx.collections.transformation.FilteredList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import medical.DataBase.Db;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -21,6 +25,7 @@ import net.sf.jasperreports.engine.design.JasperDesign;
 import net.sf.jasperreports.engine.xml.JRXmlLoader;
 import net.sf.jasperreports.view.JasperViewer;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -85,9 +90,7 @@ public class ControllerCheckup implements Initializable {
 
 
 
-         observableList_1 =FXCollections.observableArrayList(new CheckupName("fns"),new CheckupName("uree"),new CheckupName("Creatinine"),new CheckupName("asat"),new CheckupName("Alat"),new CheckupName("crp"),new CheckupName("Vs"),new CheckupName("cholesterol"),new CheckupName("Triglyceride"));
-
-
+         observableList_1 =FXCollections.observableArrayList(db.getCheckupName());
 
 
 
@@ -113,10 +116,12 @@ public class ControllerCheckup implements Initializable {
 
     public void onAddToList2(ActionEvent actionEvent) {
        String txt="";
+       int j = 0;
         for(int i=0;i<observableList_1.size();i++){
             if(observableList_1.get(i).getChecked().isSelected()){
                 String s =observableList_1.get(i).getName();
-                txt = txt+(i+1)+"- The Analysis "+s+"\n";
+                j++;
+                txt = txt+(j)+"- The Analysis "+s+"\n";
                 text.setText(txt);
             }
 
@@ -132,8 +137,8 @@ public class ControllerCheckup implements Initializable {
 
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setContentText("");
-            alert.setTitle("");
+            alert.setContentText("Are you sure to save ?");
+            alert.setTitle("CONFIRMATION");
             alert.setHeaderText("");
 
             ButtonType buttonCancel=  new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
@@ -169,27 +174,56 @@ public class ControllerCheckup implements Initializable {
 
                     JasperViewer.viewReport(jP,false);
                 } catch (Exception e) {
-                    e.printStackTrace();
+
+                    Alert alert2 = new Alert(Alert.AlertType.ERROR);
+                    alert2.setContentText(e.getMessage());
+                    alert2.setTitle("ERROR");
+                    alert2.setHeaderText("");
+                    alert2.showAndWait();
                 }
                     text.clear();
-                System.out.println("work....");
-            }else {
 
-                Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
-                alert2.setContentText("");
-                alert2.setTitle("");
-                alert2.setHeaderText("");
-                alert2.showAndWait();
             }
+
+
+
 
 
 
         }else {
             Alert alert2 = new Alert(Alert.AlertType.INFORMATION);
-            alert2.setContentText("Document is Empty");
-            alert2.setTitle("");
+            alert2.setContentText("Checkup List Is Empty");
+            alert2.setTitle("INFORMATION");
             alert2.setHeaderText("");
             alert2.showAndWait();
         }
+    }
+
+    public void onOpenMedicalAnalysis(ActionEvent actionEvent) {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("chakupAdd.fxml"));
+
+
+            Stage stage =   new Stage();
+            try {
+                stage.setScene(new Scene(loader.load()));
+
+
+
+            } catch (IOException e) {
+                Alert alert2 = new Alert(Alert.AlertType.ERROR);
+                alert2.setContentText(e.getMessage());
+                alert2.setTitle("ERROR");
+                alert2.setHeaderText("");
+                alert2.showAndWait();
+            }
+
+
+        stage.setTitle("Medical Analysis");
+        Image icon = new Image(getClass().getResourceAsStream("img/plus.png"));
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.getIcons().add(icon);
+            stage.show();
+
     }
 }
